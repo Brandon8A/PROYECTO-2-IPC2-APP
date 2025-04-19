@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-slider',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './slider.component.html',
   styleUrl: './slider.component.css'
 })
@@ -14,7 +14,7 @@ export class SliderComponent {
   }
 
   gestionarUsuarios() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['home-admin/gestion-usuarios']);
   }
 
   public isOpen: boolean = false;

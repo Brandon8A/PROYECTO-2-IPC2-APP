@@ -2,11 +2,9 @@
     <div class="menu">
         <button class="close-btn" (click)="toogleMenu()">X</button>
         <ul>
-            <li><a (click)="gestionarUsuarios()">Gestionar Usuarios</a></li>
-            <li><a>Reportes</a></li>
-            <li><a>Cerrar Sesión</a></li>
+            <li><a routerLink="/home-admin/gestion-usuarios">Gestionar Usuarios</a></li>
         </ul>
     </div>
 </div>
 
-<button class="open-btn" (click)="toogleMenu()">Menu</button>
+<button class="open-btn" (click)="toogleMenu()" >Menu</button>
