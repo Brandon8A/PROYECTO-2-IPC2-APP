@@ -46,8 +46,8 @@ public class MarketingDAO extends CrudDAO<MarketingModel>{
 
             while (rs.next()) {
                 admins.add(new MarketingModel(
-                        rs.getString("email"),
-                        rs.getString("password")
+                        rs.getString("correo_marketing"),
+                        rs.getString("contraseña")
                 ));
             }
         }

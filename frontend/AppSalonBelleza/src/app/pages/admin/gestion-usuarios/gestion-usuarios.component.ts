@@ -14,6 +14,10 @@ export class GestionUsuariosComponent {
   
   usersMarketing: UserMarketing[] = [];
 
+  ngOnInit(){
+    this.obtenerUsuariosMarketing();
+  }
+
   obtenerUsuariosMarketing(){
     this.fetchback.obtenerUsuariosMarketing().subscribe({
       next: value => {

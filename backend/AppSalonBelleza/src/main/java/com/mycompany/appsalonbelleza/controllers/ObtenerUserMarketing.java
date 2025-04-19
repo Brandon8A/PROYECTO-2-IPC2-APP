@@ -6,7 +6,6 @@ package com.mycompany.appsalonbelleza.controllers;
 
 import com.google.gson.Gson;
 import com.mycompany.appsalonbelleza.models.MarketingModel;
-import com.mycompany.appsalonbelleza.persistence.AdminDAO;
 import com.mycompany.appsalonbelleza.persistence.MarketingDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,7 +25,7 @@ public class ObtenerUserMarketing extends HttpServlet {
 
     private final MarketingDAO marketingDAO = new MarketingDAO();
     private Gson gson = new Gson();
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -66,20 +65,21 @@ public class ObtenerUserMarketing extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
+        System.out.println("Conectando con servlet ObtenerUserMarketing");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        
+
         try {
-            
+
             List<MarketingModel> marketings = marketingDAO.findAll();
             String json = gson.toJson(marketings);
             response.getWriter().write(json);
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al tener usuarios de marketing");
         }
-        
+
     }
 
     /**
@@ -94,6 +94,7 @@ public class ObtenerUserMarketing extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
     /**

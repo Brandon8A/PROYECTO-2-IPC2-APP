@@ -18,6 +18,6 @@ export class RegisterServiceService {
   }
 
   obtenerUsuariosMarketing(): Observable<UserMarketing[]>{
-    return this.http.get<UserMarketing[]>(`${this.API_URL}/RegistrarAdministrador`);
+    return this.http.get<UserMarketing[]>(`${this.API_URL}/ObtenerUserMarketing`);
   }
 }
