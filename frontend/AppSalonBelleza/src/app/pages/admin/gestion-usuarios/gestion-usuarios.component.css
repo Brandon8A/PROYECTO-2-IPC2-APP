@@ -1,0 +1,30 @@
+.card-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    padding: 100px;
+    justify-content: center;
+}
+
+.card{
+    background-color: aliceblue;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px regba(0, 0, 0, 0.2);
+    width: 1100px;
+}
+
+.card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.card-header{
+    padding: 15px;
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+}
+
+.card-body{
+    padding: 15px;   
+}
+
