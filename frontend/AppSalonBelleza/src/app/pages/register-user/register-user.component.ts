@@ -51,8 +51,6 @@ export class RegisterUserComponent {
     }else{
       console.log('No es administrador')
     }
-
     this.registerForm.reset();
   }
-
 }
