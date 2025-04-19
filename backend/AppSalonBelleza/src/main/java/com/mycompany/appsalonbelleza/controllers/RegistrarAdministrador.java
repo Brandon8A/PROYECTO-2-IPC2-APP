@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author brandon
  */
 @WebServlet(urlPatterns = {"/RegistrarAdministrador"})
-public class RegistrarUsuario extends HttpServlet {
+public class RegistrarAdministrador extends HttpServlet {
     
     private final AdminDAO adminDAO = new AdminDAO();
 

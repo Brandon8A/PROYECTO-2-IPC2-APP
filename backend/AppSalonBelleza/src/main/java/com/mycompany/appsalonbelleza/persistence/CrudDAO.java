@@ -5,6 +5,7 @@
 package com.mycompany.appsalonbelleza.persistence;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -12,5 +13,5 @@ import java.sql.SQLException;
  */
 public abstract class CrudDAO<T> {
     public abstract T insert(T entity) throws SQLException;
-    
+    public abstract List<T> findAll() throws SQLException;
 }

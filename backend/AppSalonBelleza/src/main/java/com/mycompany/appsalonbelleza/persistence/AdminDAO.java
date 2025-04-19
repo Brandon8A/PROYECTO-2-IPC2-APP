@@ -9,8 +9,11 @@ import com.mycompany.appsalonbelleza.encriptacion.EncriptarMD5;
 import com.mycompany.appsalonbelleza.models.AdminModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -34,5 +37,23 @@ public class AdminDAO extends CrudDAO<AdminModel>{
         }
         return entity;
     }
+
+    @Override
+    public List<AdminModel> findAll() throws SQLException {
+        List<AdminModel> admins = new ArrayList<>();
+        String sql = "SELECT * FROM Administrador";
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                admins.add(new AdminModel(
+                        rs.getString("email"),
+                        rs.getString("password")
+                ));
+            }
+        }
+        return admins;
+    }
+    
+    
     
 }
