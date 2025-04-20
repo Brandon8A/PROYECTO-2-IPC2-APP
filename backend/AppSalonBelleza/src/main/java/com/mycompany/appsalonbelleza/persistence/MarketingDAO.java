@@ -41,7 +41,7 @@ public class MarketingDAO extends CrudDAO<MarketingModel>{
     @Override
     public List<MarketingModel> findAll() throws SQLException {
         List<MarketingModel> admins = new ArrayList<>();
-        String sql = "SELECT * FROM Marketing";
+        String sql = "SELECT * FROM Marketing WHERE activo = TRUE";
         try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
