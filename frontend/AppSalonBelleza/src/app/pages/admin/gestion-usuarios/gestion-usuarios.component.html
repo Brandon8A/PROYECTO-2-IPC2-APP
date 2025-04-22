@@ -2,8 +2,12 @@
     <div class="card-container">
         <div class="card">
             <div class="card-header">
-                <h2>Usuarios de marketing</h2>
-                <button class="btn btn-sm btn-warning">Crear Usuario Marketing</button>
+                <h2>
+                    <div class="contenedor">
+                        <button class="btn btn-sm btn-primary">Crear Usuario Marketing</button>
+                    </div>
+                    Usuarios de marketing
+                </h2>
             </div>
             <div class="card-body">
                 <table class="table w-full">
@@ -20,12 +24,9 @@
                             <td>{{$index+1}}</td>
                             <td>{{userMarketing.email}}</td>
                             <td class="space-x-2">
-                                <button class="btn btn-sm btn-info">Editar</button>
-                                @if (userMarketing.state === 'DISABLED') {
-                                <button class="btn btn-sm btn-secondary">Activar</button>
-                                }@else {
-                                <button class="btn btn-sm btn-warning">Desactivar</button>
-                                }
+                                <button class="btn btn-sm btn-info"
+                                    (click)="editarUsuario('MARKETING', userMarketing)">Editar</button>
+                                <button class="btn btn-sm btn-danger">Elimnar</button>
                             </td>
                         </tr>
                         }
@@ -35,18 +36,64 @@
         </div>
         <div class="card">
             <div class="card-header">
-                <h2>Gestor de Servicios</h2>
+                <h2>
+                    <div class="contenedor">
+                        <button class="btn btn-sm btn-primary">Crear Usuario Gestor Servicios</button>
+                    </div>
+                    Usuarios Gestor de Servicios
+                </h2>
             </div>
             <div class="card-body">
-                <p>Mostrar tabla de clientes</p>
+                <table class="table w-full">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Usuario</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (userGestorServicios of usersGestorServicios; track $index) {
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{userGestorServicios.email}}</td>
+                            <td class="space-x-2">
+                                <button class="btn btn-sm btn-info"
+                                    (click)="editarUsuario('MARKETING', userGestorServicios)">Editar</button>
+                                <button class="btn btn-sm btn-danger">Elimnar</button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="card">
             <div class="card-header">
                 <h2>Empleados</h2>
             </div>
-            <div class="card-body">
-                <p>Mostrar tabla de clientes</p>
+            <div class="card-body"><table class="table w-full">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Usuario</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (userEmpleado of usersEmpleados; track $index) {
+                    <tr>
+                        <td>{{$index+1}}</td>
+                        <td>{{userEmpleado.email}}</td>
+                        <td class="space-x-2">
+                            <button class="btn btn-sm btn-info"
+                                (click)="editarUsuario('MARKETING', userEmpleado)">Editar</button>
+                            <button class="btn btn-sm btn-danger">Elimnar</button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
             </div>
         </div>
         <div class="card">

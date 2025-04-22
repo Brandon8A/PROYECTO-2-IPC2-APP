@@ -41,13 +41,15 @@ public class AdminDAO extends CrudDAO<AdminModel>{
     @Override
     public List<AdminModel> findAll() throws SQLException {
         List<AdminModel> admins = new ArrayList<>();
-        String sql = "SELECT * FROM Administrador";
-        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+        String sql = "SELECT * FROM Administrador WHERE activo = TRUE";
+        try (Connection conn = DBConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql); 
+                ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 admins.add(new AdminModel(
-                        rs.getString("email"),
-                        rs.getString("password")
+                        rs.getString("correo_administrador"),
+                        rs.getString("contraseña")
                 ));
             }
         }

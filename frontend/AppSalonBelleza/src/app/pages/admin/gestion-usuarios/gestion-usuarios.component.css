@@ -28,3 +28,15 @@
     padding: 15px;   
 }
 
+/* button-right.component.css */
+.contenedor {
+    display: flex;
+    justify-content: flex-end; /* Alinea los elementos al final (derecha) */
+    cursor: pointer;
+  }
+  
+.boton-derecho {
+    padding: 25px 20px; /* Tamaño del botón */
+    font-size: 16px;
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  }

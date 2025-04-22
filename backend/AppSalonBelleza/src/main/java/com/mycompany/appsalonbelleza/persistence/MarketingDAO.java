@@ -26,7 +26,8 @@ public class MarketingDAO extends CrudDAO<MarketingModel>{
         String sqlInsert = "INSERT INTO Marketing(correo_marketing, contraseña) VALUES(?, ?)";
         EncriptarMD5 encrypt = new EncriptarMD5();
         
-        try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)){
+        try (Connection connection = DBConnection.getConnection(); 
+                PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)){
             statement.setString(1, entity.getEmail());
             statement.setString(2, encrypt.getMD5(entity.getPassword()));
             
@@ -40,17 +41,18 @@ public class MarketingDAO extends CrudDAO<MarketingModel>{
 
     @Override
     public List<MarketingModel> findAll() throws SQLException {
-        List<MarketingModel> admins = new ArrayList<>();
+        List<MarketingModel> marketings = new ArrayList<>();
         String sql = "SELECT * FROM Marketing WHERE activo = TRUE";
-        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = DBConnection.getConnection(); 
+                PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                admins.add(new MarketingModel(
+                marketings.add(new MarketingModel(
                         rs.getString("correo_marketing"),
                         rs.getString("contraseña")
                 ));
             }
         }
-        return admins;
+        return marketings;
     }
 }
