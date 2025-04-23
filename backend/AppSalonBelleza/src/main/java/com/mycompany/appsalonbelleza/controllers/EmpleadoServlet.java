@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author brandon
  */
-@WebServlet(name = "EmpleadoServlet", urlPatterns = {"/EmpleadoServlet"})
+@WebServlet(urlPatterns = {"/EmpleadoServlet"})
 public class EmpleadoServlet extends HttpServlet {
 
     private final EmpleadoDAO empleadoDAO = new EmpleadoDAO();
@@ -76,7 +76,7 @@ public class EmpleadoServlet extends HttpServlet {
             response.getWriter().write(json);
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al tener usuarios Gestor de Servicios");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al tener usuarios Empleado");
         }
     }
 

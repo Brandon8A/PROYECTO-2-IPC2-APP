@@ -31,10 +31,8 @@ public class ClienteDAO extends CrudDAO<ClienteModel>{
         EncriptarMD5 encrypt = new EncriptarMD5();
         try (Connection connection = DBConnection.getConnection(); 
         PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)){
-            statement.setString(1, entity.getCorreo());
-            statement.setString(2, entity.getDireccion());
-            statement.setString(3, entity.getDpi());
-            statement.setString(4, entity.getTelefono());
+            statement.setString(1, entity.getEmail());
+            statement.setString(2, encrypt.getMD5(entity.getPassword()));
             
             statement.executeUpdate();
         } catch (Exception e) {
@@ -52,16 +50,8 @@ public class ClienteDAO extends CrudDAO<ClienteModel>{
 
             while (rs.next()) {
                 clientes.add(new ClienteModel(
-                        rs.getString("dpi"), 
-                        rs.getString("dpi"),
-                        Boolean.parseBoolean(rs.getString("dpi")),
-                        rs.getString("dpi"),
-                        rs.getString("dpi"),
-                        rs.getString("dpi"),
-                        rs.getString("dpi"),
-                        rs.getString("dpi"),
-                        rs.getString("dpi"),
-                        rs.getString("dpi"))
+                        rs.getString("correo_cliente"), 
+                        rs.getString("contraseña"))
                 );
             }
         }

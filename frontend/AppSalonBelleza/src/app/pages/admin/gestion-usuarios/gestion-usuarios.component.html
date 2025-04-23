@@ -4,7 +4,7 @@
             <div class="card-header">
                 <h2>
                     <div class="contenedor">
-                        <button class="btn btn-sm btn-primary">Crear Usuario Marketing</button>
+                        <button class="btn btn-sm btn-primary" (click)="crearUsuarioMarketingAdmin()">Crear Usuario Marketing</button>
                     </div>
                     Usuarios de marketing
                 </h2>
@@ -38,7 +38,7 @@
             <div class="card-header">
                 <h2>
                     <div class="contenedor">
-                        <button class="btn btn-sm btn-primary">Crear Usuario Gestor Servicios</button>
+                        <button class="btn btn-sm btn-primary" (click)="crearUsuarioGestorServiciosAdmin()">Crear Usuario Gestor Servicios</button>
                     </div>
                     Usuarios Gestor de Servicios
                 </h2>
@@ -59,7 +59,7 @@
                             <td>{{userGestorServicios.email}}</td>
                             <td class="space-x-2">
                                 <button class="btn btn-sm btn-info"
-                                    (click)="editarUsuario('MARKETING', userGestorServicios)">Editar</button>
+                                    (click)="editarUsuario('GESTOR SERVICIOS', userGestorServicios)">Editar</button>
                                 <button class="btn btn-sm btn-danger">Elimnar</button>
                             </td>
                         </tr>
@@ -70,38 +70,70 @@
         </div>
         <div class="card">
             <div class="card-header">
-                <h2>Empleados</h2>
+                <h2>
+                    <div class="contenedor">
+                        <button class="btn btn-sm btn-primary" (click)="crearUsuarioEmpleadoAdmin()">Crear Usuario Empleado</button>
+                    </div>
+                    Usuarios Empleado
+                </h2>
             </div>
-            <div class="card-body"><table class="table w-full">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Usuario</th>
-                        <th>Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (userEmpleado of usersEmpleados; track $index) {
-                    <tr>
-                        <td>{{$index+1}}</td>
-                        <td>{{userEmpleado.email}}</td>
-                        <td class="space-x-2">
-                            <button class="btn btn-sm btn-info"
-                                (click)="editarUsuario('MARKETING', userEmpleado)">Editar</button>
-                            <button class="btn btn-sm btn-danger">Elimnar</button>
-                        </td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
+            <div class="card-body">
+                <table class="table w-full">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Usuario</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (userEmpleado of usersEmpleados; track $index) {
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{userEmpleado.email}}</td>
+                            <td class="space-x-2">
+                                <button class="btn btn-sm btn-info"
+                                    (click)="editarUsuario('EMPLEADO', userEmpleado)">Editar</button>
+                                <button class="btn btn-sm btn-danger">Elimnar</button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="card">
             <div class="card-header">
-                <h2>Clientes</h2>
+                <h2>
+                    <div class="contenedor">
+                        <button class="btn btn-sm btn-primary" (click)="crearUsuarioClienteAdmin()">Crear Usuario Cliente</button>
+                    </div>
+                    Usuarios Cliente
+                </h2>
             </div>
             <div class="card-body">
-                <p>Mostrar tabla de clientes</p>
+                <table class="table w-full">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Usuario</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (userCliente of usersClientes; track $index) {
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{userCliente.email}}</td>
+                            <td class="space-x-2">
+                                <button class="btn btn-sm btn-info"
+                                    (click)="editarUsuario('CLIENTE', userCliente)">Editar</button>
+                                <button class="btn btn-sm btn-danger">Elimnar</button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

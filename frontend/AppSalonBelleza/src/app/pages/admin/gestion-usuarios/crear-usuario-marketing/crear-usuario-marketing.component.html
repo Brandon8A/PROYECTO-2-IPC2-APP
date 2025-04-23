@@ -1,0 +1,27 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+<div class="container d-flex justify-content-center align-items-center vh-100">
+
+    <div class="card p-4 shadow-lg" style="width: 22rem;">
+        <h2 class="text-center mb-4">Administrador</h2>
+        <h4 class="text-center mb-2"> Registrar Usuario Marketing</h4>
+        <form [formGroup]="registerForm">
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo</label>
+                <input type="text" class="form-control" id="email" formControlName="email" placeholder="Correo">
+                @if (email.invalid && email.touched) {
+                    <p class="form-error">Correo es requerido</p>
+                }
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="userPassword" formControlName="password" placeholder="Contraseña">
+                @if (password.invalid && password.touched) {
+                    <p class="form-error">Contraseña es requerida</p>
+                }
+            </div>
+            <div class="d-grid gap-2">
+                <button [disabled]="registerForm.invalid" class="btn btn-primary" (click)="registerUser()" >Guardar Datos</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -39,6 +39,7 @@ public class MarketingDAO extends CrudDAO<MarketingModel>{
         return entity;
     }
 
+    
     @Override
     public List<MarketingModel> findAll() throws SQLException {
         List<MarketingModel> marketings = new ArrayList<>();

@@ -28,6 +28,8 @@ export class GestionUsuariosComponent {
   ngOnInit(){
     this.obtenerUsuariosMarketing();
     this.obtenerUsuariosGestorServicios();
+    this.obtenerUsuariosEmpleados();
+    this.obtenerUsuariosClientes();
   }
 
   obtenerUsuariosMarketing(){
@@ -42,6 +44,10 @@ export class GestionUsuariosComponent {
     })
   }
 
+  crearUsuarioMarketingAdmin(){
+    this.router.navigate(['home-admin/gestion-usuarios/crear-marketing-admin']);
+  }
+
   obtenerUsuariosGestorServicios(){
     this.fetchback.obtenerUsuariosGestorServicios().subscribe({
       next: value => {
@@ -54,7 +60,26 @@ export class GestionUsuariosComponent {
     })
   }
 
+  crearUsuarioGestorServiciosAdmin(){
+    this.router.navigate(['home-admin/gestion-usuarios/crear-gestor-servicios-admin']);
+  }
+
   obtenerUsuariosEmpleados(){
+    this.fetchback.obtenerUsuariosEmpleados().subscribe({
+      next: value => {
+        this.usersEmpleados = value;
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+  }
+
+  crearUsuarioEmpleadoAdmin(){
+    this.router.navigate(['home-admin/gestion-usuarios/crear-empleado-admin']);
+  }
+
+  obtenerUsuariosClientes(){
     this.fetchback.obtenerUsuariosClientes().subscribe({
       next: value => {
         this.usersClientes = value;
@@ -65,8 +90,9 @@ export class GestionUsuariosComponent {
     })
   }
 
-
-
+  crearUsuarioClienteAdmin(){
+    this.router.navigate(['home-admin/gestion-usuarios/crear-cliente-admin']);
+  }
 
 
   editarUsuario(usuario: String, userMarketing: any){

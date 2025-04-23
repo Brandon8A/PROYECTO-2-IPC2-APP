@@ -7,6 +7,7 @@ package com.mycompany.appsalonbelleza.controllers;
 import com.google.gson.Gson;
 import com.mycompany.appsalonbelleza.models.MarketingModel;
 import com.mycompany.appsalonbelleza.persistence.MarketingDAO;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -92,7 +93,23 @@ public class ObtenerUserMarketing extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        System.out.println("Conectado con SERVLET: RegistrarAdministrador");
+        Gson gson = new Gson();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        try {
+            BufferedReader reader = request.getReader();
+            MarketingModel marketingForm = gson.fromJson(reader, MarketingModel.class);
+            this.marketingDAO.insert(marketingForm);
+            
+            response.setStatus(HttpServletResponse.SC_CREATED);
+            response.getWriter().write("{\"message\":\"Usuario creado correctamente\"}");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en el servlet RegistrarUsuario, meotodo post.");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al crear Administrador");
+        }
+//        processRequest(request, response);
 
     }
 

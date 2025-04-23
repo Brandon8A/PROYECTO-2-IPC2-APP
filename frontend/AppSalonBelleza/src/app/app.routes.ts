@@ -3,6 +3,10 @@ import { RegisterUserComponent } from './pages/register-user/register-user.compo
 import { LoginComponent } from './pages/login/login.component';
 import { HomeAdminComponent } from './pages/admin/home-admin/home-admin.component';
 import { GestionUsuariosComponent } from './pages/admin/gestion-usuarios/gestion-usuarios.component';
+import { CrearUsuarioMarketingComponent } from './pages/admin/gestion-usuarios/crear-usuario-marketing/crear-usuario-marketing.component';
+import { CrearUsuarioGestorServiciosComponent } from './pages/admin/gestion-usuarios/crear-usuario-gestor-servicios/crear-usuario-gestor-servicios.component';
+import { CrearUsuarioEmpleadoComponent } from './pages/admin/gestion-usuarios/crear-usuario-empleado/crear-usuario-empleado.component';
+import { CrearUsuarioClienteComponent } from './pages/admin/gestion-usuarios/crear-usuario-cliente/crear-usuario-cliente.component';
 
 export const routes: Routes = [
     {path: '', redirectTo:'login', pathMatch: 'full'},
@@ -10,7 +14,11 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'home-admin', component: HomeAdminComponent,
         children:[
-            {path: 'gestion-usuarios', component: GestionUsuariosComponent}
+            {path: 'gestion-usuarios', component: GestionUsuariosComponent},
+            {path: 'gestion-usuarios/crear-marketing-admin', component: CrearUsuarioMarketingComponent},
+            {path: 'gestion-usuarios/crear-gestor-servicios-admin', component: CrearUsuarioGestorServiciosComponent},
+            {path: 'gestion-usuarios/crear-empleado-admin', component: CrearUsuarioEmpleadoComponent},
+            {path: 'gestion-usuarios/crear-cliente-admin', component: CrearUsuarioClienteComponent}
         ]
     },
 

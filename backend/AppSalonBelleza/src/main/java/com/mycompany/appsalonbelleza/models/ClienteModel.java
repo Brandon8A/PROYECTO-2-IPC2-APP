@@ -9,8 +9,8 @@ package com.mycompany.appsalonbelleza.models;
  * @author brandon
  */
 public class ClienteModel {
-    private String correo;
-    private String contraseña;
+    private String email;
+    private String password;
     private boolean listaNegra;
     private String dpi;
     private String telefono;
@@ -21,8 +21,8 @@ public class ClienteModel {
     private String gustos;
 
     public ClienteModel(String correo, String contraseña, boolean listaNegra, String dpi, String telefono, String direccion, String pathFoto, String hobbies, String descripcion, String gustos) {
-        this.correo = correo;
-        this.contraseña = contraseña;
+        this.email = correo;
+        this.password = contraseña;
         this.listaNegra = listaNegra;
         this.dpi = dpi;
         this.telefono = telefono;
@@ -33,23 +33,28 @@ public class ClienteModel {
         this.gustos = gustos;
     }
 
+    public ClienteModel(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+    
     public ClienteModel() {
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setPassword(String passwotd) {
+        this.password = passwotd;
     }
 
     public boolean isListaNegra() {
@@ -118,7 +123,7 @@ public class ClienteModel {
     
     @Override
     public String toString(){
-        return "Cliente { Correo = " + this.correo + ", password = " + this.contraseña + "}"; 
+        return "Cliente { Correo = " + this.email + ", password = " + this.password + "}"; 
     }
     
 }

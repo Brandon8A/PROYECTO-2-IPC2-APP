@@ -10,6 +10,7 @@ import { UserCliente } from '../interfaces/user-cliente';
 @Injectable({
   providedIn: 'root'
 })
+
 export class RegisterServiceService {
 
   readonly API_URL = 'http://localhost:8080/AppSalonBelleza';
@@ -24,8 +25,16 @@ export class RegisterServiceService {
     return this.http.get<UserMarketing[]>(`${this.API_URL}/ObtenerUserMarketing`);
   }
 
+  crearMarketing(marketing: UserMarketing){
+    return this.http.post<UserMarketing>(`${this.API_URL}/ObtenerUserMarketing`, marketing);
+  }
+
   obtenerUsuariosGestorServicios(): Observable<UserGestorServicios[]>{
     return this.http.get<UserGestorServicios[]>(`${this.API_URL}/GestorServiciosServlet`);
+  }
+
+  crearGestorServicios(gestorServicios: UserGestorServicios){
+    return this.http.post<UserGestorServicios>(`${this.API_URL}/GestorServiciosServlet`, gestorServicios);
   }
 
   obtenerUsuariosEmpleados(): Observable<UserEmpleado[]>{

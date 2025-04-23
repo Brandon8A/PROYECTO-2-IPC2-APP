@@ -47,12 +47,12 @@ public class EmpleadoDAO extends CrudDAO<EmpleadoModel>{
                 PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()){
             while (rs.next()) {
                 empleados.add(new EmpleadoModel(
-                        rs.getString("correo_gestor_servicios"),
+                        rs.getString("correo_empleado"),
                         rs.getString("contraseña")
                 ));
             }
         } catch (Exception e) {
-            System.out.println("Error en Gestor serviciosDAO");
+            System.out.println("Error en EmpleadoDAO");
             System.out.println(e);
         }
         return empleados;

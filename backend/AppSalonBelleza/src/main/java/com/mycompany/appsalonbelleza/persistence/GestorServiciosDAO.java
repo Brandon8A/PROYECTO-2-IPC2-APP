@@ -23,7 +23,7 @@ public class GestorServiciosDAO extends CrudDAO<GestorServiciosModel> {
 
     @Override
     public GestorServiciosModel insert(GestorServiciosModel entity) throws SQLException {
-        String sqlInsert = "INSERT INTO Administrador(correo_administrador, contraseña) VALUES(?, ?)";
+        String sqlInsert = "INSERT INTO Gestor_Servicios(correo_gestor_servicios, contraseña) VALUES(?, ?)";
         EncriptarMD5 encrypt = new EncriptarMD5();
 
         try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
