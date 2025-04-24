@@ -41,7 +41,15 @@ export class RegisterServiceService {
     return this.http.get<UserEmpleado[]>(`${this.API_URL}/EmpleadoServlet`);
   }
 
+  crearEmpleado(empleado: UserEmpleado){
+    return this.http.post<UserEmpleado>(`${this.API_URL}/EmpleadoServlet`, empleado);
+  }
+
   obtenerUsuariosClientes(): Observable<UserCliente[]>{
     return this.http.get<UserCliente[]>(`${this.API_URL}/ClienteServlet`);
+  }
+
+  crearCliente(cliente: UserCliente){
+    return this.http.post<UserCliente>(`${this.API_URL}/ClienteServlet`, cliente);
   }
 }

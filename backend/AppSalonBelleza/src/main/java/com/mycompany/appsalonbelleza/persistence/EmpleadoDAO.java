@@ -7,7 +7,6 @@ package com.mycompany.appsalonbelleza.persistence;
 import com.mycompany.appsalonbelleza.aplication.DBConnection;
 import com.mycompany.appsalonbelleza.encriptacion.EncriptarMD5;
 import com.mycompany.appsalonbelleza.models.EmpleadoModel;
-import com.mycompany.appsalonbelleza.models.GestorServiciosModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,7 +32,7 @@ public class EmpleadoDAO extends CrudDAO<EmpleadoModel>{
             statement.setString(2, encrypt.getMD5(entity.getPassword()));
             statement.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Error en: GestorServiciosDAO");
+            System.out.println("Error en: EmpleadoDAO");
         }
         return entity;
     }

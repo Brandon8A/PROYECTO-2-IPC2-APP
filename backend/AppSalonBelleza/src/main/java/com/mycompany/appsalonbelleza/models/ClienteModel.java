@@ -12,25 +12,20 @@ public class ClienteModel {
     private String email;
     private String password;
     private boolean listaNegra;
-    private String dpi;
-    private String telefono;
-    private String direccion;
+    private String userDpi;
+    private String userPhoneNumber;
+    private String userAddress;
     private String pathFoto;
     private String hobbies;
     private String descripcion;
     private String gustos;
 
-    public ClienteModel(String correo, String contraseña, boolean listaNegra, String dpi, String telefono, String direccion, String pathFoto, String hobbies, String descripcion, String gustos) {
+    public ClienteModel(String correo, String contraseña, String userDpi, String userPhoneNumber, String userAddress) {
         this.email = correo;
         this.password = contraseña;
-        this.listaNegra = listaNegra;
-        this.dpi = dpi;
-        this.telefono = telefono;
-        this.direccion = direccion;
-        this.pathFoto = pathFoto;
-        this.hobbies = hobbies;
-        this.descripcion = descripcion;
-        this.gustos = gustos;
+        this.userDpi = userDpi;
+        this.userPhoneNumber = userPhoneNumber;
+        this.userAddress = userAddress;
     }
 
     public ClienteModel(String email, String password) {
@@ -65,28 +60,28 @@ public class ClienteModel {
         this.listaNegra = listaNegra;
     }
 
-    public String getDpi() {
-        return dpi;
+    public String getUserDpi() {
+        return userDpi;
     }
 
-    public void setDpi(String dpi) {
-        this.dpi = dpi;
+    public void setUserDpi(String userDpi) {
+        this.userDpi = userDpi;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getUserPhoneNumber() {
+        return userPhoneNumber;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setUserPhoneNumber(String userPhoneNumber) {
+        this.userPhoneNumber = userPhoneNumber;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getUserAddress() {
+        return userAddress;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setUserAddres(String userAddress) {
+        this.userAddress = userAddress;
     }
 
     public String getPathFoto() {

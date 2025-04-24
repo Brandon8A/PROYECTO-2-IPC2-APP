@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.mycompany.appsalonbelleza.models.ClienteModel;
 import com.mycompany.appsalonbelleza.models.EmpleadoModel;
 import com.mycompany.appsalonbelleza.persistence.ClienteDAO;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -91,7 +92,24 @@ public class ClienteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        System.out.println("Conectado con SERVLET: ClienteServlet");
+        Gson gson = new Gson();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        try {
+            BufferedReader reader = request.getReader();
+            ClienteModel clienteForm = gson.fromJson(reader, ClienteModel.class);
+            this.clienteDAO.insert(clienteForm);
+            
+            response.setStatus(HttpServletResponse.SC_CREATED);
+            response.getWriter().write("{\"message\":\"Usuario Cliente creado correctamente\"}");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en el servlet ClienteServlet, metodo post.");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al crear Cliente");
+        }
+//        processRequest(request, response);
     }
 
     /**

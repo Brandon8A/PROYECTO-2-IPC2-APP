@@ -82,6 +82,7 @@ export class GestionUsuariosComponent {
   obtenerUsuariosClientes(){
     this.fetchback.obtenerUsuariosClientes().subscribe({
       next: value => {
+        console.log(value);
         this.usersClientes = value;
       },
       error: err => {

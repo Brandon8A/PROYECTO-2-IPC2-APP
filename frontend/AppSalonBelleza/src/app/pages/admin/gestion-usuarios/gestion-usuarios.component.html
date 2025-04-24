@@ -117,6 +117,9 @@
                         <tr>
                             <th>#</th>
                             <th>Usuario</th>
+                            <th>DPI</th>
+                            <th>Telefono</th>
+                            <th>Direccion</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -125,6 +128,9 @@
                         <tr>
                             <td>{{$index+1}}</td>
                             <td>{{userCliente.email}}</td>
+                            <td>{{userCliente.userDpi}}</td>
+                            <td>{{userCliente.userPhoneNumber}}</td>
+                            <td>{{userCliente.userAddress}}</td>
                             <td class="space-x-2">
                                 <button class="btn btn-sm btn-info"
                                     (click)="editarUsuario('CLIENTE', userCliente)">Editar</button>

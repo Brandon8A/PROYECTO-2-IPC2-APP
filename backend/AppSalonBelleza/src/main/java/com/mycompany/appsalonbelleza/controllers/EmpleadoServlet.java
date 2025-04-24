@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.mycompany.appsalonbelleza.models.EmpleadoModel;
 import com.mycompany.appsalonbelleza.models.GestorServiciosModel;
 import com.mycompany.appsalonbelleza.persistence.EmpleadoDAO;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -92,7 +93,23 @@ public class EmpleadoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-
+        System.out.println("Conectado con SERVLET: EmpleadoServlet");
+        Gson gson = new Gson();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        try {
+            BufferedReader reader = request.getReader();
+            EmpleadoModel empleadoForm = gson.fromJson(reader, EmpleadoModel.class);
+            this.empleadoDAO.insert(empleadoForm);
+            
+            response.setStatus(HttpServletResponse.SC_CREATED);
+            response.getWriter().write("{\"message\":\"Usuario creado correctamente\"}");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en el servlet RegistrarUsuario, meotodo post.");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al crear Administrador");
+        }
     }
 
     /**
