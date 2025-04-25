@@ -6,6 +6,7 @@ import { UserMarketing } from '../interfaces/user-marketing';
 import { UserGestorServicios } from '../interfaces/user-gestor-servicios';
 import { UserEmpleado } from '../interfaces/user-empleado';
 import { UserCliente } from '../interfaces/user-cliente';
+import { LoginUser } from '../interfaces/login-user';
 
 @Injectable({
   providedIn: 'root'
@@ -51,5 +52,9 @@ export class RegisterServiceService {
 
   crearCliente(cliente: UserCliente){
     return this.http.post<UserCliente>(`${this.API_URL}/ClienteServlet`, cliente);
+  }
+
+  loguearUsuario(loginUser: LoginUser){
+    return this.http.post<UserCliente>(`${this.API_URL}/LoginServlet`, loginUser);
   }
 }

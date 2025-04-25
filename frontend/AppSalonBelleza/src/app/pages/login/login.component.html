@@ -3,17 +3,23 @@
 
     <div class="card p-4 shadow-lg" style="width: 22rem;">
         <h2 class="text-center mb-4">Iniciar Sesión</h2>
-        <form id="loginForm">
+        <form [formGroup]="loginForm">
             <div class="mb-3">
                 <label for="userName" class="form-label">Correo</label>
-                <input type="text" class="form-control" id="userName" formControlName="userName" placeholder="Correo" required>
+                <input type="text" class="form-control" id="email" formControlName="email" placeholder="Correo" required>
+                @if (email.invalid && email.touched) {
+                    <p class="form-error">Correo es requerido</p>
+                }
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Contraña</label>
-                <input type="text" class="form-control" id="userPassword" formControlName="userPassword" placeholder="Contraseña" required>
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="password" formControlName="password" placeholder="Contraseña" required>
+                @if (password.invalid && password.touched) {
+                    <p class="form-error">Contraseña es requerida</p>
+                }
             </div>
             <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                <button [disabled]="loginForm.invalid" (click)="loguearUsuario()" class="btn btn-primary">Iniciar Sesión</button>
             </div>
             <a routerLink='/registro'>Registrarse</a>
         </form>

@@ -6,9 +6,7 @@ package com.mycompany.appsalonbelleza.persistence;
 
 import com.mycompany.appsalonbelleza.aplication.DBConnection;
 import com.mycompany.appsalonbelleza.encriptacion.EncriptarMD5;
-import com.mycompany.appsalonbelleza.models.AdminModel;
 import com.mycompany.appsalonbelleza.models.ClienteModel;
-import com.mycompany.appsalonbelleza.models.MarketingModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +25,8 @@ public class ClienteDAO extends CrudDAO<ClienteModel> {
     public ClienteModel insert(ClienteModel entity) throws SQLException {
         String sqlInsert = "INSERT INTO Cliente(correo_cliente, contraseña, dpi, telefono, direccion) VALUES(?, ?, ?, ?, ?)";
         EncriptarMD5 encrypt = new EncriptarMD5();
-        try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection connection = DBConnection.getConnection(); 
+                PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, entity.getEmail());
             statement.setString(2, encrypt.getMD5(entity.getPassword()));
             statement.setString(3, entity.getUserDpi());
