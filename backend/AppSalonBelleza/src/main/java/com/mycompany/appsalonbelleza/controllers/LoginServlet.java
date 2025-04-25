@@ -23,7 +23,16 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-    public final LoginUserDAO loginsUserDAO = new LoginUserDAO();
+    public LoginUserDAO loginsUserDAO = new LoginUserDAO(this);
+    private String rolUserLogin;
+
+    public String getRolUserLogin() {
+        return rolUserLogin;
+    }
+
+    public void setRolUserLogin(String rolUserLogin) {
+        this.rolUserLogin = rolUserLogin;
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -87,8 +96,10 @@ public class LoginServlet extends HttpServlet {
             BufferedReader reader = request.getReader();
             UserLoginModel userLoginForm = gson.fromJson(reader, UserLoginModel.class);
             if (this.loginsUserDAO.corroborarCredenciales(userLoginForm)) {
+                userLoginForm.setRol(this.rolUserLogin);
                 System.out.println("Rol: " + userLoginForm.getRol());
                 System.out.println("Email: " + userLoginForm.getEmail());
+                System.out.println("");
                 String json = gson.toJson(userLoginForm);
                 response.setStatus(HttpServletResponse.SC_ACCEPTED);
                 response.getWriter().write(json);

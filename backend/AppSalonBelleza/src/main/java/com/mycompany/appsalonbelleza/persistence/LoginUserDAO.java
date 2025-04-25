@@ -5,6 +5,7 @@
 package com.mycompany.appsalonbelleza.persistence;
 
 import com.mycompany.appsalonbelleza.aplication.DBConnection;
+import com.mycompany.appsalonbelleza.controllers.LoginServlet;
 import com.mycompany.appsalonbelleza.encriptacion.EncriptarMD5;
 import com.mycompany.appsalonbelleza.models.ClienteModel;
 import com.mycompany.appsalonbelleza.models.UserLoginModel;
@@ -20,6 +21,12 @@ import java.sql.Statement;
 public class LoginUserDAO {
 
     public PreparedStatement statement;
+    private LoginServlet loginServlet;
+
+    public LoginUserDAO(LoginServlet loginServlet) {
+        this.loginServlet = loginServlet;
+    }
+    
 
     private final String SQL_ADMIN = "SELECT * FROM Administrador WHERE correo_administrador = ? AND contraseña = ?";
     private final String SQL_CLIENTE = "SELECT * FROM Cliente WHERE correo_cliente = ? AND contraseña = ?";
@@ -32,7 +39,7 @@ public class LoginUserDAO {
         try {
             Connection connection = DBConnection.getConnection();
             if (verificarUser(connection, SQL_ADMIN, entity)) {
-                entity.setRol("Administrador");
+                loginServlet.setRolUserLogin("Administrador");
                 return true;
             }
         } catch (Exception e) {

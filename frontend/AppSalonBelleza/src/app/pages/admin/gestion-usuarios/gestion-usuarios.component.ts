@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { UserMarketingServiceService } from '../../../services/user-marketing-service.service';
 import { UserGestorServicios } from '../../../interfaces/user-gestor-servicios';
 import { UserEmpleado } from '../../../interfaces/user-empleado';
-import { UserCliente } from '../../../interfaces/user-cliente';
+import { UserClienteAdmin } from '../../../interfaces/user-cliente-admin';
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -21,7 +21,7 @@ export class GestionUsuariosComponent {
   usersMarketing: UserMarketing[] = [];
   usersGestorServicios: UserGestorServicios[] = [];
   usersEmpleados: UserEmpleado[] = [];
-  usersClientes: UserCliente[] = [];
+  usersClientes: UserClienteAdmin[] = [];
 
   constructor(private router: Router){}
 

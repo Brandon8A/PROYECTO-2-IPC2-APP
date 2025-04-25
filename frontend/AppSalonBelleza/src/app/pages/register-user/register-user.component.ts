@@ -4,52 +4,66 @@ import { RegisterServiceService } from '../../services/register-service.service'
 import { ReactiveFormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { RegisterDatosClienteComponent } from "../cliente/register-datos-cliente/register-datos-cliente.component";
+import { CompartirDatosService } from '../../services/compartir-datos.service';
 
 @Component({
   selector: 'app-register-user',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RegisterDatosClienteComponent],
   templateUrl: './register-user.component.html',
   styleUrl: './register-user.component.css'
 })
 export class RegisterUserComponent {
-  
-    registerForm: FormGroup;
-    email: FormControl;
-    password: FormControl;
-    rol: FormControl;
+
+  emailCliente: string = '';
+  passwordCliente: string = '';
+
+  registerForm: FormGroup;
+  email: FormControl;
+  password: FormControl;
+  rol: FormControl;
 
 
-    constructor(public registroServicio: RegisterServiceService, private router: Router){
-      this.email = new FormControl('', Validators.required);
-      this.password = new FormControl('', Validators.required);
-      this.rol = new FormControl('', Validators.required);
+  constructor(public registroServicio: RegisterServiceService, private router: Router, public datosCompartidos: CompartirDatosService) {
+    this.email = new FormControl('', Validators.required);
+    this.password = new FormControl('', Validators.required);
+    this.rol = new FormControl('', Validators.required);
 
-      this.registerForm = new FormGroup({
-        email: this.email,
-        password: this.password,
-        rol: this.rol
-      });
-    }
+    this.registerForm = new FormGroup({
+      email: this.email,
+      password: this.password,
+      rol: this.rol
+    });
+  }
 
 
-  registerUser(){
+  registerUser() {
     if (this.registerForm.invalid) {
       return;
     }
+    const email = this.registerForm.get('email')?.value;
+    const password = this.registerForm.get('password')?.value
+
     console.log(this.registerForm.value);
     if (this.rol.value.toLowerCase() === 'administrador') {
       this.registroServicio.crearAdministrador(this.registerForm.value).subscribe({
-        next: (data) => {
+        next: data => {
           Swal.fire('Exito!', 'Administrador creado correctamente', 'success');
           console.log(data);
           this.router.navigate(['/home-admin']);
         },
-        error: (error)=>{
+        error: (error) => {
           console.log(error)
         }
       });
-    }else{
-      console.log('No es administrador')
+    } else if (this.rol.value.toLowerCase() === 'cliente') {
+      this.router.navigate(['/registro-datos-cliente'])
+    } else if (this.rol.value.toLowerCase() === 'empleado') {
+      console.log('Mostrar home-empleado')
+    } else if (this.rol.value.toLowerCase() === 'gestor-servicios') {
+      console.log('Mostrar home-gestor-servicios')
+    } else {
+      console.log('Mostrar home-marketing')
     }
     this.registerForm.reset();
   }

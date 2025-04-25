@@ -3,6 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterServiceService } from '../../services/register-service.service';
 import Swal from 'sweetalert2';
+import { LoginUser } from '../../interfaces/login-user';
 
 @Component({
   selector: 'app-login',
@@ -31,9 +32,13 @@ export class LoginComponent {
     }
     console.log(this.loginForm.value);
     this.registroServicio.loguearUsuario(this.loginForm.value).subscribe({
-      next: (data) => {
+      next: datos => {
         Swal.fire('Exito!', 'Bienvenido', 'success');
-        console.log(data);
+        if (datos.rol === 'Administrador') {
+          this.router.navigate(['/home-admin']);
+        } else {
+          console.log('Dirigerse a otra ruta que no sea home-admin');
+        }
       },
       error: (error) => {
         console.log(error)

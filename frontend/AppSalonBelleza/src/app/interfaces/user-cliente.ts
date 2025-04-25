@@ -1,8 +1,9 @@
 export interface UserCliente {
     email: string;
-    password: string;
-    userDpi: string;
-    userPhoneNumber: string;
-    userAddress: string;
-    
+    dpi: string;
+    telefono: string;
+    direccion: string;
+    hobbies: string;
+    descripcion: string;
+    gustos: string;
 }

@@ -3,7 +3,7 @@
 
     <div class="card p-4 shadow-lg" style="width: 22rem;">
         <h2 class="text-center mb-4">Registrar Usuario</h2>
-        <form [formGroup]="registerForm">
+        <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
             <div class="mb-3">
                 <label for="email" class="form-label">Correo</label>
                 <input type="text" class="form-control" id="email" formControlName="email" placeholder="Correo">

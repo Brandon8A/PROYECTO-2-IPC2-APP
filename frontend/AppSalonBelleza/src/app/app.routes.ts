@@ -7,6 +7,7 @@ import { CrearUsuarioMarketingComponent } from './pages/admin/gestion-usuarios/c
 import { CrearUsuarioGestorServiciosComponent } from './pages/admin/gestion-usuarios/crear-usuario-gestor-servicios/crear-usuario-gestor-servicios.component';
 import { CrearUsuarioEmpleadoComponent } from './pages/admin/gestion-usuarios/crear-usuario-empleado/crear-usuario-empleado.component';
 import { CrearUsuarioClienteComponent } from './pages/admin/gestion-usuarios/crear-usuario-cliente/crear-usuario-cliente.component';
+import { RegisterDatosClienteComponent } from './pages/cliente/register-datos-cliente/register-datos-cliente.component';
 
 export const routes: Routes = [
     {path: '', redirectTo:'login', pathMatch: 'full'},
@@ -21,6 +22,7 @@ export const routes: Routes = [
             {path: 'gestion-usuarios/crear-cliente-admin', component: CrearUsuarioClienteComponent}
         ]
     },
+    {path: 'registro-datos-cliente', component: RegisterDatosClienteComponent},
 
     {path: '**', redirectTo: 'login', pathMatch: 'full'}
 ];

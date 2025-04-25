@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { UserMarketing } from '../interfaces/user-marketing';
 import { UserGestorServicios } from '../interfaces/user-gestor-servicios';
 import { UserEmpleado } from '../interfaces/user-empleado';
-import { UserCliente } from '../interfaces/user-cliente';
+import { UserClienteAdmin } from '../interfaces/user-cliente-admin';
 import { LoginUser } from '../interfaces/login-user';
 
 @Injectable({
@@ -46,15 +46,15 @@ export class RegisterServiceService {
     return this.http.post<UserEmpleado>(`${this.API_URL}/EmpleadoServlet`, empleado);
   }
 
-  obtenerUsuariosClientes(): Observable<UserCliente[]>{
-    return this.http.get<UserCliente[]>(`${this.API_URL}/ClienteServlet`);
+  obtenerUsuariosClientes(): Observable<UserClienteAdmin[]>{
+    return this.http.get<UserClienteAdmin[]>(`${this.API_URL}/ClienteServlet`);
   }
 
-  crearCliente(cliente: UserCliente){
-    return this.http.post<UserCliente>(`${this.API_URL}/ClienteServlet`, cliente);
+  crearCliente(cliente: UserClienteAdmin){
+    return this.http.post<UserClienteAdmin>(`${this.API_URL}/ClienteServlet`, cliente);
   }
 
   loguearUsuario(loginUser: LoginUser){
-    return this.http.post<UserCliente>(`${this.API_URL}/LoginServlet`, loginUser);
+    return this.http.post<LoginUser>(`${this.API_URL}/LoginServlet`, loginUser);
   }
 }

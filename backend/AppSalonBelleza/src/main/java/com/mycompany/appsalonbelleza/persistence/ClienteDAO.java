@@ -44,7 +44,8 @@ public class ClienteDAO extends CrudDAO<ClienteModel> {
     public List<ClienteModel> findAll() throws SQLException {
         List<ClienteModel> clientes = new ArrayList<>();
         String sql = "SELECT * FROM Cliente WHERE activo = TRUE";
-        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); 
+                ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 clientes.add(new ClienteModel(
