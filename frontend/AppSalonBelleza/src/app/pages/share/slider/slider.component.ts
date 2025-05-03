@@ -13,10 +13,6 @@ export class SliderComponent {
 
   }
 
-  gestionarUsuarios() {
-    this.router.navigate(['home-admin/gestion-usuarios']);
-  }
-
   public isOpen: boolean = false;
 
   toogleMenu() {

@@ -41,6 +41,9 @@ public class LoginUserDAO {
             if (verificarUser(connection, SQL_ADMIN, entity)) {
                 loginServlet.setRolUserLogin("Administrador");
                 return true;
+            }else if (verificarUser(connection, SQL_CLIENTE, entity)) {
+                loginServlet.setRolUserLogin("Cliente");
+                return true;
             }
         } catch (Exception e) {
             System.out.println("Error en: ClienteDAO en metodo 'corroborarCredenciales'");

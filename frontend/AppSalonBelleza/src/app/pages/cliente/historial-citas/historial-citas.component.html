@@ -1,0 +1,38 @@
+<div class="content">
+    <div class="card-container">
+        <div class="card">
+            <div class="card-header">
+                <h2>
+                    <!-- <div class="contenedor">
+                        <button class="btn btn-sm btn-primary" (click)="crearUsuarioClienteAdmin()">Crear Usuario Cliente</button>
+                    </div> -->
+                    Historial de Citas
+                </h2>
+            </div>
+            <div class="card-body">
+                <table class="table w-full">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Servicio</th>
+                            <th>Fecha</th>
+                            <th>Empleado Asignado</th>
+                            <th>Cobro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (historial of historial; track $index) {
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{historial.servicio}}</td>
+                            <td>{{historial.fecha}}</td>
+                            <td>{{historial.empleado}}</td>
+                            <td>{{historial.cobro}}</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

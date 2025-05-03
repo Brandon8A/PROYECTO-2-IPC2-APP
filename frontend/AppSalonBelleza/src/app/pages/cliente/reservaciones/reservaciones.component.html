@@ -1,0 +1,38 @@
+<div class="content">
+    <div class="card-container">
+        <div class="card">
+            <div class="card-header">
+                <h2>
+                    <!-- <div class="contenedor">
+                        <button class="btn btn-sm btn-primary" (click)="crearUsuarioClienteAdmin()">Crear Usuario Cliente</button>
+                    </div> -->
+                    Reservaciones
+                </h2>
+            </div>
+            <div class="card-body">
+                <table class="table w-full">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Empleado Asignado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (reservacion of reservaciones; track $index) {
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{reservacion.idReservacion}}</td>
+                            <td>{{reservacion.fecha}}</td>
+                            <td>{{reservacion.hora}}</td>
+                            <td>{{reservacion.empleado}}</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -99,7 +99,6 @@ public class LoginServlet extends HttpServlet {
                 userLoginForm.setRol(this.rolUserLogin);
                 System.out.println("Rol: " + userLoginForm.getRol());
                 System.out.println("Email: " + userLoginForm.getEmail());
-                System.out.println("");
                 String json = gson.toJson(userLoginForm);
                 response.setStatus(HttpServletResponse.SC_ACCEPTED);
                 response.getWriter().write(json);

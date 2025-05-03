@@ -69,6 +69,7 @@ export class RegisterDatosClienteComponent implements OnInit{
         console.log(error)
       }
     }); */
+    this.router.navigate(['/home-cliente'])
     this.registerForm.reset();
   }
 }

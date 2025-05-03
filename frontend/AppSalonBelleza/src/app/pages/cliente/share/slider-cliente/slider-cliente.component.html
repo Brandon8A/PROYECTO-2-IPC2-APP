@@ -1,0 +1,19 @@
+<div class="menu-container" [class.open]="isOpen">
+    <div class="menu">
+        <button class="close-btn" (click)="toogleMenu()">X</button>
+        <ul>
+            <li (click)="servicios()">Servicios</li>
+        </ul>
+        <ul>
+            <li><a routerLink="/home-cliente/reservaciones">Reservaciones</a></li>
+        </ul>
+        <ul>
+            <li><a routerLink="/home-cliente/historial">Historial de Citas</a></li>
+        </ul>
+        <ul>
+            <li><a routerLink="/login">Cerrar Sesion</a></li>
+        </ul>
+    </div>
+</div>
+
+<button class="open-btn" (click)="toogleMenu()" >Menu</button>

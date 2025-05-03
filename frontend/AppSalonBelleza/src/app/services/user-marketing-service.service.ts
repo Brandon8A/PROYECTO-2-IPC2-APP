@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserMarketing } from '../interfaces/user-marketing';
+import { UserMarketing } from '../interfaces/users/user-marketing';
 
 @Injectable({
   providedIn: 'root'

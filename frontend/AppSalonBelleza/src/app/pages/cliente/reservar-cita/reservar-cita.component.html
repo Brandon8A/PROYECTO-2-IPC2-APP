@@ -1,0 +1,56 @@
+<div class="content">
+    <div class="card-container">
+        <div class="card">
+            <div class="card-header">
+                <h2>
+                    Asignar fecha, hora y empleado a la cita
+                </h2>
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+                    rel="stylesheet">
+                <div class="container d-flex justify-content-center align-items-center vh-100">
+
+                    <div class="card p-4 shadow-lg" style="width: 22rem;">
+                        <h2 class="text-center mb-4">Establecer Horario</h2>
+                        <form [formGroup]="horarioForm" (ngSubmit)="obtenerUsuariosEmpleados()">
+                            <div>
+                                <label for="horaEntrada" class="form-label">Hora de entrada:</label>
+                                <input class="form-control" type="time" id="horaEntrada"
+                                    formControlName="horaEntrada" />
+
+                                <div *ngIf="horarioForm.get('horaEntrada')?.invalid && horarioForm.get('horaEntrada')?.touched"
+                                    style="color:red">
+                                    Debes seleccionar la hora de entrada.
+                                </div>
+                            </div>
+                            <button type="submit" [disabled]="horarioForm.invalid" class="btn btn-primary">Mostrar
+                                Empelados disponibles</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table w-full">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Empleado</th>
+                            <th>Asignar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (userEmpleado of usersEmpleados; track $index) {
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{userEmpleado.email}}</td>
+                            <td class="space-x-2">
+                                <button class="btn btn-sm btn-primary" (click)="guardarCita(userEmpleado.email)">Asignar Empleado</button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

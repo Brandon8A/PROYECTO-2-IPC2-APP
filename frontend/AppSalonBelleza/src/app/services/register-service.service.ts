@@ -1,12 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Administrador } from '../interfaces/administrador';
+import { Administrador } from '../interfaces/users/administrador';
 import { Observable } from 'rxjs';
-import { UserMarketing } from '../interfaces/user-marketing';
-import { UserGestorServicios } from '../interfaces/user-gestor-servicios';
-import { UserEmpleado } from '../interfaces/user-empleado';
-import { UserClienteAdmin } from '../interfaces/user-cliente-admin';
+import { UserMarketing } from '../interfaces/users/user-marketing';
+import { UserGestorServicios } from '../interfaces/users/user-gestor-servicios';
+import { UserEmpleado } from '../interfaces/users/user-empleado';
+import { UserClienteAdmin } from '../interfaces/users/user-cliente-admin';
 import { LoginUser } from '../interfaces/login-user';
+import { Servicios } from '../interfaces/servicios';
+import { Reservacion } from '../interfaces/reservacion';
+import { HistorialCliente } from '../interfaces/historial-cliente';
+import { Cita } from '../interfaces/cita';
 
 @Injectable({
   providedIn: 'root'
@@ -57,4 +61,25 @@ export class RegisterServiceService {
   loguearUsuario(loginUser: LoginUser){
     return this.http.post<LoginUser>(`${this.API_URL}/LoginServlet`, loginUser);
   }
+
+  obtenerServicios(): Observable<Servicios[]>{
+    return this.http.get<Servicios[]>(`${this.API_URL}/ServiciosServlet`);
+  }
+
+  obtenerReservacionesCliente(): Observable<Reservacion[]>{
+    return this.http.get<Reservacion[]>(`${this.API_URL}/ReservacionServlet`);
+  }
+
+  obtenerHistorialCliente(): Observable<HistorialCliente[]>{
+    return this.http.get<HistorialCliente[]>(`${this.API_URL}/HistorialClienteServlet`);
+  }
+
+  obtenerEmpleadosDisponibles(hora: string): Observable<UserEmpleado[]>{
+    return this.http.get<UserEmpleado[]>(`${this.API_URL}/EmpleadoDisponibleServlet?hora=${hora}`);
+  }
+
+  crearCita(cita: Cita){
+    return this.http.post<Cita>(`${this.API_URL}/CitaServlet`, cita);
+  }
+  
 }

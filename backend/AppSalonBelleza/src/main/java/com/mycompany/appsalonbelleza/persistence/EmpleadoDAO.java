@@ -51,10 +51,30 @@ public class EmpleadoDAO extends CrudDAO<EmpleadoModel>{
                 ));
             }
         } catch (Exception e) {
-            System.out.println("Error en EmpleadoDAO");
+            System.out.println("Error en EmpleadoDAO findALL()");
             System.out.println(e);
         }
         return empleados;
+    }
+    
+    public List<EmpleadoModel> findAllDisponibles(String hora) throws SQLException {
+        List<EmpleadoModel> empleadosDisponibles = new ArrayList<>();
+        String sql = "SELECT e.* FROM Empleado e WHERE NOT EXISTS "
+                + "(SELECT 1 FROM Horario h WHERE h.correo_empleado_fk = e.correo_empleado AND h.hora_inicio = '"+hora+"')";
+        
+        try (Connection conn = DBConnection.getConnection(); 
+                PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()){
+            while (rs.next()) {
+                empleadosDisponibles.add(new EmpleadoModel(
+                        rs.getString("correo_empleado"),
+                        rs.getString("contraseña")
+                ));
+            }
+        } catch (Exception e) {
+            System.out.println("Error en EmpleadoDAO en findAllDisponibles()");
+            System.out.println(e);
+        }
+        return empleadosDisponibles;
     }
     
 }

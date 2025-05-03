@@ -33,11 +33,18 @@ export class LoginComponent {
     console.log(this.loginForm.value);
     this.registroServicio.loguearUsuario(this.loginForm.value).subscribe({
       next: datos => {
+        const emailLogueado = datos.email;
         Swal.fire('Exito!', 'Bienvenido', 'success');
         if (datos.rol === 'Administrador') {
-          this.router.navigate(['/home-admin']);
-        } else {
-          console.log('Dirigerse a otra ruta que no sea home-admin');
+          this.router.navigate(['/home-admin'], {
+            queryParams: {emailLogueado}
+          });
+        } else if(datos.rol === 'Cliente') {
+          this.router.navigate(['/home-cliente'], {
+            queryParams: {emailLogueado}
+          });
+        }else{
+          console.log('Dirigirse a otra ruta.')
         }
       },
       error: (error) => {

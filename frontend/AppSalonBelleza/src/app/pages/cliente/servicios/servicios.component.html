@@ -1,0 +1,43 @@
+<div class="content">
+    <div class="card-container">
+        <div class="card">
+            <div class="card-header">
+                <h2>
+                    <!-- <div class="contenedor">
+                        <button class="btn btn-sm btn-primary" (click)="crearUsuarioClienteAdmin()">Crear Usuario Cliente</button>
+                    </div> -->
+                    Servicios
+                </h2>
+            </div>
+            <div class="card-body">
+                <table class="table w-full">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tipo Servicio</th>
+                            <th>Descripcion</th>
+                            <th>Precio</th>
+                            <th>Tiempo de Servicio</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (servicio of servicios; track $index) {
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{servicio.nombreServicio}}</td>
+                            <td>{{servicio.descripcion}}</td>
+                            <td>{{servicio.precio}}</td>
+                            <td>{{servicio.tiempoServicio}}</td>
+                            <td class="space-x-2">
+                                <button class="btn btn-sm btn-info" (click)="reservarCita(servicio.nombreServicio)">Reservar Cita</button>
+                                <button class="btn btn-sm btn-danger">Ver en Pdf</button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

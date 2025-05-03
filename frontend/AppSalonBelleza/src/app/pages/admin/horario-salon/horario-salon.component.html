@@ -1,0 +1,31 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+<div class="container d-flex justify-content-center align-items-center vh-100">
+
+    <div class="card p-4 shadow-lg" style="width: 22rem;">
+        <h2 class="text-center mb-4">Establecer Horario</h2>
+        <form [formGroup]="horarioForm" (ngSubmit)="onSubmit()">
+            <div>
+                <label for="horaEntrada" class="form-label">Hora de entrada:</label>
+                <input class="form-control" type="time" id="horaEntrada" formControlName="horaEntrada" />
+
+                <div *ngIf="horarioForm.get('horaEntrada')?.invalid && horarioForm.get('horaEntrada')?.touched"
+                    style="color:red">
+                    Debes seleccionar la hora de entrada.
+                </div>
+            </div>
+
+            <div>
+                <label for="horaSalida" class="form-label">Hora de salida:</label>
+                <input class="form-control" type="time" id="horaSalida" formControlName="horaSalida" />
+
+                <div *ngIf="horarioForm.get('horaSalida')?.invalid && horarioForm.get('horaSalida')?.touched"
+                    style="color:red">
+                    Debes seleccionar la hora de salida.
+                </div>
+            </div>
+
+            <button type="submit" [disabled]="horarioForm.invalid" class="btn btn-primary">Establecer horario</button>
+        </form>
+
+    </div>
+</div>

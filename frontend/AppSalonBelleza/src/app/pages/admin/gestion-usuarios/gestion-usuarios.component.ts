@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { RegisterServiceService } from '../../../services/register-service.service';
-import { UserMarketing } from '../../../interfaces/user-marketing';
+import { UserMarketing } from '../../../interfaces/users/user-marketing';
 import { Router } from '@angular/router';
 import { UserMarketingServiceService } from '../../../services/user-marketing-service.service';
-import { UserGestorServicios } from '../../../interfaces/user-gestor-servicios';
-import { UserEmpleado } from '../../../interfaces/user-empleado';
-import { UserClienteAdmin } from '../../../interfaces/user-cliente-admin';
+import { UserGestorServicios } from '../../../interfaces/users/user-gestor-servicios';
+import { UserEmpleado } from '../../../interfaces/users/user-empleado';
+import { UserClienteAdmin } from '../../../interfaces/users/user-cliente-admin';
 
 @Component({
   selector: 'app-gestion-usuarios',
