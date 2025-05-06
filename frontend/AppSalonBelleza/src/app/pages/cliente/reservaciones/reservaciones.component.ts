@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { RegisterServiceService } from '../../../services/register-service.service';
 import { Router } from '@angular/router';
 import { Reservacion } from '../../../interfaces/reservacion';
+import { ClienteServiceService } from '../../../services/cliente/cliente-service.service';
 
 @Component({
   selector: 'app-reservaciones',
@@ -10,7 +10,7 @@ import { Reservacion } from '../../../interfaces/reservacion';
   styleUrl: './reservaciones.component.css'
 })
 export class ReservacionesComponent {
-  private readonly fetchback = inject(RegisterServiceService);
+  private readonly fetchback = inject(ClienteServiceService);
   
   reservaciones: Reservacion[] = [];
 

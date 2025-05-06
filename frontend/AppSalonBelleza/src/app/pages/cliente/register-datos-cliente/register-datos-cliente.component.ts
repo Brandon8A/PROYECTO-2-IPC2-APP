@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule, Form } from '@angular/forms';
-import { RegisterServiceService } from '../../../services/register-service.service';
-import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteServiceService } from '../../../services/cliente/cliente-service.service';
 import { CompartirDatosService } from '../../../services/compartir-datos.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register-datos-cliente',
@@ -23,8 +22,9 @@ export class RegisterDatosClienteComponent implements OnInit{
   gustos: FormControl;
   email: FormControl;
   password: FormControl;
+  emailCliente: string = '';
 
-  constructor(public clienteServicio: ClienteServiceService, private router: Router, private datosRecibidos: CompartirDatosService) {
+  constructor(public clienteServicio: ClienteServiceService, private router: Router, private route: ActivatedRoute) {
 
     this.hobbies = new FormControl('', Validators.required);
     this.descripcion = new FormControl('', Validators.required);
@@ -47,29 +47,30 @@ export class RegisterDatosClienteComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.datosRecibidos.correo$.subscribe(correo => {
-      this.registerForm.patchValue({email: correo})
-    })
+    this.route.queryParams.subscribe(params => {
+      this.emailCliente = params['email'];
+    });
+    console.log(this.emailCliente);
   }
-
-  
 
   registerUser() {
     if (this.registerForm.invalid) {
       return;
     }
     console.log(this.registerForm.value);
-    /* this.clienteServicio.crearCliente(this.registerForm.value).subscribe({
-      next: (data) => {
-        Swal.fire('Exito!', 'Usuario Cliente creado correctamente', 'success');
-        console.log(data);
-        this.router.navigate(['/home-admin/gestion-usuarios']);
+    this.clienteServicio.actualizarDatosCliente(this.registerForm.value, this.emailCliente).subscribe({
+      next: data => {
+        const emailLogueado = data.email;
+        Swal.fire('Exito!', 'Datos guardados correctamente', 'success');
+        this.router.navigate(['/home-cliente'], {
+          queryParams: { emailLogueado}
+        });
+        this.registerForm.reset();
       },
-      error: (error) => {
-        console.log(error)
+      error: error => {
+        console.log(error);
+        Swal.fire('Error!', 'No se pudo guardar los datos', 'error');
       }
-    }); */
-    this.router.navigate(['/home-cliente'])
-    this.registerForm.reset();
+    })
   }
 }

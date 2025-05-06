@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { RegisterServiceService } from '../../../services/register-service.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AdminServicesService } from '../../../services/admin/admin-services.service';
 
 @Component({
   selector: 'app-horario-salon',
@@ -16,7 +17,7 @@ export class HorarioSalonComponent {
 
   horarioForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private registerService: AdminServicesService) {
     this.horarioForm = this.fb.group({
       horaEntrada: ['', Validators.required],
       horaSalida: ['', Validators.required]
@@ -29,8 +30,15 @@ export class HorarioSalonComponent {
       console.log('Hora de entrada:', horaEntrada);
       console.log('Hora de salida:', horaSalida);
       console.log(this.horarioForm.value)
-      Swal.fire('Exito!', 'Horario actualizado', 'success');
-      this.router.navigate(['/home-admin']);
+      this.registerService.actualizarHorarioSalon(this.horarioForm.value).subscribe({
+        next: data => {
+          console.log('Horario actualizado')
+          Swal.fire('Exito', 'Horario Actualizado.', 'success');
+          this.router.navigate(['/home-admin']);
+        }
+      })
+     /*  Swal.fire('Exito!', 'Horario actualizado', 'success');
+      this.router.navigate(['/home-admin']); */
     } else {
       console.log('Formulario inválido');
     }

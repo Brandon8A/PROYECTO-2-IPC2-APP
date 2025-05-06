@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { RegisterServiceService } from '../../../services/register-service.service';
 import { Route, Router } from '@angular/router';
 import { HistorialCliente } from '../../../interfaces/historial-cliente';
+import { ClienteServiceService } from '../../../services/cliente/cliente-service.service';
 
 @Component({
   selector: 'app-historial-citas',
@@ -10,7 +10,7 @@ import { HistorialCliente } from '../../../interfaces/historial-cliente';
   styleUrl: './historial-citas.component.css'
 })
 export class HistorialCitasComponent {
-  private readonly fetchback = inject(RegisterServiceService);
+  private readonly fetchback = inject(ClienteServiceService);
   
   historial: HistorialCliente[] = [];
 
@@ -31,5 +31,4 @@ export class HistorialCitasComponent {
       }
     })
   }
-
 }

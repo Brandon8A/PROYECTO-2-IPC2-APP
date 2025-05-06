@@ -1,12 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RegisterServiceService } from '../../../services/register-service.service';
-import { UserMarketingServiceService } from '../../../services/user-marketing-service.service';
 import { UserEmpleado } from '../../../interfaces/users/user-empleado';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Cita } from '../../../interfaces/cita';
 import Swal from 'sweetalert2';
+import { ClienteServiceService } from '../../../services/cliente/cliente-service.service';
 
 @Component({
   selector: 'app-reservar-cita',
@@ -14,11 +13,12 @@ import Swal from 'sweetalert2';
   templateUrl: './reservar-cita.component.html',
   styleUrl: './reservar-cita.component.css'
 })
+
 export class ReservarCitaComponent implements OnInit {
 
   horarioForm: FormGroup;
 
-  private readonly fetchback = inject(RegisterServiceService);
+  private readonly fetchback = inject(ClienteServiceService);
 
   usersEmpleados: UserEmpleado[] = [];
 

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { RegisterServiceService } from '../../../../services/register-service.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AdminServicesService } from '../../../../services/admin/admin-services.service';
 
 @Component({
   selector: 'app-crear-usuario-gestor-servicios',
@@ -15,7 +16,7 @@ export class CrearUsuarioGestorServiciosComponent {
   email: FormControl;
   password: FormControl;
 
-  constructor(public registroServicio: RegisterServiceService, private router: Router) {
+  constructor(public adminServicio: AdminServicesService, private router: Router) {
 
     this.email = new FormControl('', Validators.required);
     this.password = new FormControl('', Validators.required);
@@ -31,7 +32,7 @@ export class CrearUsuarioGestorServiciosComponent {
       return;
     }
     console.log(this.registerForm.value);
-    this.registroServicio.crearGestorServicios(this.registerForm.value).subscribe({
+    this.adminServicio.crearGestorServiciosAdmin(this.registerForm.value).subscribe({
       next: (data) => {
         Swal.fire('Exito!', 'Usuario Gestor Servicios creado correctamente', 'success');
         console.log(data);

@@ -4,6 +4,7 @@ import { RegisterServiceService } from '../../../../services/register-service.se
 import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { AdminServicesService } from '../../../../services/admin/admin-services.service';
 
 @Component({
   selector: 'app-crear-usuario-marketing',
@@ -17,7 +18,7 @@ export class CrearUsuarioMarketingComponent {
   email: FormControl;
   password: FormControl;
 
-  constructor(public registroServicio: RegisterServiceService, private router: Router) {
+  constructor(public adminServicio: AdminServicesService, private router: Router) {
 
     this.email = new FormControl('', Validators.required);
     this.password = new FormControl('', Validators.required);
@@ -33,7 +34,7 @@ export class CrearUsuarioMarketingComponent {
       return;
     }
     console.log(this.registerForm.value);
-    this.registroServicio.crearMarketing(this.registerForm.value).subscribe({
+    this.adminServicio.crearMarketingAdmin(this.registerForm.value).subscribe({
       next: (data) => {
         Swal.fire('Exito!', 'Usuario Marketing creado correctamente', 'success');
         console.log(data);

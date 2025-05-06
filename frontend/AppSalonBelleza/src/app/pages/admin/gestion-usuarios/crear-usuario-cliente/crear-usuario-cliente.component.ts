@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { RegisterServiceService } from '../../../../services/register-service.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AdminServicesService } from '../../../../services/admin/admin-services.service';
 
 @Component({
   selector: 'app-crear-usuario-cliente',
@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
   templateUrl: './crear-usuario-cliente.component.html',
   styleUrl: './crear-usuario-cliente.component.css'
 })
+
 export class CrearUsuarioClienteComponent {
   registerForm: FormGroup;
   email: FormControl;
@@ -18,7 +19,7 @@ export class CrearUsuarioClienteComponent {
   phoneNumber: FormControl;
   address: FormControl;
 
-  constructor(public registroServicio: RegisterServiceService, private router: Router) {
+  constructor(public servicioAdmin: AdminServicesService, private router: Router) {
 
     this.email = new FormControl('', Validators.required);
     this.password = new FormControl('', Validators.required);
@@ -40,7 +41,7 @@ export class CrearUsuarioClienteComponent {
       return;
     }
     console.log(this.registerForm.value);
-    this.registroServicio.crearCliente(this.registerForm.value).subscribe({
+    this.servicioAdmin.crearClienteAdmin(this.registerForm.value).subscribe({
       next: (data) => {
         Swal.fire('Exito!', 'Usuario Cliente creado correctamente', 'success');
         console.log(data);

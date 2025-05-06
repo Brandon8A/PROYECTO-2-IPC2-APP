@@ -18,7 +18,7 @@ export class HomeClienteComponent implements OnInit{
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.emailLogueado = params['emailLogueado'];
-      console.log(this.emailLogueado);
+      console.log('Email Logueado: '+this.emailLogueado);
     })
   }
 }

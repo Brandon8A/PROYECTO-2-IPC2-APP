@@ -3,7 +3,6 @@ import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterServiceService } from '../../services/register-service.service';
 import Swal from 'sweetalert2';
-import { LoginUser } from '../../interfaces/login-user';
 
 @Component({
   selector: 'app-login',

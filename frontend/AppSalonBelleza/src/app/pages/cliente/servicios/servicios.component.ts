@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RegisterServiceService } from '../../../services/register-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Servicios } from '../../../interfaces/servicios';
+import { ClienteServiceService } from '../../../services/cliente/cliente-service.service';
 
 @Component({
   selector: 'app-servicios',
@@ -9,8 +9,9 @@ import { Servicios } from '../../../interfaces/servicios';
   templateUrl: './servicios.component.html',
   styleUrl: './servicios.component.css'
 })
+
 export class ServiciosComponent implements OnInit{
-  private readonly fetchback = inject(RegisterServiceService);
+  private readonly fetchback = inject(ClienteServiceService);
   emailLogueado: string | null = null;
   servicios: Servicios[] = [];
 

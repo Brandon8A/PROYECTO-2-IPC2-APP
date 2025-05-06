@@ -32,6 +32,10 @@ public class ClienteModel {
         this.email = email;
         this.password = password;
     }
+
+    public ClienteModel(String email) {
+        this.email = email;
+    }
     
     public ClienteModel() {
     }

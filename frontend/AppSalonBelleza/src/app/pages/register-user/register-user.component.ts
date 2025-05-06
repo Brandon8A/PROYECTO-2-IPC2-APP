@@ -4,12 +4,11 @@ import { RegisterServiceService } from '../../services/register-service.service'
 import { ReactiveFormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { RegisterDatosClienteComponent } from "../cliente/register-datos-cliente/register-datos-cliente.component";
 import { CompartirDatosService } from '../../services/compartir-datos.service';
 
 @Component({
   selector: 'app-register-user',
-  imports: [ReactiveFormsModule, RegisterDatosClienteComponent],
+  imports: [ReactiveFormsModule],
   templateUrl: './register-user.component.html',
   styleUrl: './register-user.component.css'
 })
@@ -41,8 +40,8 @@ export class RegisterUserComponent {
     if (this.registerForm.invalid) {
       return;
     }
-    const email = this.registerForm.get('email')?.value;
-    const password = this.registerForm.get('password')?.value
+    var email = this.registerForm.get('email')?.value;
+    var password = this.registerForm.get('password')?.value
 
     console.log(this.registerForm.value);
     if (this.rol.value.toLowerCase() === 'administrador') {
@@ -57,13 +56,27 @@ export class RegisterUserComponent {
         }
       });
     } else if (this.rol.value.toLowerCase() === 'cliente') {
-      this.router.navigate(['/registro-datos-cliente'])
+      this.registroServicio.crearCliente(this.registerForm.value).subscribe({
+        next: data =>{
+          this.router.navigate(['registro-datos-cliente'], {
+            queryParams: { email }
+          })
+        }
+      })
+      /* this.registroServicio.crearCliente(this.registerForm.value).subscribe({
+        next: data => {
+          Swal.fire('Exito!', 'Cliente creado correctamente', 'success');
+          console.log(data);
+          this.router.navigate(['/registro-datos-cliente'], {
+            queryParams: { data.email }});
+        }
+      }) */
     } else if (this.rol.value.toLowerCase() === 'empleado') {
-      console.log('Mostrar home-empleado')
+      console.log('Mostrar home-empleado');
     } else if (this.rol.value.toLowerCase() === 'gestor-servicios') {
-      console.log('Mostrar home-gestor-servicios')
+      console.log('Mostrar home-gestor-servicios');
     } else {
-      console.log('Mostrar home-marketing')
+      console.log('Mostrar home-marketing');
     }
     this.registerForm.reset();
   }

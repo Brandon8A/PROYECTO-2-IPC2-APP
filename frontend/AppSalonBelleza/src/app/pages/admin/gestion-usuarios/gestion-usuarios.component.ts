@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { RegisterServiceService } from '../../../services/register-service.service';
 import { UserMarketing } from '../../../interfaces/users/user-marketing';
 import { Router } from '@angular/router';
 import { UserMarketingServiceService } from '../../../services/user-marketing-service.service';
 import { UserGestorServicios } from '../../../interfaces/users/user-gestor-servicios';
 import { UserEmpleado } from '../../../interfaces/users/user-empleado';
 import { UserClienteAdmin } from '../../../interfaces/users/user-cliente-admin';
+import { AdminServicesService } from '../../../services/admin/admin-services.service';
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -15,7 +15,7 @@ import { UserClienteAdmin } from '../../../interfaces/users/user-cliente-admin';
 })
 export class GestionUsuariosComponent {
 
-  private readonly fetchback = inject(RegisterServiceService);
+  private readonly fetchback = inject(AdminServicesService);
   private readonly marketingService = inject(UserMarketingServiceService);
   
   usersMarketing: UserMarketing[] = [];

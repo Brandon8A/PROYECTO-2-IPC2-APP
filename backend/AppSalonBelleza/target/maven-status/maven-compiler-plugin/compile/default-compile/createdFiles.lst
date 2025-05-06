@@ -1,6 +1,7 @@
 com/mycompany/appsalonbelleza/controllers/GestorServiciosServlet.class
 com/mycompany/appsalonbelleza/persistence/EmpleadoDAO.class
 com/mycompany/appsalonbelleza/controllers/cliente/DatosClienteServlet.class
+com/mycompany/appsalonbelleza/persistence/HorarioSalonDAO.class
 com/mycompany/appsalonbelleza/models/UserLoginModel.class
 com/mycompany/appsalonbelleza/models/ClienteModel.class
 com/mycompany/appsalonbelleza/models/GestorServiciosModel.class
@@ -19,11 +20,13 @@ com/mycompany/appsalonbelleza/models/AdminModel.class
 com/mycompany/appsalonbelleza/controllers/LoginServlet.class
 com/mycompany/appsalonbelleza/persistence/MarketingDAO.class
 com/mycompany/appsalonbelleza/persistence/CitaDAO.class
+com/mycompany/appsalonbelleza/controllers/HorarioSalonServlet.class
 com/mycompany/appsalonbelleza/models/ServicioModel.class
 com/mycompany/appsalonbelleza/aplication/DBConnection.class
 com/mycompany/appsalonbelleza/persistence/CrudDAO.class
 com/mycompany/appsalonbelleza/controllers/ClienteServlet.class
 com/mycompany/appsalonbelleza/models/CitaModel.class
+com/mycompany/appsalonbelleza/models/HorarioSalonModel.class
 com/mycompany/appsalonbelleza/persistence/ServiciosDAO.class
 com/mycompany/appsalonbelleza/models/MarketingModel.class
 com/mycompany/appsalonbelleza/resources/JakartaEE8Resource.class
