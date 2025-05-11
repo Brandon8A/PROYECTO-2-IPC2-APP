@@ -1,17 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, ReactiveFormsModule, Form } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteServiceService } from '../../../services/cliente/cliente-service.service';
-import { CompartirDatosService } from '../../../services/compartir-datos.service';
+import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register-datos-cliente',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './register-datos-cliente.component.html',
   styleUrl: './register-datos-cliente.component.css'
 })
-export class RegisterDatosClienteComponent implements OnInit{
+export class RegisterDatosClienteComponent implements OnInit {
 
   registerForm: FormGroup;
   hobbies: FormControl;
@@ -23,6 +23,7 @@ export class RegisterDatosClienteComponent implements OnInit{
   email: FormControl;
   password: FormControl;
   emailCliente: string = '';
+  fotoPerfil: File | null = null;
 
   constructor(public clienteServicio: ClienteServiceService, private router: Router, private route: ActivatedRoute) {
 
@@ -53,24 +54,34 @@ export class RegisterDatosClienteComponent implements OnInit{
     console.log(this.emailCliente);
   }
 
+  onFileSelected(event: any) {
+    this.fotoPerfil = event.target.files[0];
+  }
+
   registerUser() {
     if (this.registerForm.invalid) {
       return;
     }
-    console.log(this.registerForm.value);
-    this.clienteServicio.actualizarDatosCliente(this.registerForm.value, this.emailCliente).subscribe({
-      next: data => {
-        const emailLogueado = data.email;
-        Swal.fire('Exito!', 'Datos guardados correctamente', 'success');
-        this.router.navigate(['/home-cliente'], {
-          queryParams: { emailLogueado}
-        });
-        this.registerForm.reset();
-      },
-      error: error => {
-        console.log(error);
-        Swal.fire('Error!', 'No se pudo guardar los datos', 'error');
-      }
-    })
+    if (this.fotoPerfil) {
+      const formData = new FormData();
+      formData.append('fotoPerfil', this.fotoPerfil);
+      console.log(this.registerForm.value);
+      this.clienteServicio.actualizarDatosCliente(this.registerForm.value, this.emailCliente).subscribe({
+        next: data => {
+          const emailLogueado = data.email;
+          Swal.fire('Exito!', 'Datos guardados correctamente', 'success');
+          this.router.navigate(['/home-cliente'], {
+            queryParams: { emailLogueado }
+          });
+          this.registerForm.reset();
+        },
+        error: error => {
+          console.log(error);
+          Swal.fire('Error!', 'No se pudo guardar los datos', 'error');
+        }
+      });
+    } else {
+
+    }
   }
 }

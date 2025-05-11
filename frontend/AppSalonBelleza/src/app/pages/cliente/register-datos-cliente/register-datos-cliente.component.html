@@ -51,6 +51,9 @@
                 <label for="text" class="form-label">Seleccionar foto</label>
                 <input type="file">
             </div> -->
+            <div class="mb-3">
+                <input type="file" (change)="onFileSelected($event)"/>
+            </div>
             <div class="d-grid gap-2">
                 <button [disabled]="registerForm.invalid" class="btn btn-primary" (click)="registerUser()" >Guardar Datos</button>
             </div>

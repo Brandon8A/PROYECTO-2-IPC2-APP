@@ -5,4 +5,5 @@ export interface DatosCliente {
     hobbies: string;
     descripcion: string;
     gustos: string;
+    pathFotoPerfil: string;
 }
