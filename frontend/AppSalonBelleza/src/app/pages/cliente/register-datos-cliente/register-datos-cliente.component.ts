@@ -62,26 +62,20 @@ export class RegisterDatosClienteComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    if (this.fotoPerfil) {
-      const formData = new FormData();
-      formData.append('fotoPerfil', this.fotoPerfil);
-      console.log(this.registerForm.value);
-      this.clienteServicio.actualizarDatosCliente(this.registerForm.value, this.emailCliente).subscribe({
-        next: data => {
-          const emailLogueado = data.email;
-          Swal.fire('Exito!', 'Datos guardados correctamente', 'success');
-          this.router.navigate(['/home-cliente'], {
-            queryParams: { emailLogueado }
-          });
-          this.registerForm.reset();
-        },
-        error: error => {
-          console.log(error);
-          Swal.fire('Error!', 'No se pudo guardar los datos', 'error');
-        }
-      });
-    } else {
-
-    }
+    console.log(this.registerForm.value);
+    this.clienteServicio.actualizarDatosCliente(this.registerForm.value, this.emailCliente).subscribe({
+      next: data => {
+        const emailLogueado = data.email;
+        Swal.fire('Exito!', 'Datos guardados correctamente', 'success');
+        this.router.navigate(['/home-cliente'], {
+          queryParams: { emailLogueado }
+        });
+        this.registerForm.reset();
+      },
+      error: error => {
+        console.log(error);
+        Swal.fire('Error!', 'No se pudo guardar los datos', 'error');
+      }
+    });
   }
 }

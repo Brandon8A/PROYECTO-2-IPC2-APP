@@ -26,6 +26,7 @@ public class ClienteServlet extends HttpServlet {
     
     private final ClienteDAO clienteDAO = new ClienteDAO();
     private final Gson gson = new Gson();
+    private final String PATH_FOTOS_PERFIL = "/home/brandon-ochoa/apache-tomcat-9.0.100/webapps/perfiles/";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -120,6 +121,8 @@ public class ClienteServlet extends HttpServlet {
         String cliente = request.getParameter("cliente");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+        
+        
 
         try {
             BufferedReader reader = request.getReader();
