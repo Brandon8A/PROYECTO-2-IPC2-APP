@@ -23,7 +23,6 @@ export class RegisterDatosClienteComponent implements OnInit {
   email: FormControl;
   password: FormControl;
   emailCliente: string = '';
-  fotoPerfil: File | null = null;
 
   constructor(public clienteServicio: ClienteServiceService, private router: Router, private route: ActivatedRoute) {
 
@@ -54,10 +53,6 @@ export class RegisterDatosClienteComponent implements OnInit {
     console.log(this.emailCliente);
   }
 
-  onFileSelected(event: any) {
-    this.fotoPerfil = event.target.files[0];
-  }
-
   registerUser() {
     if (this.registerForm.invalid) {
       return;
@@ -65,10 +60,13 @@ export class RegisterDatosClienteComponent implements OnInit {
     console.log(this.registerForm.value);
     this.clienteServicio.actualizarDatosCliente(this.registerForm.value, this.emailCliente).subscribe({
       next: data => {
+        console.log('la data es: '+data)
         const emailLogueado = data.email;
+        const pathFoto = data.pathFoto;
+        console.log('path: ' + pathFoto);
         Swal.fire('Exito!', 'Datos guardados correctamente', 'success');
         this.router.navigate(['/home-cliente'], {
-          queryParams: { emailLogueado }
+          queryParams: { emailLogueado, pathFoto }
         });
         this.registerForm.reset();
       },

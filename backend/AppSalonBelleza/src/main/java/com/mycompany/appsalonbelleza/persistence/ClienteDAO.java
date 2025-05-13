@@ -55,19 +55,22 @@ public class ClienteDAO extends CrudDAO<ClienteModel> {
     }
 
     public ClienteModel actualizarDatosCliente(ClienteModel clienteModel, String cliente) {
-        String sqlInsert = "UPDATE Cliente SET dpi = ?, telefono = ?, direccion = ?, hobbies = ?, descripcion = ?, gustos = ?"
-                + " WHERE correo_cliente = '" + cliente + "';";
+        String sqlInsert = "UPDATE Cliente SET dpi = ?, telefono = ?, direccion = ?, hobbies = ?, descripcion = ?, gustos = ?,"
+                + "path_foto = ? WHERE correo_cliente = '" + cliente + "';";
         clienteModel.setEmail(cliente);
-        try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection connection = DBConnection.getConnection(); 
+                PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, clienteModel.getUserDpi());
             statement.setString(2, clienteModel.getUserPhoneNumber());
             statement.setString(3, clienteModel.getUserAddress());
             statement.setString(4, clienteModel.getHobbies());
             statement.setString(5, clienteModel.getDescripcion());
             statement.setString(6, clienteModel.getGustos());
+            statement.setString(7, clienteModel.getPathFoto());
 
             statement.executeUpdate();
         } catch (Exception e) {
+            System.out.println(e);
             System.out.println("Error en: ClienteDAO en metodo actualizarDatosCliente()");
         }
         return clienteModel;

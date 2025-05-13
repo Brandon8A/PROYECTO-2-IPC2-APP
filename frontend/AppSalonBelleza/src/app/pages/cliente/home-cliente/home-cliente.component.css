@@ -1,0 +1,36 @@
+.perfil-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    text-align: center;
+  }
+  
+  .perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .foto-perfil {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }

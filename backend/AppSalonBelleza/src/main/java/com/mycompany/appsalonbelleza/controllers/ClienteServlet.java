@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.mycompany.appsalonbelleza.models.ClienteModel;
 import com.mycompany.appsalonbelleza.persistence.ClienteDAO;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -23,10 +24,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(urlPatterns = {"/ClienteServlet"})
 public class ClienteServlet extends HttpServlet {
-    
+
     private final ClienteDAO clienteDAO = new ClienteDAO();
     private final Gson gson = new Gson();
-    private final String PATH_FOTOS_PERFIL = "/home/brandon-ochoa/apache-tomcat-9.0.100/webapps/perfiles/";
+    private final String PATH_FOTOS_PERFIL = "http://localhost:8080/AppSalonBelleza/imagenes/";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -70,7 +71,7 @@ public class ClienteServlet extends HttpServlet {
         System.out.println("Conectando con servlet ClienteServlet");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        
+
         try {
             List<ClienteModel> clientes = clienteDAO.findAll();
             String json = gson.toJson(clientes);
@@ -96,12 +97,12 @@ public class ClienteServlet extends HttpServlet {
         Gson gson = new Gson();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        
+
         try {
             BufferedReader reader = request.getReader();
             ClienteModel clienteForm = gson.fromJson(reader, ClienteModel.class);
             this.clienteDAO.insert(clienteForm);
-            
+
             response.setStatus(HttpServletResponse.SC_CREATED);
             response.getWriter().write("{\"message\":\"Usuario Cliente creado correctamente\"}");
         } catch (Exception e) {
@@ -121,12 +122,23 @@ public class ClienteServlet extends HttpServlet {
         String cliente = request.getParameter("cliente");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        
-        
+
+        File carpeta = new File(PATH_FOTOS_PERFIL);
+        if (!carpeta.exists()) {
+            System.out.println("Las carpetas no existen.");
+            if (!carpeta.mkdirs()) {
+                System.out.println("No se pudieron crear las carpetas.");
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "No se pudieron crear las carpetas de los perfiles");
+                return;
+            }
+            System.out.println("Carpetas creadas");
+        }
+        System.out.println("path carpetas localhost: " + carpeta.getAbsolutePath());
 
         try {
             BufferedReader reader = request.getReader();
             ClienteModel datosClienteForm = gson.fromJson(reader, ClienteModel.class);
+            datosClienteForm.setPathFoto(PATH_FOTOS_PERFIL + "user.png");
             String json = gson.toJson(this.clienteDAO.actualizarDatosCliente(datosClienteForm, cliente));
             System.out.println(json);
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
@@ -136,7 +148,8 @@ public class ClienteServlet extends HttpServlet {
             System.out.println("Error en el servlet ClienteServlet, metodo doPut().");
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al actualizar los datos del cliente");
         }
-    } 
+    }
+
     /**
      * Returns a short description of the servlet.
      *
