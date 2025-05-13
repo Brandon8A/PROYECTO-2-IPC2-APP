@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from "../../share/header/header.component";
 import { SliderClienteComponent } from "../share/slider-cliente/slider-cliente.component";
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { ClienteServiceService } from '../../../services/cliente/cliente-service.service';
 
 @Component({
   selector: 'app-home-cliente',
@@ -11,10 +12,12 @@ import { ActivatedRoute, RouterOutlet } from '@angular/router';
 })
 export class HomeClienteComponent implements OnInit{
 
+  selectedFile!: File;
+
   emailLogueado: string | null = null;
   fotoPerfil: string | null = null;
 
-  constructor(private route: ActivatedRoute){}
+  constructor(private route: ActivatedRoute, public clienteServicio: ClienteServiceService){}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -25,20 +28,15 @@ export class HomeClienteComponent implements OnInit{
     })
   }
 
-  seleccionarArchivo() {
-    const input = document.getElementById('fileInput') as HTMLInputElement;
-    input?.click();
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
   }
 
-  cambiarImagen(event: any) {
-    const archivo = event.target.files[0];
-    if (archivo) {
-      const lector = new FileReader();
-      lector.onload = (e: any) => {
-        //this.imagenURL = e.target.result; // Para mostrar la vista previa inmediata
-        // Aquí podrías subir la imagen al backend con HttpClient
-      };
-      lector.readAsDataURL(archivo);
-    }
+  uploadImage() {
+    if (!this.selectedFile) return;
+
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+    this.clienteServicio.actualizarFotoPerfil(formData);
   }
 }

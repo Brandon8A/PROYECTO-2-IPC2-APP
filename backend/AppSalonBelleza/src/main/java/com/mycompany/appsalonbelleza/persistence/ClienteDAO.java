@@ -31,6 +31,8 @@ public class ClienteDAO extends CrudDAO<ClienteModel> {
 
             statement.executeUpdate();
         } catch (Exception e) {
+            e.getStackTrace();
+            System.out.println("error en ClienteDAO metodo Insert, erro: " + e);
             System.out.println("Error en: ClienteDAO en metodo 'insert'");
         }
         return entity;

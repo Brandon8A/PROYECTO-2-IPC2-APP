@@ -5,7 +5,7 @@
     <div class="perfil">
         <!-- <img [src]="imagenURL" class="foto-perfil" /> -->
         <img [src]="fotoPerfil" alt="Logo del servidor" width="200" class="foto-perfil">
-        <input type="file" (change)="cambiarImagen($event)" id="fileInput" hidden />
-        <button (click)="seleccionarArchivo()">Cambiar foto de perfil</button>
+        <input type="file" (change)="onFileSelected($event)" id="fileInput" hidden />
+        <button (click)="uploadImage()">Cambiar foto de perfil</button>
     </div>
 </div>

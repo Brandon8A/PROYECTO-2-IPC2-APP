@@ -46,4 +46,8 @@ export class ClienteServiceService {
   obtenerReservacionesCliente(): Observable<Reservacion[]>{
     return this.http.get<Reservacion[]>(`${this.API_URL}/ReservacionServlet`);
   }
+
+  actualizarFotoPerfil(formData: FormData){
+    this.http.post(`${this.API_URL}/ImagenServlet`, formData)
+  }
 }
