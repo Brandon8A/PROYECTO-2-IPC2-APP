@@ -77,6 +77,7 @@ public class ImagenServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("Servlet ImagenServlet, metodo doPost()");
         Part filePart = request.getPart("file"); // "file" es el nombre del campo en Angular
         String fileName = filePart.getSubmittedFileName();
 
@@ -89,6 +90,7 @@ public class ImagenServlet extends HttpServlet {
             Files.copy(input, file.toPath());
         }
 
+        System.out.println("Imagen guardada en: " + file.getAbsolutePath());
         response.setContentType("application/json");
         response.getWriter().write("{\"message\": \"Imagen subida exitosamente.\"}");
 //        processRequest(request, response);

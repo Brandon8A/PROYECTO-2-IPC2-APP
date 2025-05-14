@@ -4,6 +4,7 @@ import { Administrador } from '../interfaces/users/administrador';
 import { LoginUser } from '../interfaces/login-user';
 import { UserCliente } from '../interfaces/users/user-cliente';
 import { HorarioSalon } from '../interfaces/horario-salon';
+import { UserGestorServicios } from '../interfaces/users/user-gestor-servicios';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,9 @@ export class RegisterServiceService {
 
   crearCliente(cliente: UserCliente) {
     return this.http.post<UserCliente>(`${this.API_URL}/ClienteServlet`, cliente);
+  }
+
+  crearGestorServicios(gestorServicios: UserGestorServicios) {
+    return this.http.post<UserGestorServicios>(`${this.API_URL}/GestorServiciosServlet`, gestorServicios);
   }
 }

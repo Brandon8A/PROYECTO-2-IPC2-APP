@@ -15,6 +15,7 @@ import { ServiciosComponent } from './pages/cliente/servicios/servicios.componen
 import { HistorialCitasComponent } from './pages/cliente/historial-citas/historial-citas.component';
 import { ReservacionesComponent } from './pages/cliente/reservaciones/reservaciones.component';
 import { ReservarCitaComponent } from './pages/cliente/reservar-cita/reservar-cita.component';
+import { HomeGestorServiciosComponent } from './pages/gestor-servicios/home-gestor-servicios/home-gestor-servicios.component';
 
 export const routes: Routes = [
     {path: '', redirectTo:'login', pathMatch: 'full'},
@@ -40,6 +41,7 @@ export const routes: Routes = [
             {path: 'reservar-cita', component: ReservarCitaComponent}
         ]
     },
+    {path: 'home-gestor-servicios', component: HomeGestorServiciosComponent},
 
     {path: '**', redirectTo: 'login', pathMatch: 'full'}
 ];

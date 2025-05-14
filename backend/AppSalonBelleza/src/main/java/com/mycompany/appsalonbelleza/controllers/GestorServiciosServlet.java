@@ -6,7 +6,6 @@ package com.mycompany.appsalonbelleza.controllers;
 
 import com.google.gson.Gson;
 import com.mycompany.appsalonbelleza.models.GestorServiciosModel;
-import com.mycompany.appsalonbelleza.models.MarketingModel;
 import com.mycompany.appsalonbelleza.persistence.GestorServiciosDAO;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -92,8 +91,7 @@ public class GestorServiciosServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Conectado con SERVLET: RegistrarAdministrador");
-        Gson gson = new Gson();
+        System.out.println("Conectado con SERVLET: GestorServiciosServlet, metodo doPost()");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         try {

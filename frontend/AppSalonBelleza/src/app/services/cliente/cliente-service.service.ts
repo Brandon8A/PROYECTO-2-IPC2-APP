@@ -47,7 +47,8 @@ export class ClienteServiceService {
     return this.http.get<Reservacion[]>(`${this.API_URL}/ReservacionServlet`);
   }
 
-  actualizarFotoPerfil(formData: FormData){
-    this.http.post(`${this.API_URL}/ImagenServlet`, formData)
+  actualizarFotoPerfil(formData: FormData, file: File){
+    formData.append('file', file);
+    return this.http.post<string>(`${this.API_URL}/ImagenServlet`, formData)
   }
 }

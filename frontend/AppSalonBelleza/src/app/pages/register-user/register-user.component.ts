@@ -23,7 +23,8 @@ export class RegisterUserComponent {
   rol: FormControl;
 
 
-  constructor(public registroServicio: RegisterServiceService, private router: Router, public datosCompartidos: CompartirDatosService) {
+  constructor(public registroServicio: RegisterServiceService, private router: Router,
+     public datosCompartidos: CompartirDatosService) {
     this.email = new FormControl('', Validators.required);
     this.password = new FormControl('', Validators.required);
     this.rol = new FormControl('', Validators.required);
@@ -73,8 +74,20 @@ export class RegisterUserComponent {
       }) */
     } else if (this.rol.value.toLowerCase() === 'empleado') {
       console.log('Mostrar home-empleado');
-    } else if (this.rol.value.toLowerCase() === 'gestor-servicios') {
+    } else if (this.rol.value.toLowerCase() === 'gestor_servicios') {
       console.log('Mostrar home-gestor-servicios');
+      this.registroServicio.crearGestorServicios(this.registerForm.value).subscribe({
+        next: data => {
+          Swal.fire('Exito!', 'Gestor de servicios creado correctamente', 'success');
+          console.log(data);
+          this.router.navigate(['/home-gestor-servicios'], {
+            queryParams: { email }
+          });
+        },
+        error: (error) => {
+          console.log(error)
+        }
+      })
     } else {
       console.log('Mostrar home-marketing');
     }
