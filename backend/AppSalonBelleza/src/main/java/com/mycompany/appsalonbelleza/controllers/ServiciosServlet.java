@@ -7,6 +7,7 @@ package com.mycompany.appsalonbelleza.controllers;
 import com.google.gson.Gson;
 import com.mycompany.appsalonbelleza.models.ServicioModel;
 import com.mycompany.appsalonbelleza.persistence.ServiciosDAO;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -91,7 +92,22 @@ public class ServiciosServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        System.out.println("Ingresando a servlet ServiciosServlet, metodo doPost()");
+        String gestorServicios = request.getParameter("gestorServicios");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        try {
+            BufferedReader reader = request.getReader();
+            ServicioModel datosServicioForm = gson.fromJson(reader, ServicioModel.class);
+            datosServicioForm.setCreadorServicio(gestorServicios);
+            this.serviciosDAO.insert(datosServicioForm);
+            
+            response.setStatus(HttpServletResponse.SC_CREATED);
+            response.getWriter().write("{\"message\":\"Servicio creado correctamente\"}");
+        } catch (Exception e) {
+        }
+//        processRequest(request, response);
     }
 
     /**

@@ -3,5 +3,7 @@ export interface Servicios {
     descripcion: string;
     precio: number;
     tiempoServicio: string;
-
+    oculto: boolean;
+    creadorServicio: string;
+    path: string;
 }

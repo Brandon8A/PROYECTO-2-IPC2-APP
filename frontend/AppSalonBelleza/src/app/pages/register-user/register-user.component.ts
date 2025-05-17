@@ -87,7 +87,7 @@ export class RegisterUserComponent {
         error: (error) => {
           console.log(error)
         }
-      })
+      });
     } else {
       console.log('Mostrar home-marketing');
     }

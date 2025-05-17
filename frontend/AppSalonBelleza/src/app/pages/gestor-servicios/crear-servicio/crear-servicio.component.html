@@ -1,0 +1,44 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow-lg" style="width: 22rem;">
+        <h4 class="text-center mb-2"> Crear Servicio</h4>
+        <form [formGroup]="registerForm">
+            <div class="mb-3">
+                <label for="text" class="form-label">Servicio</label>
+                <input type="text" class="form-control" id="nombreServicio" formControlName="nombreServicio" placeholder="Nombre del servicio">
+                @if (nombreServicio.invalid && nombreServicio.touched) {
+                    <p class="form-error">El nombre del servicio es requerido</p>
+                }
+            </div>
+            <div class="mb-3">
+                <label for="text" class="form-label">Descripcion</label>
+                <input type="text" class="form-control" id="descripcion" formControlName="descripcion" placeholder="Descripcion">
+                @if (descripcion.invalid && descripcion.touched) {
+                    <p class="form-error">La descripcion del servicio es requerida</p>
+                }
+            </div>
+            <div class="mb-3">
+                <label for="text" class="form-label">Tiempo</label>
+                <input type="time" class="form-control" id="tiempoServicio" formControlName="tiempoServicio" placeholder="Tiempo">
+                @if (tiempoServicio.invalid && tiempoServicio.touched) {
+                    <p class="form-error">Direccion es requerida</p>
+                }
+            </div>
+            <div class="mb-3">
+                <label for="text" class="form-label">Precio</label>
+                <input type="text" class="form-control" id="precio" formControlName="precio" placeholder="Precio">
+                @if (precio.invalid && precio.touched) {
+                    <p class="form-error">El precio es requerido</p>
+                }
+            </div>
+                <!-- <input type="file" (change)="onFileSelected($event)"> -->
+            <!-- <div class="mb-3">
+                <label for="text" class="form-label">Seleccionar foto</label>
+                <input type="file">
+            </div> -->
+            <div class="d-grid gap-2">
+                <button [disabled]="registerForm.invalid" class="btn btn-primary" (click)="crearServicio()" >Crear Servicio</button>
+            </div>
+        </form>
+    </div>
+</div>

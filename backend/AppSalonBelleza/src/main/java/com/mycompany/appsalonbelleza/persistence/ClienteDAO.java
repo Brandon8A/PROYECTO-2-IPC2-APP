@@ -25,7 +25,8 @@ public class ClienteDAO extends CrudDAO<ClienteModel> {
     public ClienteModel insert(ClienteModel entity) throws SQLException {
         String sqlInsert = "INSERT INTO Cliente(correo_cliente, contraseña) VALUES(?, ?)";
         EncriptarMD5 encrypt = new EncriptarMD5();
-        try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection connection = DBConnection.getConnection(); 
+                PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, entity.getEmail());
             statement.setString(2, encrypt.getMD5(entity.getPassword()));
 

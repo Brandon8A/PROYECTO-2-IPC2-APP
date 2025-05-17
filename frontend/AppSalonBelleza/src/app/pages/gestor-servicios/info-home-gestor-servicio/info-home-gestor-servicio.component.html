@@ -1,0 +1,47 @@
+<div class="content">
+    <div class="card-container">
+        <div class="card">
+            <div class="card-header">
+                <h2>
+                    <div class="contenedor">
+                        <button class="btn btn-sm btn-primary" (click)="crearServicio()">Crear Servicio</button>
+                    </div>
+                    Servicios
+                </h2>
+            </div>
+            <div class="card-body">
+                <table class="table w-full">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Servicio</th>
+                            <th>Descripcion</th>
+                            <th>Tiempo de Duracion</th>
+                            <th>Precio</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (servicio of servicios; track $index) {
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{servicio.nombreServicio}}</td>
+                            <td>{{servicio.descripcion}}</td>
+                            <td>{{servicio.tiempoServicio}}</td>
+                            <td>{{servicio.precio}}</td>
+                            <td class="space-x-2">
+                                <button class="btn btn-sm btn-info" (click)="editar()">Editar</button>
+                                <button class="btn btn-sm btn-danger">Agregar catalogo</button>
+                                @if (servicio.oculto) {
+                                    <button class="btn btn-sm btn-primary" (click)="ocultar()">Ocultar</button>
+                                } @else {
+                                    <button class="btn btn-sm btn-primary" (click)="mostrar()">Mostrar</button>}
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,13 +14,17 @@ public class ServicioModel {
     private Double precio;
     private String tiempoServicio;
     private String creadorServicio;
+    private String oculto;
+    private String path;
 
-    public ServicioModel(String nombreServicio, String descripcion, Double precio, String tiempoServicio, String creadorServicio) {
+    public ServicioModel(String nombreServicio, String descripcion, Double precio, String tiempoServicio, String creadorServicio, String oculto) {
         this.nombreServicio = nombreServicio;
         this.descripcion = descripcion;
         this.precio = precio;
         this.tiempoServicio = tiempoServicio;
         this.creadorServicio = creadorServicio;
+        this.oculto = oculto;
+        this.path = path;
     }
 
     public ServicioModel() {
@@ -65,5 +69,21 @@ public class ServicioModel {
     public void setCreadorServicio(String creadorServicio) {
         this.creadorServicio = creadorServicio;
     }  
+
+    public String getOculto() {
+        return oculto;
+    }
+
+    public void setOculto(String oculto) {
+        this.oculto = oculto;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
     
 }

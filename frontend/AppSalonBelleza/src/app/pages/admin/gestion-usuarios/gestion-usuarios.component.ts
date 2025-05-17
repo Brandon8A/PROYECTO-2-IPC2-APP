@@ -38,7 +38,6 @@ export class GestionUsuariosComponent {
         this.usersMarketing = value;
       },
       error: err => {
-        //TODO: manejar error
         console.log(err);
       }
     })
@@ -54,7 +53,6 @@ export class GestionUsuariosComponent {
         this.usersGestorServicios = value;
       },
       error: err => {
-        //TODO: manejar error
         console.log(err);
       }
     })
