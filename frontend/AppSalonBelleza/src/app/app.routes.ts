@@ -18,6 +18,8 @@ import { ReservarCitaComponent } from './pages/cliente/reservar-cita/reservar-ci
 import { HomeGestorServiciosComponent } from './pages/gestor-servicios/home-gestor-servicios/home-gestor-servicios.component';
 import { CrearServicioComponent } from './pages/gestor-servicios/crear-servicio/crear-servicio.component';
 import { InfoHomeGestorServicioComponent } from './pages/gestor-servicios/info-home-gestor-servicio/info-home-gestor-servicio.component';
+import { EditarServicioComponent } from './pages/gestor-servicios/editar-servicio/editar-servicio.component';
+import { ReportesGestorServiciosComponent } from './pages/gestor-servicios/reportes-gestor-servicios/reportes-gestor-servicios.component';
 
 export const routes: Routes = [
     {path: '', redirectTo:'login', pathMatch: 'full'},
@@ -46,7 +48,9 @@ export const routes: Routes = [
     {path: 'home-gestor-servicios', component: HomeGestorServiciosComponent,
         children:[
             {path: 'crear-servicio', component: CrearServicioComponent},
-            {path: 'info-home-gestor-servicios', component: InfoHomeGestorServicioComponent}
+            {path: 'info-home-gestor-servicios', component: InfoHomeGestorServicioComponent},
+            {path: 'editar-servicio', component: EditarServicioComponent},
+            {path: 'reportes-gestor-servicios', component: ReportesGestorServiciosComponent}
         ]
     },
 

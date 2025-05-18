@@ -109,6 +109,37 @@ public class ServiciosServlet extends HttpServlet {
         }
 //        processRequest(request, response);
     }
+    
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        System.out.println("Conectando con servlet: ServiciosServlet, metodo doPut()");
+        String nombreServicio = request.getParameter("servicio");
+        String tipoDeActualizacion = request.getParameter("tipoDeActualizacion");
+        System.out.println("\nTipo de actualizacion: " + tipoDeActualizacion);
+        System.out.println("\n");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        try {
+            BufferedReader reader = request.getReader();
+            ServicioModel datosServicioForm = gson.fromJson(reader, ServicioModel.class);
+            if (tipoDeActualizacion.equals("actualizarDatos")) {
+                serviciosDAO.actualizarDatosServicio(datosServicioForm, nombreServicio);
+            }else if (tipoDeActualizacion.equals("ocultar")) {
+                serviciosDAO.ocultarServicio(nombreServicio);
+            } else {
+                serviciosDAO.mostrarServicio(nombreServicio);
+            }
+            response.setStatus(HttpServletResponse.SC_ACCEPTED);
+            response.getWriter().write("{\"message\":\"Servicio creado correctamente\"}");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en el servlet ClienteServlet, metodo doPut().");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al actualizar los datos del cliente");
+        }
+    }
 
     /**
      * Returns a short description of the servlet.

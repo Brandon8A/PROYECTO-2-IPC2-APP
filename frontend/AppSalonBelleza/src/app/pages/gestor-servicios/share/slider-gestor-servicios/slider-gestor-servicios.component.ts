@@ -27,8 +27,8 @@ export class SliderGestorServiciosComponent {
     });
   }
 
-  crearServicio(){
-    this.router.navigate(['/home-gestor-servicios/crear-servicio'], {
+  reportes(){
+    this.router.navigate(['/home-gestor-servicios/reportes-gestor-servicios'], {
       queryParams: { emailLogueado: this.emailLogueado }
     });
   }

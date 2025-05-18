@@ -26,4 +26,19 @@ export class GestorServiciosServiceService {
   obtenerServicios(): Observable<Servicios[]> {
     return this.http.get<Servicios[]>(`${this.API_URL}/ServiciosServlet`);
   }
+
+  editarServicio(datosServicio: Servicios, servicio: string, tipoActualizacion: string) {
+    console.log('Metodo editarServicio() en servicio gestor-servicios-service');
+    return this.http.put<Servicios>(`${this.API_URL}/ServiciosServlet?servicio=${servicio}&tipoDeActualizacion=${tipoActualizacion}`, datosServicio);
+  }
+
+  mostrarServicio(datosServicio: Servicios, nombreServicio: string, tipoActualizacion: string){
+    console.log('Metodo mostrarServicio() en servicio gestor-servicios-service');
+    return this.http.put<Servicios>(`${this.API_URL}/ServiciosServlet?servicio=${nombreServicio}&tipoDeActualizacion=${tipoActualizacion}`, datosServicio);
+  }
+
+  ocultarServicio(datosServicio: Servicios, nombreServicio: string, tipoActualizacion: string){
+    console.log('Metodo ocultarServicio() en servicio gestor-servicios-service');
+    return this.http.put<Servicios>(`${this.API_URL}/ServiciosServlet?servicio=${nombreServicio}&tipoDeActualizacion=${tipoActualizacion}`, datosServicio);
+  }
 }

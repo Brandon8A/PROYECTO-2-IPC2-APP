@@ -45,7 +45,8 @@ public class ServiciosDAO {
         String sqlInsert = "INSERT INTO Servicio(nombre_servicio, descripcion, precio, tiempo_servicio, correo_gestor_servicios_fk)"
                 + " VALUES(?, ?, ?, ?, ?)";
 //        System.out.println();
-        try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, servicio.getNombreServicio());
             statement.setString(2, servicio.getDescripcion());
             statement.setString(3, Double.toString(servicio.getPrecio()));
@@ -58,5 +59,47 @@ public class ServiciosDAO {
             System.out.println("Error en ServiciosDAO metodo insert(). error: " + e);
         }
         return servicio;
+    }
+    
+    public ServicioModel actualizarDatosServicio(ServicioModel datosServicio, String nombreServicio) throws SQLException{
+        String sqlInsert = "UPDATE Servicio SET descripcion = ?, precio = ?, tiempo_servicio = ? WHERE nombre_servicio = '"
+                + nombreServicio + "'";
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)){
+            statement.setString(1, datosServicio.getDescripcion());
+            statement.setString(2, Double.toString(datosServicio.getPrecio()));
+            statement.setString(3, datosServicio.getTiempoServicio());
+            
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.getStackTrace();
+            System.out.println("error: " + e);
+            System.out.println("Error en ServiciosDAO en metodo actualizarDatosServicio()");
+        }
+        return datosServicio;
+    }
+    
+    public void ocultarServicio(String nombreServicio)throws SQLException{
+        String sqlInsert = "UPDATE Servicio SET oculto = TRUE WHERE nombre_servicio = '"+ nombreServicio + "'";
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)){
+            
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.getStackTrace();
+            System.out.println("Error en ServiciosDAO en metodo ocultarServicio()");
+        }
+    }
+    
+    public void mostrarServicio(String nombreServicio)throws SQLException{
+        String sqlInsert = "UPDATE Servicio SET oculto = FALSE WHERE nombre_servicio = '"+ nombreServicio + "'";
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)){
+            
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.getStackTrace();
+            System.out.println("Error en ServiciosDAO en metodo mostrarServicio()");
+        }
     }
 }
