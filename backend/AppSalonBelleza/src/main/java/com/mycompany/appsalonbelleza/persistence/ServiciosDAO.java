@@ -23,7 +23,9 @@ public class ServiciosDAO {
     public List<ServicioModel> findAll() {
         List<ServicioModel> servicios = new ArrayList<>();
         String sql = "SELECT * FROM Servicio";
-        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = DBConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql); 
+                ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 servicios.add(new ServicioModel(
                         rs.getString("nombre_servicio"),
@@ -101,5 +103,28 @@ public class ServiciosDAO {
             e.getStackTrace();
             System.out.println("Error en ServiciosDAO en metodo mostrarServicio()");
         }
+    }
+    
+    public List<ServicioModel> obtenerServicioQueGeneraMasGanancia(){
+        List<ServicioModel> servicioQueGeneraMasGanancias = new ArrayList<>();
+        String sqlInsert = "SELECT *, (precio * veces_utilizado) AS ganancia FROM Servicio ORDER BY ganancia DESC LIMIT 1;";
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sqlInsert);
+                ResultSet resultSet = statement.executeQuery();){
+            while (resultSet.next()) {                
+                servicioQueGeneraMasGanancias.add(new ServicioModel(
+                        resultSet.getString("nombre_servicio"),
+                        resultSet.getString("descripcion"),
+                        Double.parseDouble(resultSet.getString("precio")),
+                        resultSet.getString("tiempo_servicio")));
+            }
+            
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.getStackTrace();
+            System.out.println("Error: " + e);
+            System.out.println("Error en ServiciosDAO en metodo mostrarServicio()");
+        }
+        return servicioQueGeneraMasGanancias;
     }
 }

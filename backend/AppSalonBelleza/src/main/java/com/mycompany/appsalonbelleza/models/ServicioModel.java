@@ -24,8 +24,16 @@ public class ServicioModel {
         this.tiempoServicio = tiempoServicio;
         this.creadorServicio = creadorServicio;
         this.oculto = oculto;
-        this.path = path;
     }
+
+    public ServicioModel(String nombreServicio, String descripcion, Double precio, String tiempoServicio) {
+        this.nombreServicio = nombreServicio;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.tiempoServicio = tiempoServicio;
+    }
+    
+    
 
     public ServicioModel() {
     }

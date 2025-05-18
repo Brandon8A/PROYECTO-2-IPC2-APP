@@ -41,4 +41,8 @@ export class GestorServiciosServiceService {
     console.log('Metodo ocultarServicio() en servicio gestor-servicios-service');
     return this.http.put<Servicios>(`${this.API_URL}/ServiciosServlet?servicio=${nombreServicio}&tipoDeActualizacion=${tipoActualizacion}`, datosServicio);
   }
+
+  obtenerServicioQueGeneraMasIngreso(tipoReporte:string): Observable<Servicios[]>{
+    return this.http.get<Servicios[]>(`${this.API_URL}/ReportesServiciosServlet?tipoReporte=${tipoReporte}`);
+  }
 }
