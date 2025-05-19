@@ -16,7 +16,7 @@ export class HomeGestorServiciosComponent implements OnInit{
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.email = params['email'];
+      this.email = params['emailLogueado'];
     });
     this.home();
     console.log("Email logueado en home-gestor-servicios: "+ this.email);

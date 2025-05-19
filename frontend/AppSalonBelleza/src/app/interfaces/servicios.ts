@@ -6,4 +6,5 @@ export interface Servicios {
     oculto: boolean;
     creadorServicio: string;
     path: string;
+    vecesUtilizado: number;
 }

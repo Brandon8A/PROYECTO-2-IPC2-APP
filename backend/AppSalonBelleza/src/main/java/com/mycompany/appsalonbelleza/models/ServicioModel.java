@@ -16,6 +16,7 @@ public class ServicioModel {
     private String creadorServicio;
     private String oculto;
     private String path;
+    private String vecesUtilizado;
 
     public ServicioModel(String nombreServicio, String descripcion, Double precio, String tiempoServicio, String creadorServicio, String oculto) {
         this.nombreServicio = nombreServicio;
@@ -31,6 +32,14 @@ public class ServicioModel {
         this.descripcion = descripcion;
         this.precio = precio;
         this.tiempoServicio = tiempoServicio;
+    }
+
+    public ServicioModel(String nombreServicio, String descripcion, Double precio, String tiempoServicio, String vecesUtilizado) {
+        this.nombreServicio = nombreServicio;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.tiempoServicio = tiempoServicio;
+        this.vecesUtilizado = vecesUtilizado;
     }
     
     
@@ -93,5 +102,15 @@ public class ServicioModel {
     public void setPath(String path) {
         this.path = path;
     }
+
+    public String getVecesUtilizado() {
+        return vecesUtilizado;
+    }
+
+    public void setVecesUtilizado(String vecesUtilizado) {
+        this.vecesUtilizado = vecesUtilizado;
+    }
+    
+    
     
 }

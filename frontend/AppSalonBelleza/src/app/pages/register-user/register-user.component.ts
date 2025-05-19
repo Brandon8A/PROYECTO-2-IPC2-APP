@@ -74,6 +74,7 @@ export class RegisterUserComponent {
       }) */
     } else if (this.rol.value.toLowerCase() === 'empleado') {
       console.log('Mostrar home-empleado');
+      
     } else if (this.rol.value.toLowerCase() === 'gestor_servicios') {
       console.log('Mostrar home-gestor-servicios');
       this.registroServicio.crearGestorServicios(this.registerForm.value).subscribe({

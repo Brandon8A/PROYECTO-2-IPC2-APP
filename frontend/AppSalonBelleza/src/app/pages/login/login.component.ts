@@ -36,19 +36,29 @@ export class LoginComponent {
         Swal.fire('Exito!', 'Bienvenido', 'success');
         if (datos.rol === 'Administrador') {
           this.router.navigate(['/home-admin'], {
-            queryParams: {emailLogueado}
+            queryParams: { emailLogueado }
           });
-        } else if(datos.rol === 'Cliente') {
+        } else if (datos.rol === 'Cliente') {
           this.router.navigate(['/home-cliente'], {
-            queryParams: {emailLogueado}
+            queryParams: { emailLogueado }
           });
-        }else{
-          console.log('Dirigirse a otra ruta.')
+        } else if (datos.rol === 'GestorServicios'){
+          this.router.navigate(['/home-gestor-servicios'], {
+            queryParams: { emailLogueado }
+          });
+        } else if (datos.rol === 'Marketing'){
+          this.router.navigate(['/home-gestor-servicios'], {
+            queryParams: { emailLogueado }
+          });
+        } else if (datos.rol === 'Empleado'){
+          this.router.navigate(['/home-gestor-servicios'], {
+            queryParams: { emailLogueado }
+          });
         }
       },
       error: (error) => {
         console.log(error)
-        Swal.fire('Error!', 'Correo o contraseña incorrectos', 'success');
+        Swal.fire('Error!', 'Correo o contraseña incorrectos', 'error');
         this.router.navigate(['/login']);
         this.loginForm.reset();
       }

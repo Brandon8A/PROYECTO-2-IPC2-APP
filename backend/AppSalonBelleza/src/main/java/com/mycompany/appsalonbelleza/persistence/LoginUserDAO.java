@@ -26,7 +26,6 @@ public class LoginUserDAO {
     public LoginUserDAO(LoginServlet loginServlet) {
         this.loginServlet = loginServlet;
     }
-    
 
     private final String SQL_ADMIN = "SELECT * FROM Administrador WHERE correo_administrador = ? AND contraseña = ?";
     private final String SQL_CLIENTE = "SELECT * FROM Cliente WHERE correo_cliente = ? AND contraseña = ?";
@@ -41,12 +40,23 @@ public class LoginUserDAO {
             if (verificarUser(connection, SQL_ADMIN, entity)) {
                 loginServlet.setRolUserLogin("Administrador");
                 return true;
-            }else if (verificarUser(connection, SQL_CLIENTE, entity)) {
+            } else if (verificarUser(connection, SQL_CLIENTE, entity)) {
                 loginServlet.setRolUserLogin("Cliente");
                 return true;
+            } else if (verificarUser(connection, SQL_GESTOR_SERVICIOS, entity)) {
+                loginServlet.setRolUserLogin("GestorServicios");
+                return true;
+            } else if (verificarUser(connection, SQL_MARKETING, entity)) {
+                loginServlet.setRolUserLogin("Marketing");
+                return true;
+            } else if (verificarUser(connection, SQL_EMPLEADO, entity)) {
+                loginServlet.setRolUserLogin("Empleado");
+                return true;
+            } else {
+                return false;
             }
         } catch (Exception e) {
-            System.out.println("Error en: ClienteDAO en metodo 'corroborarCredenciales'");
+            System.out.println("Error en: ClienteDAO en metodo 'corroborarCredenciales()'");
         }
         return false;
     }
@@ -57,12 +67,12 @@ public class LoginUserDAO {
             statement.setString(1, entity.getEmail());
             statement.setString(2, encrypt.getMD5(entity.getPassword()));
             System.out.println();
-            
+
             ResultSet resultSet = statement.executeQuery();
             return resultSet.next();
         } catch (Exception e) {
-            System.out.println("Error en metodo verificarUser");
-            System.out.println(e.getStackTrace());
+            System.out.println("Error en LoginUserDAO metodo verificarUser()");
+            System.out.println("Error: " + e);
         }
         return false;
     }

@@ -101,6 +101,7 @@ public class ServiciosDAO {
             statement.executeUpdate();
         } catch (Exception e) {
             e.getStackTrace();
+            System.out.println("Buscando Error: " + e);
             System.out.println("Error en ServiciosDAO en metodo mostrarServicio()");
         }
     }
@@ -119,12 +120,110 @@ public class ServiciosDAO {
                         resultSet.getString("tiempo_servicio")));
             }
             
-            statement.executeUpdate();
+//            statement.executeQuery();
         } catch (Exception e) {
             e.getStackTrace();
             System.out.println("Error: " + e);
-            System.out.println("Error en ServiciosDAO en metodo mostrarServicio()");
+            System.out.println("Error en ServiciosDAO en metodo obtenerServicioQueGeneraMasGanancia()");
         }
         return servicioQueGeneraMasGanancias;
+    }
+    
+    public List<ServicioModel> obtenerServiciosMasReservados(){
+        List<ServicioModel> serviciosMasReservados = new ArrayList<>();
+        String sqlInsert = "SELECT * FROM Servicio ORDER BY veces_utilizado DESC LIMIT 5;";
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sqlInsert);
+                ResultSet resultSet = statement.executeQuery();){
+            while (resultSet.next()) {                
+                serviciosMasReservados.add(new ServicioModel(
+                        resultSet.getString("nombre_servicio"),
+                        resultSet.getString("descripcion"),
+                        Double.parseDouble(resultSet.getString("precio")),
+                        resultSet.getString("tiempo_servicio"),
+                        resultSet.getString("veces_utilizado")));
+            }
+            
+//            statement.executeQuery();
+        } catch (Exception e) {
+            e.getStackTrace();
+            System.out.println("Error: " + e);
+            System.out.println("Error en ServiciosDAO en metodo obtenerServiciosMasReservados()");
+        }
+        return serviciosMasReservados;
+    }
+    
+    public List<ServicioModel> obtenerServiciosMenosReservados(){
+        List<ServicioModel> serviciosMasReservados = new ArrayList<>();
+        String sqlInsert = "SELECT * FROM Servicio ORDER BY veces_utilizado ASC LIMIT 5;";
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sqlInsert);
+                ResultSet resultSet = statement.executeQuery();){
+            while (resultSet.next()) {                
+                serviciosMasReservados.add(new ServicioModel(
+                        resultSet.getString("nombre_servicio"),
+                        resultSet.getString("descripcion"),
+                        Double.parseDouble(resultSet.getString("precio")),
+                        resultSet.getString("tiempo_servicio"),
+                        resultSet.getString("veces_utilizado")));
+            }
+            
+//            statement.executeQuery();
+        } catch (Exception e) {
+            e.getStackTrace();
+            System.out.println("Error: " + e);
+            System.out.println("Error en ServiciosDAO en metodo obtenerServiciosMenosReservados()");
+        }
+        return serviciosMasReservados;
+    }
+    
+    public List<ServicioModel> obtenerServiciosMasReservadosPorFecha(String fecha1, String fecha2){
+        List<ServicioModel> serviciosMasReservados = new ArrayList<>();
+        String sqlInsert = "SELECT DISTINCT s.* FROM Servicio s JOIN Cita c ON s.nombre_servicio = c.nombre_servicio_fk WHERE c.fecha_cita BETWEEN"
+                + " '" + fecha1 + "' AND '" + fecha2 + "' LIMIT 5;";
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sqlInsert);
+                ResultSet resultSet = statement.executeQuery();){
+            while (resultSet.next()) {                
+                serviciosMasReservados.add(new ServicioModel(
+                        resultSet.getString("nombre_servicio"),
+                        resultSet.getString("descripcion"),
+                        Double.parseDouble(resultSet.getString("precio")),
+                        resultSet.getString("tiempo_servicio"),
+                        resultSet.getString("veces_utilizado")));
+            }
+            
+//            statement.executeQuery();
+        } catch (Exception e) {
+            e.getStackTrace();
+            System.out.println("Error: " + e);
+            System.out.println("Error en ServiciosDAO en metodo obtenerServiciosMasReservadosPorFecha()");
+        }
+        return serviciosMasReservados;
+    }
+    
+    public List<ServicioModel> obtenerServiciosMenosReservadosPorFecha(String fecha1, String fecha2){
+        List<ServicioModel> serviciosMasReservados = new ArrayList<>();
+        String sqlInsert = "SELECT DISTINCT s.* FROM Servicio s JOIN Cita c ON s.nombre_servicio = c.nombre_servicio_fk WHERE c.fecha_cita BETWEEN"
+                + " '" + fecha1 + "' AND '" + fecha2 + "' LIMIT 5;";
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sqlInsert);
+                ResultSet resultSet = statement.executeQuery();){
+            while (resultSet.next()) {                
+                serviciosMasReservados.add(new ServicioModel(
+                        resultSet.getString("nombre_servicio"),
+                        resultSet.getString("descripcion"),
+                        Double.parseDouble(resultSet.getString("precio")),
+                        resultSet.getString("tiempo_servicio"),
+                        resultSet.getString("veces_utilizado")));
+            }
+            
+//            statement.executeQuery();
+        } catch (Exception e) {
+            e.getStackTrace();
+            System.out.println("Error: " + e);
+            System.out.println("Error en ServiciosDAO en metodo obtenerServiciosMenosReservadosPorFecha()");
+        }
+        return serviciosMasReservados;
     }
 }

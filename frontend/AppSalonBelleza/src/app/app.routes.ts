@@ -20,6 +20,7 @@ import { CrearServicioComponent } from './pages/gestor-servicios/crear-servicio/
 import { InfoHomeGestorServicioComponent } from './pages/gestor-servicios/info-home-gestor-servicio/info-home-gestor-servicio.component';
 import { EditarServicioComponent } from './pages/gestor-servicios/editar-servicio/editar-servicio.component';
 import { ReportesGestorServiciosComponent } from './pages/gestor-servicios/reportes-gestor-servicios/reportes-gestor-servicios.component';
+import { HomeEmpleadoComponent } from './pages/empleado/home-empleado/home-empleado.component';
 
 export const routes: Routes = [
     {path: '', redirectTo:'login', pathMatch: 'full'},
@@ -53,6 +54,7 @@ export const routes: Routes = [
             {path: 'reportes-gestor-servicios', component: ReportesGestorServiciosComponent}
         ]
     },
+    {path: 'home-empleado', component: HomeEmpleadoComponent},
 
     {path: '**', redirectTo: 'login', pathMatch: 'full'}
 ];

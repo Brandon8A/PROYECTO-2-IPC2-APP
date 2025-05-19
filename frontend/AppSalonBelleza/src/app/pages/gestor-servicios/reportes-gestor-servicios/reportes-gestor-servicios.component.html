@@ -9,12 +9,49 @@
                         <button class="btn btn-sm btn-danger">Exportar PDF</button>
                     </div>
                     <div class="contenedor">
-                        <button class="btn btn-sm btn-primary mt-1">Filtrar por intervalo de tiempo</button>
+                        <form [formGroup]="formularioFechasMasReservados"
+                            (ngSubmit)="obtenerServiciosMasReservadosPorFecha()">
+                            <div>
+                                <label for="fechaInicio">Fecha de inicio:</label>
+                                <input type="date" id="fechaInicio" formControlName="fechaInicio">
+                            </div>
+
+                            <div>
+                                <label for="fechaFin">Fecha de fin:</label>
+                                <input type="date" id="fechaFin" formControlName="fechaFin">
+                            </div>
+
+                            <button type="submit" class="btn btn-sm btn-primary mt-1" [disabled]="!formularioFechasMasReservados.valid">Filtrar por intervalo de tiempo</button>
+                        </form>
                     </div>
                     Servicios más reservados
                 </h2>
             </div>
             <div class="card-body">
+                <table class="table w-full">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Servicio</th>
+                            <th>Descripcion</th>
+                            <th>Precio</th>
+                            <th>Tiempo</th>
+                            <th># Reservaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (serviciosMasReservados of serviciosMasReservados; track $index) {
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{serviciosMasReservados.nombreServicio}}</td>
+                            <td>{{serviciosMasReservados.descripcion}}</td>
+                            <td>{{serviciosMasReservados.precio}}</td>
+                            <td>{{serviciosMasReservados.tiempoServicio}}</td>
+                            <td>{{serviciosMasReservados.vecesUtilizado}}</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="card">
@@ -24,12 +61,49 @@
                         <button class="btn btn-sm btn-danger">Exportar PDF</button>
                     </div>
                     <div class="contenedor">
-                        <button class="btn btn-sm btn-primary mt-1">Filtrar por intervalo de tiempo</button>
+                        <form [formGroup]="formularioFechasMenosReservados"
+                            (ngSubmit)="obtenerServiciosMasReservadosPorFecha()">
+                            <div>
+                                <label for="fechaInicio">Fecha de inicio:</label>
+                                <input type="date" id="fechaInicio" formControlName="fechaInicio">
+                            </div>
+
+                            <div>
+                                <label for="fechaFin">Fecha de fin:</label>
+                                <input type="date" id="fechaFin" formControlName="fechaFin">
+                            </div>
+
+                            <button type="submit" class="btn btn-sm btn-primary mt-1" [disabled]="!formularioFechasMenosReservados.valid">Filtrar por intervalo de tiempo</button>
+                        </form>
                     </div>
                     Servicios menos reservados
                 </h2>
             </div>
             <div class="card-body">
+                <table class="table w-full">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Servicio</th>
+                            <th>Descripcion</th>
+                            <th>Precio</th>
+                            <th>Tiempo</th>
+                            <th># Reservaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (serviciosMenosReservados of serviciosMenosReservados; track $index) {
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{serviciosMenosReservados.nombreServicio}}</td>
+                            <td>{{serviciosMenosReservados.descripcion}}</td>
+                            <td>{{serviciosMenosReservados.precio}}</td>
+                            <td>{{serviciosMenosReservados.tiempoServicio}}</td>
+                            <td>{{serviciosMenosReservados.vecesUtilizado}}</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="card">

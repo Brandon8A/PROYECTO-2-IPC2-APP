@@ -3,6 +3,7 @@ import { UserGestorServicios } from '../../interfaces/users/user-gestor-servicio
 import { HttpClient } from '@angular/common/http';
 import { Servicios } from '../../interfaces/servicios';
 import { Observable } from 'rxjs';
+import { Fechas } from '../../interfaces/fechas';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,21 @@ export class GestorServiciosServiceService {
 
   obtenerServicioQueGeneraMasIngreso(tipoReporte:string): Observable<Servicios[]>{
     return this.http.get<Servicios[]>(`${this.API_URL}/ReportesServiciosServlet?tipoReporte=${tipoReporte}`);
+  }
+
+  obtenerServiciosMasReservados(tipoReporte: string): Observable<Servicios[]>{
+    return this.http.get<Servicios[]>(`${this.API_URL}/ReportesServiciosServlet?tipoReporte=${tipoReporte}`);
+  }
+
+  obtenerServiciosMenosReservados(tipoReporte: string): Observable<Servicios[]>{
+    return this.http.get<Servicios[]>(`${this.API_URL}/ReportesServiciosServlet?tipoReporte=${tipoReporte}`);
+  }
+
+  obtenerServiciosMasReservadosPorFecha(tipoReporte: string, fechas: Fechas): Observable<Servicios[]>{
+    return this.http.post<Servicios[]>(`${this.API_URL}/ReportesServiciosServlet?tipoReporte=${tipoReporte}`, fechas);
+  }
+
+  obtenerServiciosMenosReservadosPorFecha(tipoReporte: string, fechas: Fechas): Observable<Servicios[]>{
+    return this.http.post<Servicios[]>(`${this.API_URL}/ReportesServiciosServlet?tipoReporte=${tipoReporte}`, fechas);
   }
 }

@@ -51,7 +51,7 @@ public class GestorServiciosDAO extends CrudDAO<GestorServiciosModel> {
                 ));
             }
         } catch(Exception e) {
-            System.out.println("Error en Gestor serviciosDAO");
+            System.out.println("Error en Gestor serviciosDAO metodo findAll()");
             System.out.println(e);
         }
         return gestorServicios;
