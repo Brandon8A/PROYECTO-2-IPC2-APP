@@ -11,6 +11,7 @@ import com.mycompany.appsalonbelleza.persistence.CitaDAO;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CitaServlet extends HttpServlet {
     
     public CitaDAO citaDAO = new CitaDAO();
+    Gson gson = new Gson();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -64,7 +66,21 @@ public class CitaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("Ingresando a Servlet: CitaServlet metodo doGet()");
         
+        String empleado = request.getParameter("empleado");
+        
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        try {
+            List<CitaModel> clientes = citaDAO.findAll(empleado);
+            String json = gson.toJson(clientes);
+            response.getWriter().write(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al tener usuarios Empleado");
+        }
 //        processRequest(request, response);
     }
 

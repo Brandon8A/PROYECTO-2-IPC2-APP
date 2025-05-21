@@ -1,0 +1,97 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow-lg" style="width: 22rem;">
+        <h4 class="text-center mb-2"> Ingresar Anuncio</h4>
+        <!-- <form [formGroup]="registerForm">
+            <div class="mb-3">
+                <label for="text" class="form-label">Seleccionar Tipo Anuncio</label>
+                <select [(ngModel)]="opcionSeleccionada" class="form-select"
+                    aria-label="Default select example" id="tipoAnuncio" formControlName="tipoAnuncio">
+                    <option value="texto">Texto: Q. {{precioTexto}} por día</option>
+                    <option value="imagen">Imagen: Q. {{precioImagen}} por día</option>
+                    <option value="video">Video: Q. {{precioVideo}} por día</option>
+                </select>
+                @if (tipoAnuncio.invalid && tipoAnuncio.touched) {
+                <p class="form-error">Seleccione un tipo de Anuncio</p>
+                }
+            </div>
+            <div class="mb-3">
+                <label for="text" class="form-label">Descripcion</label>
+                <input type="text" class="form-control" id="descripcion" formControlName="descripcion"
+                    placeholder="Descripcion del Anuncio">
+                @if (descripcion.invalid && descripcion.touched) {
+                <p class="form-error">La descripcion es requerida</p>
+                }
+            </div>
+            <div class="mb-3">
+                <label for="text" class="form-label">Numero de dias que estará activo</label>
+                <input type="number" class="form-control" id="tiempoServicio" formControlName="tiempoServicio"
+                    placeholder="Numero de dias que estará activo">
+                @if (tiempoServicio.invalid && tiempoServicio.touched) {
+                <p class="form-error">El numero de dias que se mostrará en el sistema es requerido </p>
+                }
+            </div>
+            
+            <div class="d-grid gap-2">
+                <button [disabled]="registerForm.invalid" class="btn btn-primary" (click)="ingresarAnuncio()">Guardar
+                    Anuncio</button>
+            </div>
+        </form> -->
+        <form [formGroup]="formulario" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="text" class="form-label">Seleccionar Tipo Anuncio</label>
+                <select [(ngModel)]="opcionSeleccionada" class="form-select" aria-label="Default select example"
+                    id="tipoAnuncio" formControlName="tipoAnuncio" required>
+                    <option value="texto">Texto: Q. {{precioTexto}} por día</option>
+                    <option value="imagen con texto">Imagen: Q. {{precioImagen}} por día</option>
+                    <option value="video con texto">Video: Q. {{precioVideo}} por día</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>Descripcion</label>
+                <input class="form-control" type="text" formControlName="descripcion" required>
+            </div>
+            <div class="mb-3">
+                <label>Numero de dias que estará activo</label>
+                <input class="form-control" type="number" formControlName="dias" required>
+            </div>
+
+            <div class="mb-3" *ngIf="opcionSeleccionada == 'texto'">
+                <label>Texto</label>
+                <input class="form-control" type="text" formControlName="textoAnuncio" placeholder="Ingrese el texto"
+                    required>
+            </div>
+
+            <div class="mb-3" *ngIf="opcionSeleccionada == 'imagen con texto'">
+                <label>Imagen</label>
+                <input class="form-control" type="file" (change)="onArchivoSeleccionado($event)"
+                    placeholder="Seleccion Imagen" required>
+            </div>
+
+            <div class="mb-3" *ngIf="opcionSeleccionada == 'video con texto'">
+                <label>Ingresar link</label>
+                <input class="form-control" type="text" formControlName="videoAnuncio" placeholder="Ingrese el link"
+                    required>
+            </div>
+            <div class="d-grid gap-2">
+                <button [disabled]="formulario.invalid" class="btn btn-primary" (click)="ingresarAnuncio()">Guardar
+                    Anuncio</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- <input type="file" (change)="onFileSelected($event)"> -->
+<!-- <div class="mb-3">
+                <label for="text" class="form-label">Seleccionar foto</label>
+                <input type="file">
+            
+            </div> 
+            <div class="mb-3" *ngIf="opcionSeleccionada == 'texto'">
+                <p>Ingresar texto</p>
+            </div>
+            <div class="mb-3" *ngIf="opcionSeleccionada == 'imagen'">
+                <input type="file" accept="image/*" formControlName="imagen" />
+            </div>
+            <div class="mb-3" *ngIf="opcionSeleccionada == 'video'">
+                <input type="link" placeholder="Ingresa el link del video">
+            </div>-->

@@ -8,6 +8,7 @@ import { UserEmpleado } from '../../interfaces/users/user-empleado';
 import { HistorialCliente } from '../../interfaces/historial-cliente';
 import { Reservacion } from '../../interfaces/reservacion';
 import { DatosCliente } from '../../interfaces/datos-cliente';
+import { CitaCliente } from '../../interfaces/cita-cliente';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,8 @@ export class ClienteServiceService {
     return this.http.get<Servicios[]>(`${this.API_URL}/ServiciosServlet`);
   }
 
-  crearCita(cita: Cita){
-    return this.http.post<Cita>(`${this.API_URL}/CitaServlet`, cita);
+  crearCita(cita: CitaCliente){
+    return this.http.post<CitaCliente>(`${this.API_URL}/CitaServlet`, cita);
   }
 
   obtenerEmpleadosDisponibles(hora: string): Observable<UserEmpleado[]>{

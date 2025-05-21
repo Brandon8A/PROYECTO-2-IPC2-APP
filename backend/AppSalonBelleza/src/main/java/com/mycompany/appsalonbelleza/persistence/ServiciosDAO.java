@@ -23,9 +23,7 @@ public class ServiciosDAO {
     public List<ServicioModel> findAll() {
         List<ServicioModel> servicios = new ArrayList<>();
         String sql = "SELECT * FROM Servicio";
-        try (Connection conn = DBConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql); 
-                ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 servicios.add(new ServicioModel(
                         rs.getString("nombre_servicio"),
@@ -47,8 +45,7 @@ public class ServiciosDAO {
         String sqlInsert = "INSERT INTO Servicio(nombre_servicio, descripcion, precio, tiempo_servicio, correo_gestor_servicios_fk)"
                 + " VALUES(?, ?, ?, ?, ?)";
 //        System.out.println();
-        try (Connection connection = DBConnection.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, servicio.getNombreServicio());
             statement.setString(2, servicio.getDescripcion());
             statement.setString(3, Double.toString(servicio.getPrecio()));
@@ -62,16 +59,15 @@ public class ServiciosDAO {
         }
         return servicio;
     }
-    
-    public ServicioModel actualizarDatosServicio(ServicioModel datosServicio, String nombreServicio) throws SQLException{
+
+    public ServicioModel actualizarDatosServicio(ServicioModel datosServicio, String nombreServicio) throws SQLException {
         String sqlInsert = "UPDATE Servicio SET descripcion = ?, precio = ?, tiempo_servicio = ? WHERE nombre_servicio = '"
                 + nombreServicio + "'";
-        try (Connection connection = DBConnection.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)){
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, datosServicio.getDescripcion());
             statement.setString(2, Double.toString(datosServicio.getPrecio()));
             statement.setString(3, datosServicio.getTiempoServicio());
-            
+
             statement.executeUpdate();
         } catch (Exception e) {
             e.getStackTrace();
@@ -80,46 +76,43 @@ public class ServiciosDAO {
         }
         return datosServicio;
     }
-    
-    public void ocultarServicio(String nombreServicio)throws SQLException{
-        String sqlInsert = "UPDATE Servicio SET oculto = TRUE WHERE nombre_servicio = '"+ nombreServicio + "'";
-        try (Connection connection = DBConnection.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)){
-            
+
+    public void ocultarServicio(String nombreServicio) throws SQLException {
+        String sqlInsert = "UPDATE Servicio SET oculto = TRUE WHERE nombre_servicio = '" + nombreServicio + "'";
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
+
             statement.executeUpdate();
         } catch (Exception e) {
             e.getStackTrace();
             System.out.println("Error en ServiciosDAO en metodo ocultarServicio()");
         }
     }
-    
-    public void mostrarServicio(String nombreServicio)throws SQLException{
-        String sqlInsert = "UPDATE Servicio SET oculto = FALSE WHERE nombre_servicio = '"+ nombreServicio + "'";
-        try (Connection connection = DBConnection.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)){
-            
+
+    public void mostrarServicio(String nombreServicio) throws SQLException {
+        String sqlInsert = "UPDATE Servicio SET oculto = FALSE WHERE nombre_servicio = '" + nombreServicio + "'";
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
+
             statement.executeUpdate();
-        } catch (Exception e) {
-            e.getStackTrace();
-            System.out.println("Buscando Error: " + e);
-            System.out.println("Error en ServiciosDAO en metodo mostrarServicio()");
         }
+//         catch (Exception e) {
+//            e.getStackTrace();
+//            System.out.println("Buscando Error: " + e);
+//            System.out.println("Error en ServiciosDAO en metodo mostrarServicio()");
+//        }
     }
-    
-    public List<ServicioModel> obtenerServicioQueGeneraMasGanancia(){
+
+    public List<ServicioModel> obtenerServicioQueGeneraMasGanancia() {
         List<ServicioModel> servicioQueGeneraMasGanancias = new ArrayList<>();
         String sqlInsert = "SELECT *, (precio * veces_utilizado) AS ganancia FROM Servicio ORDER BY ganancia DESC LIMIT 1;";
-        try (Connection connection = DBConnection.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sqlInsert);
-                ResultSet resultSet = statement.executeQuery();){
-            while (resultSet.next()) {                
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert); ResultSet resultSet = statement.executeQuery();) {
+            while (resultSet.next()) {
                 servicioQueGeneraMasGanancias.add(new ServicioModel(
                         resultSet.getString("nombre_servicio"),
                         resultSet.getString("descripcion"),
                         Double.parseDouble(resultSet.getString("precio")),
                         resultSet.getString("tiempo_servicio")));
             }
-            
+
 //            statement.executeQuery();
         } catch (Exception e) {
             e.getStackTrace();
@@ -128,14 +121,12 @@ public class ServiciosDAO {
         }
         return servicioQueGeneraMasGanancias;
     }
-    
-    public List<ServicioModel> obtenerServiciosMasReservados(){
+
+    public List<ServicioModel> obtenerServiciosMasReservados() {
         List<ServicioModel> serviciosMasReservados = new ArrayList<>();
         String sqlInsert = "SELECT * FROM Servicio ORDER BY veces_utilizado DESC LIMIT 5;";
-        try (Connection connection = DBConnection.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sqlInsert);
-                ResultSet resultSet = statement.executeQuery();){
-            while (resultSet.next()) {                
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert); ResultSet resultSet = statement.executeQuery();) {
+            while (resultSet.next()) {
                 serviciosMasReservados.add(new ServicioModel(
                         resultSet.getString("nombre_servicio"),
                         resultSet.getString("descripcion"),
@@ -143,7 +134,7 @@ public class ServiciosDAO {
                         resultSet.getString("tiempo_servicio"),
                         resultSet.getString("veces_utilizado")));
             }
-            
+
 //            statement.executeQuery();
         } catch (Exception e) {
             e.getStackTrace();
@@ -152,14 +143,12 @@ public class ServiciosDAO {
         }
         return serviciosMasReservados;
     }
-    
-    public List<ServicioModel> obtenerServiciosMenosReservados(){
+
+    public List<ServicioModel> obtenerServiciosMenosReservados() {
         List<ServicioModel> serviciosMasReservados = new ArrayList<>();
         String sqlInsert = "SELECT * FROM Servicio ORDER BY veces_utilizado ASC LIMIT 5;";
-        try (Connection connection = DBConnection.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sqlInsert);
-                ResultSet resultSet = statement.executeQuery();){
-            while (resultSet.next()) {                
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert); ResultSet resultSet = statement.executeQuery();) {
+            while (resultSet.next()) {
                 serviciosMasReservados.add(new ServicioModel(
                         resultSet.getString("nombre_servicio"),
                         resultSet.getString("descripcion"),
@@ -167,7 +156,7 @@ public class ServiciosDAO {
                         resultSet.getString("tiempo_servicio"),
                         resultSet.getString("veces_utilizado")));
             }
-            
+
 //            statement.executeQuery();
         } catch (Exception e) {
             e.getStackTrace();
@@ -176,15 +165,13 @@ public class ServiciosDAO {
         }
         return serviciosMasReservados;
     }
-    
-    public List<ServicioModel> obtenerServiciosMasReservadosPorFecha(String fecha1, String fecha2){
+
+    public List<ServicioModel> obtenerServiciosMasReservadosPorFecha(String fecha1, String fecha2) {
         List<ServicioModel> serviciosMasReservados = new ArrayList<>();
         String sqlInsert = "SELECT DISTINCT s.* FROM Servicio s JOIN Cita c ON s.nombre_servicio = c.nombre_servicio_fk WHERE c.fecha_cita BETWEEN"
                 + " '" + fecha1 + "' AND '" + fecha2 + "' LIMIT 5;";
-        try (Connection connection = DBConnection.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sqlInsert);
-                ResultSet resultSet = statement.executeQuery();){
-            while (resultSet.next()) {                
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert); ResultSet resultSet = statement.executeQuery();) {
+            while (resultSet.next()) {
                 serviciosMasReservados.add(new ServicioModel(
                         resultSet.getString("nombre_servicio"),
                         resultSet.getString("descripcion"),
@@ -192,7 +179,7 @@ public class ServiciosDAO {
                         resultSet.getString("tiempo_servicio"),
                         resultSet.getString("veces_utilizado")));
             }
-            
+
 //            statement.executeQuery();
         } catch (Exception e) {
             e.getStackTrace();
@@ -201,15 +188,13 @@ public class ServiciosDAO {
         }
         return serviciosMasReservados;
     }
-    
-    public List<ServicioModel> obtenerServiciosMenosReservadosPorFecha(String fecha1, String fecha2){
+
+    public List<ServicioModel> obtenerServiciosMenosReservadosPorFecha(String fecha1, String fecha2) {
         List<ServicioModel> serviciosMasReservados = new ArrayList<>();
         String sqlInsert = "SELECT DISTINCT s.* FROM Servicio s JOIN Cita c ON s.nombre_servicio = c.nombre_servicio_fk WHERE c.fecha_cita BETWEEN"
                 + " '" + fecha1 + "' AND '" + fecha2 + "' LIMIT 5;";
-        try (Connection connection = DBConnection.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sqlInsert);
-                ResultSet resultSet = statement.executeQuery();){
-            while (resultSet.next()) {                
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert); ResultSet resultSet = statement.executeQuery();) {
+            while (resultSet.next()) {
                 serviciosMasReservados.add(new ServicioModel(
                         resultSet.getString("nombre_servicio"),
                         resultSet.getString("descripcion"),
@@ -217,7 +202,7 @@ public class ServiciosDAO {
                         resultSet.getString("tiempo_servicio"),
                         resultSet.getString("veces_utilizado")));
             }
-            
+
 //            statement.executeQuery();
         } catch (Exception e) {
             e.getStackTrace();

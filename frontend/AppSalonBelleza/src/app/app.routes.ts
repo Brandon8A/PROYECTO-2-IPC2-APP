@@ -21,40 +21,60 @@ import { InfoHomeGestorServicioComponent } from './pages/gestor-servicios/info-h
 import { EditarServicioComponent } from './pages/gestor-servicios/editar-servicio/editar-servicio.component';
 import { ReportesGestorServiciosComponent } from './pages/gestor-servicios/reportes-gestor-servicios/reportes-gestor-servicios.component';
 import { HomeEmpleadoComponent } from './pages/empleado/home-empleado/home-empleado.component';
+import { InfoHomeEmpleadoComponent } from './pages/empleado/info-home-empleado/info-home-empleado.component';
+import { RegisterDatosEmpleadoComponent } from './pages/empleado/register-datos-empleado/register-datos-empleado.component';
+import { HomeMarketingComponent } from './pages/marketing/home-marketing/home-marketing.component';
+import { InfoHomeMarketingComponent } from './pages/marketing/info-home-marketing/info-home-marketing.component';
+import { IngresarAnuncioComponent } from './pages/marketing/ingresar-anuncio/ingresar-anuncio.component';
 
 export const routes: Routes = [
-    {path: '', redirectTo:'login', pathMatch: 'full'},
-    {path: 'registro', component: RegisterUserComponent},
-    {path: 'login', component: LoginComponent},
-    {path: 'registro-datos-cliente', component: RegisterDatosClienteComponent},
-    {path: 'home-admin', component: HomeAdminComponent,
-        children:[
-            {path: 'gestion-usuarios', component: GestionUsuariosComponent},
-            {path: 'gestion-usuarios/crear-marketing-admin', component: CrearUsuarioMarketingComponent},
-            {path: 'gestion-usuarios/crear-gestor-servicios-admin', component: CrearUsuarioGestorServiciosComponent},
-            {path: 'gestion-usuarios/crear-empleado-admin', component: CrearUsuarioEmpleadoComponent},
-            {path: 'gestion-usuarios/crear-cliente-admin', component: CrearUsuarioClienteComponent},
-            {path: 'horario-salon', component: HorarioSalonComponent},
-            {path: 'reportes', component: ReportesAdminComponent}
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: 'registro', component: RegisterUserComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'registro-datos-cliente', component: RegisterDatosClienteComponent },
+    { path: 'register-datos-empleado', component: RegisterDatosEmpleadoComponent },
+    {
+        path: 'home-admin', component: HomeAdminComponent,
+        children: [
+            { path: 'gestion-usuarios', component: GestionUsuariosComponent },
+            { path: 'gestion-usuarios/crear-marketing-admin', component: CrearUsuarioMarketingComponent },
+            { path: 'gestion-usuarios/crear-gestor-servicios-admin', component: CrearUsuarioGestorServiciosComponent },
+            { path: 'gestion-usuarios/crear-empleado-admin', component: CrearUsuarioEmpleadoComponent },
+            { path: 'gestion-usuarios/crear-cliente-admin', component: CrearUsuarioClienteComponent },
+            { path: 'horario-salon', component: HorarioSalonComponent },
+            { path: 'reportes', component: ReportesAdminComponent }
         ]
     },
-    {path: 'home-cliente', component: HomeClienteComponent,
-        children:[
-            {path: 'servicios', component: ServiciosComponent},
-            {path: 'reservaciones', component: ReservacionesComponent},
-            {path: 'historial', component: HistorialCitasComponent},
-            {path: 'reservar-cita', component: ReservarCitaComponent}
+    {
+        path: 'home-cliente', component: HomeClienteComponent,
+        children: [
+            { path: 'servicios', component: ServiciosComponent },
+            { path: 'reservaciones', component: ReservacionesComponent },
+            { path: 'historial', component: HistorialCitasComponent },
+            { path: 'reservar-cita', component: ReservarCitaComponent }
         ]
     },
-    {path: 'home-gestor-servicios', component: HomeGestorServiciosComponent,
-        children:[
-            {path: 'crear-servicio', component: CrearServicioComponent},
-            {path: 'info-home-gestor-servicios', component: InfoHomeGestorServicioComponent},
-            {path: 'editar-servicio', component: EditarServicioComponent},
-            {path: 'reportes-gestor-servicios', component: ReportesGestorServiciosComponent}
+    {
+        path: 'home-gestor-servicios', component: HomeGestorServiciosComponent,
+        children: [
+            { path: 'crear-servicio', component: CrearServicioComponent },
+            { path: 'info-home-gestor-servicios', component: InfoHomeGestorServicioComponent },
+            { path: 'editar-servicio', component: EditarServicioComponent },
+            { path: 'reportes-gestor-servicios', component: ReportesGestorServiciosComponent }
         ]
     },
-    {path: 'home-empleado', component: HomeEmpleadoComponent},
+    {
+        path: 'home-empleado', component: HomeEmpleadoComponent,
+        children: [
+            { path: 'info-home-empleado', component: InfoHomeEmpleadoComponent },
+        ]
+    },
+    { path: 'home-marketing', component: HomeMarketingComponent,
+        children:[
+            { path: 'info-home-marketing', component: InfoHomeMarketingComponent },
+            { path: 'ingresar-anuncio', component: IngresarAnuncioComponent },
+        ]
+    },
 
-    {path: '**', redirectTo: 'login', pathMatch: 'full'}
+    { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];

@@ -77,4 +77,19 @@ public class EmpleadoDAO extends CrudDAO<EmpleadoModel>{
         return empleadosDisponibles;
     }
     
+    public EmpleadoModel actualizarDescripcionProfesional (EmpleadoModel descripcionEmpleado, String empleado){
+        String sqlInsert = "UPDATE Empleado SET descripcion = ? WHERE correo_empleado = '"+empleado+"';";
+        descripcionEmpleado.setEmail(empleado);
+        
+        try (Connection connection = DBConnection.getConnection(); 
+                PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)){
+            statement.setString(1, descripcionEmpleado.getDescripcionProfesional());
+            
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("Error en: EmpleadoDAO en metodo actualizarDescripcionProfesional()");
+        }
+        return descripcionEmpleado;
+    }
 }

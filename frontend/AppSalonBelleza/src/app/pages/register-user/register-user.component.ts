@@ -41,7 +41,7 @@ export class RegisterUserComponent {
     if (this.registerForm.invalid) {
       return;
     }
-    var email = this.registerForm.get('email')?.value;
+    var emailLogueado = this.registerForm.get('email')?.value;
     var password = this.registerForm.get('password')?.value
 
     console.log(this.registerForm.value);
@@ -60,7 +60,7 @@ export class RegisterUserComponent {
       this.registroServicio.crearCliente(this.registerForm.value).subscribe({
         next: data =>{
           this.router.navigate(['registro-datos-cliente'], {
-            queryParams: { email }
+            queryParams: { emailLogueado }
           })
         }
       })
@@ -74,7 +74,18 @@ export class RegisterUserComponent {
       }) */
     } else if (this.rol.value.toLowerCase() === 'empleado') {
       console.log('Mostrar home-empleado');
-      
+      this.registroServicio.crearEmpleado(this.registerForm.value).subscribe({
+        next: data => {
+          Swal.fire('Exito!', 'Empleado creado correctamente', 'success');
+          console.log(data);
+          this.router.navigate(['/register-datos-empleado'], {
+            queryParams: { emailLogueado }
+          });
+        },
+        error: (error) => {
+          console.log(error)
+        }
+      });
     } else if (this.rol.value.toLowerCase() === 'gestor_servicios') {
       console.log('Mostrar home-gestor-servicios');
       this.registroServicio.crearGestorServicios(this.registerForm.value).subscribe({
@@ -82,7 +93,7 @@ export class RegisterUserComponent {
           Swal.fire('Exito!', 'Gestor de servicios creado correctamente', 'success');
           console.log(data);
           this.router.navigate(['/home-gestor-servicios'], {
-            queryParams: { email }
+            queryParams: { emailLogueado }
           });
         },
         error: (error) => {
@@ -91,6 +102,18 @@ export class RegisterUserComponent {
       });
     } else {
       console.log('Mostrar home-marketing');
+      this.registroServicio.crearMarketing(this.registerForm.value).subscribe({
+        next: data => {
+          Swal.fire('Exito!', 'Marketing creado correctamente', 'success');
+          console.log(data);
+          this.router.navigate(['/home-marketing'], {
+            queryParams: { emailLogueado }
+          });
+        },
+        error: (error) => {
+          console.log(error)
+        }
+      });
     }
     this.registerForm.reset();
   }

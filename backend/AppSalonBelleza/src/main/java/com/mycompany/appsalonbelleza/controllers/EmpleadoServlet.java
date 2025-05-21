@@ -6,7 +6,6 @@ package com.mycompany.appsalonbelleza.controllers;
 
 import com.google.gson.Gson;
 import com.mycompany.appsalonbelleza.models.EmpleadoModel;
-import com.mycompany.appsalonbelleza.models.GestorServiciosModel;
 import com.mycompany.appsalonbelleza.persistence.EmpleadoDAO;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -112,6 +111,29 @@ public class EmpleadoServlet extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        System.out.println("Conectando con servlet: EmpleadoServlet, metodo doPut()");
+        String empleado = request.getParameter("empleado");
+        System.out.println("\n");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        try {
+            BufferedReader reader = request.getReader();
+            EmpleadoModel empleadoForm = gson.fromJson(reader, EmpleadoModel.class);
+            String json = gson.toJson(empleadoDAO.actualizarDescripcionProfesional(empleadoForm, empleado));
+            
+            response.setStatus(HttpServletResponse.SC_ACCEPTED);
+            response.getWriter().write(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en el servlet EmpleadoServlet, metodo doPut().");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al actualizar los datos del cliente");
+        }
+    }
     /**
      * Returns a short description of the servlet.
      *

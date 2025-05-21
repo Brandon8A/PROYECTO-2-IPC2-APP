@@ -11,12 +11,21 @@ package com.mycompany.appsalonbelleza.models;
 public class CitaModel {
     private String hora;
     private String empleado;
+    private String nombreCliente;
+    private String nombreServicio;
+    private String tiempo;
 
     public CitaModel(String hora, String empleado) {
         this.hora = hora;
         this.empleado = empleado;
     }
 
+    public CitaModel(String nombreCliente, String nombreServicio, String tiempo) {
+        this.nombreCliente = nombreCliente;
+        this.nombreServicio = nombreServicio;
+        this.tiempo = tiempo;
+    }
+    
     public CitaModel() {
     }
 
@@ -34,6 +43,30 @@ public class CitaModel {
 
     public void setEmpleado(String empleado) {
         this.empleado = empleado;
+    }
+
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
+    }
+
+    public String getNombreServicio() {
+        return nombreServicio;
+    }
+
+    public void setNombreServicio(String nombreServicio) {
+        this.nombreServicio = nombreServicio;
+    }
+
+    public String getTiempo() {
+        return tiempo;
+    }
+
+    public void setTiempo(String tiempo) {
+        this.tiempo = tiempo;
     }
     
     

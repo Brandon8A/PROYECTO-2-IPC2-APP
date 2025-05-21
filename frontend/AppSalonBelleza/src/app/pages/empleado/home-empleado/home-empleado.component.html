@@ -1,1 +1,11 @@
-<p>home-empleado works!</p>
+<app-slider-empleado emailLogueado={{emailLogueado}}></app-slider-empleado>
+<app-header title="Usuario Empleado"></app-header>
+<router-outlet></router-outlet>
+<div class="perfil-container">
+    <div class="perfil">
+        <!-- <img [src]="imagenURL" class="foto-perfil" /> -->
+        <img [src]="fotoPerfil" alt="Logo del servidor" width="200" class="foto-perfil">
+        <input type="file" (change)="onFileSelected($event)" id="fileInput" hidden />
+        <button (click)="seleccionarArchivo()">Cambiar foto de perfil</button>
+    </div>
+</div>

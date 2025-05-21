@@ -5,6 +5,8 @@ import { LoginUser } from '../interfaces/login-user';
 import { UserCliente } from '../interfaces/users/user-cliente';
 import { HorarioSalon } from '../interfaces/horario-salon';
 import { UserGestorServicios } from '../interfaces/users/user-gestor-servicios';
+import { UserEmpleado } from '../interfaces/users/user-empleado';
+import { UserMarketing } from '../interfaces/users/user-marketing';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +32,13 @@ export class RegisterServiceService {
 
   crearGestorServicios(gestorServicios: UserGestorServicios) {
     return this.http.post<UserGestorServicios>(`${this.API_URL}/GestorServiciosServlet`, gestorServicios);
+  }
+
+  crearEmpleado(empleado: UserEmpleado) {
+    return this.http.post<UserEmpleado>(`${this.API_URL}/EmpleadoServlet`, empleado);
+  }
+
+  crearMarketing(marketing: UserMarketing) {
+    return this.http.post<UserMarketing>(`${this.API_URL}/MarketingServlet`, marketing);
   }
 }

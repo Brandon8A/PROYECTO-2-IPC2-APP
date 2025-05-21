@@ -1,0 +1,42 @@
+<div class="content">
+    <div class="card-container">
+        <div class="card">
+            <div class="card-header">
+                <h2>
+                    <!-- <div class="contenedor">
+                        <button class="btn btn-sm btn-primary" (click)="crearServicio()">Crear Servicio</button>
+                    </div> -->
+                    Servicios
+                </h2>
+            </div>
+            <div class="card-body">
+                <table class="table w-full">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre cliente</th>
+                            <th>Servicio</th>
+                            <th>Tiempo de Duracion</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (cita of citas; track $index) {
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{cita.nombreCliente}}</td>
+                            <td>{{cita.nombreServicio}}</td>
+                            <td>{{cita.tiempo}}</td>
+                            <td class="space-x-2">
+                                <button class="btn btn-sm btn-info">Atendida</button>
+                                <button class="btn btn-sm btn-danger">No se presentó</button>
+                                <button class="btn btn-sm btn-primary">Generar Factura</button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

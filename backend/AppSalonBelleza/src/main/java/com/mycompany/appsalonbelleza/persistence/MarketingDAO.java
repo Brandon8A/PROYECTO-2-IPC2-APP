@@ -34,7 +34,7 @@ public class MarketingDAO extends CrudDAO<MarketingModel>{
             statement.executeUpdate();
             
         }  catch (Exception e) {
-            System.out.println("ERROR en: MarketingDAO");
+            System.out.println("ERROR en: MarketingDAO metodo isert()");
         }
         return entity;
     }

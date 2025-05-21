@@ -47,11 +47,11 @@ export class LoginComponent {
             queryParams: { emailLogueado }
           });
         } else if (datos.rol === 'Marketing'){
-          this.router.navigate(['/home-gestor-servicios'], {
+          this.router.navigate(['/home-marketing'], {
             queryParams: { emailLogueado }
           });
         } else if (datos.rol === 'Empleado'){
-          this.router.navigate(['/home-gestor-servicios'], {
+          this.router.navigate(['/home-empleado'], {
             queryParams: { emailLogueado }
           });
         }

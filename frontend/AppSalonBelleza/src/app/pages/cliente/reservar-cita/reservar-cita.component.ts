@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Cita } from '../../../interfaces/cita';
 import Swal from 'sweetalert2';
 import { ClienteServiceService } from '../../../services/cliente/cliente-service.service';
+import { CitaCliente } from '../../../interfaces/cita-cliente';
 
 @Component({
   selector: 'app-reservar-cita',
@@ -56,7 +57,7 @@ export class ReservarCitaComponent implements OnInit {
 
   guardarCita(empleado: string) {
     const { horaEntrada } = this.horarioForm.value;
-    const cita: Cita = {
+    const cita: CitaCliente = {
       hora: horaEntrada,
       empleado: empleado
     }
