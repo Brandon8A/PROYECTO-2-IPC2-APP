@@ -43,7 +43,7 @@ export class ReportesGestorServiciosComponent {
   }
 
   obtenerServiciosMenosReservados(){
-    this.gestorServiciosService.obtenerServiciosMasReservados('serviciosMenosReservados').subscribe({
+    this.gestorServiciosService.obtenerServiciosMenosReservados('serviciosMenosReservados').subscribe({
       next: value => {
         this.serviciosMenosReservados = value;
         console.log(value);

@@ -20,11 +20,11 @@ export class InfoHomeMarketingComponent {
     this.route.queryParams.subscribe(params => {
       this.emailLogueado = params['emailLogueado'];
     });
-    console.log("Email logueado en info-home-gestor-servicio: " + this.emailLogueado);
     this.obtenerAnuncios();
+    console.log("Email logueado en info-home-gestor-servicio: " + this.emailLogueado);
   }
 
-  obtenerAnuncios(){
+  obtenerAnuncios() {
     this.marketingServicio.obteneAnuncios().subscribe({
       next: value => {
         console.log(value);
@@ -36,9 +36,40 @@ export class InfoHomeMarketingComponent {
     })
   }
 
-  ingresarAnuncio(){
+  ingresarAnuncio() {
     this.router.navigate(['/home-marketing/ingresar-anuncio'], {
       queryParams: { emailLogueado: this.emailLogueado }
+    });
+  }
+
+  quitarAnuncio(id: number, anuncio: Anuncio) {
+    this.marketingServicio.quitarAnuncio(anuncio, id, 'quitar').subscribe({
+      next: value => {
+        console.log(value);
+        this.obtenerAnuncios();
+        this.router.navigate(['/home-marketing/info-home-marketing'], {
+          queryParams: { emailLogueado: this.emailLogueado }
+        });
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
+  }
+
+  mostrarAnuncio(id: number, anuncio: Anuncio) {
+    this.marketingServicio.mostrarAnuncio(anuncio, id, 'mostrar').subscribe({
+      next: value => {
+        console.log('ANUNCIOS ACTUALIZADOS: ')
+        console.log(value);
+        this.obtenerAnuncios();
+        this.router.navigate(['/home-marketing/info-home-marketing'], {
+          queryParams: { emailLogueado: this.emailLogueado }
+        });
+      },
+      error: err => {
+        console.log(err);
+      }
     });
   }
 }

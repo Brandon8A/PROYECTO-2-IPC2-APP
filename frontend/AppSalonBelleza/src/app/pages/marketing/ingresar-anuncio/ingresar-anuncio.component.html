@@ -40,8 +40,8 @@
         <form [formGroup]="formulario" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="text" class="form-label">Seleccionar Tipo Anuncio</label>
-                <select [(ngModel)]="opcionSeleccionada" class="form-select" aria-label="Default select example"
-                    id="tipoAnuncio" formControlName="tipoAnuncio" required>
+                <select class="form-select" aria-label="Default select example"
+                    id="tipoAnuncio" formControlName="tipoAnuncio" >
                     <option value="texto">Texto: Q. {{precioTexto}} por día</option>
                     <option value="imagen con texto">Imagen: Q. {{precioImagen}} por día</option>
                     <option value="video con texto">Video: Q. {{precioVideo}} por día</option>

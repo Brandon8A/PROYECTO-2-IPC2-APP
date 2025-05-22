@@ -106,7 +106,7 @@ public class AnunciosServlet extends HttpServlet {
         Double precioAdquirido = Double.parseDouble(request.getParameter("precioAdquirido"));
 
         if (tipoAnuncio.equals("texto")) {
-             anuncioAGuardar = request.getParameter("textoAnuncio");
+            anuncioAGuardar = request.getParameter("textoAnuncio");
         } else if (tipoAnuncio.equals("imagen con texto")) {
             Part filePart = request.getPart("datoExtra");
             String nombreArchivo = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
@@ -115,16 +115,16 @@ public class AnunciosServlet extends HttpServlet {
             // Guardar imagen físicamente
             File destino = new File("/ruta/servidor/" + nombreArchivo);
             Files.copy(filePart.getInputStream(), destino.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            
+
         } else {
             anuncioAGuardar = request.getParameter("videoAnuncio");
         }
-        
+
         AnuncioModel anuncioForm = new AnuncioModel(tipoAnuncio, tiempoDuracion, descripcion, anuncioAGuardar, precioAdquirido);
 
         try {
             this.anuncioDAO.insert(anuncioForm);
-            
+
             response.setStatus(HttpServletResponse.SC_CREATED);
             response.getWriter().write("{\"message\":\"Anuncio creado correctamente\"}");
         } catch (Exception e) {
@@ -133,6 +133,36 @@ public class AnunciosServlet extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al crear Administrador");
         }
 //        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        System.out.println("Conectando con servlet: AnunciosServlet, metodo doPut()");
+        String idAnuncio = request.getParameter("anuncio");
+        String tipoDeActualizacion = request.getParameter("tipoActualizacion");
+        System.out.println("\nTipo de actualizacion: " + tipoDeActualizacion);
+        System.out.println("\n");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        try {
+            if (tipoDeActualizacion.equals("quitar")) {
+                String json = gson.toJson(this.anuncioDAO.desactivarAnuncio(idAnuncio));
+                System.out.println(json);
+                response.setStatus(HttpServletResponse.SC_ACCEPTED);
+                response.getWriter().write(json);
+            } else {
+                String json = gson.toJson(this.anuncioDAO.activarAnuncio(idAnuncio));
+                System.out.println(json);
+                response.setStatus(HttpServletResponse.SC_ACCEPTED);
+                response.getWriter().write(json);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error en el servlet AnunciosServlet, metodo doPut().");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al desactivar anuncio");
+        }
     }
 
     /**

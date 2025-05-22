@@ -54,6 +54,11 @@ export class IngresarAnuncioComponent {
         this.precioVideo = this.preciosAnuncios[i].precio;
       }
     }
+    this.formulario.get('tipoAnuncio')?.valueChanges.subscribe((value) => {
+      this.opcionSeleccionada = value;
+    })
+
+    this.opcionSeleccionada = this.formulario.get('tipoAnuncio')?.value;
     console.log("Email logueado en info-home-gestor-servicio: " + this.emailLogueado);
   }
 
@@ -97,7 +102,7 @@ export class IngresarAnuncioComponent {
       next: data => {
         console.log("Anuncio ingresado: ", data);
         Swal.fire('Exito', 'Anuncio ingresado correctamente', 'success');
-        this.router.navigate(['/home-marketing'], {
+        this.router.navigate(['/home-marketing/info-home-marketing'], {
           queryParams: { emailLogueado: this.emailLogueado }
         });
       }, 

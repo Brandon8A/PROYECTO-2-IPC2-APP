@@ -11,6 +11,7 @@
 /home/brandon/Documentos/CUNOC/CURSOS/IPC 2/PROYECTOS/PROYECTO 2 APP/PROYECTO-2-IPC2-APP/backend/AppSalonBelleza/src/main/java/com/mycompany/appsalonbelleza/controllers/cliente/DatosClienteServlet.java
 /home/brandon/Documentos/CUNOC/CURSOS/IPC 2/PROYECTOS/PROYECTO 2 APP/PROYECTO-2-IPC2-APP/backend/AppSalonBelleza/src/main/java/com/mycompany/appsalonbelleza/models/HorarioSalonModel.java
 /home/brandon/Documentos/CUNOC/CURSOS/IPC 2/PROYECTOS/PROYECTO 2 APP/PROYECTO-2-IPC2-APP/backend/AppSalonBelleza/src/main/java/com/mycompany/appsalonbelleza/models/GestorServiciosModel.java
+/home/brandon/Documentos/CUNOC/CURSOS/IPC 2/PROYECTOS/PROYECTO 2 APP/PROYECTO-2-IPC2-APP/backend/AppSalonBelleza/src/main/java/com/mycompany/appsalonbelleza/controllers/ReporteAnuncioServlet.java
 /home/brandon/Documentos/CUNOC/CURSOS/IPC 2/PROYECTOS/PROYECTO 2 APP/PROYECTO-2-IPC2-APP/backend/AppSalonBelleza/src/main/java/com/mycompany/appsalonbelleza/controllers/LoginServlet.java
 /home/brandon/Documentos/CUNOC/CURSOS/IPC 2/PROYECTOS/PROYECTO 2 APP/PROYECTO-2-IPC2-APP/backend/AppSalonBelleza/src/main/java/com/mycompany/appsalonbelleza/controllers/ClienteServlet.java
 /home/brandon/Documentos/CUNOC/CURSOS/IPC 2/PROYECTOS/PROYECTO 2 APP/PROYECTO-2-IPC2-APP/backend/AppSalonBelleza/src/main/java/com/mycompany/appsalonbelleza/models/AdminModel.java

@@ -10,21 +10,21 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
   styleUrl: './home-marketing.component.css'
 })
 export class HomeMarketingComponent {
-  emailLogueado: string = "";
+  email: string = "";
 
-  constructor(private route: ActivatedRoute, public router: Router){}
+  constructor(private route: ActivatedRoute, public router: Router) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.emailLogueado = params['emailLogueado'];
-      console.log('Email Logueado: '+this.emailLogueado);
+      this.email = params['emailLogueado'];
     })
     this.home();
+    console.log('Email Logueado: ' + this.email);
   }
 
-  home(){
+  home() {
     this.router.navigate(['/home-marketing/info-home-marketing'], {
-      queryParams: { emailLogueado: this.emailLogueado }
+      queryParams: { emailLogueado: this.email }
     });
   }
 }

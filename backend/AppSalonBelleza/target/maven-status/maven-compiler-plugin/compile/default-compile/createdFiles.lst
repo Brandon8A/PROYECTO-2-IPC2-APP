@@ -15,6 +15,7 @@ com/mycompany/appsalonbelleza/controllers/CitaServlet.class
 com/mycompany/appsalonbelleza/controllers/ReportesServiciosServlet.class
 com/mycompany/appsalonbelleza/persistence/GestorServiciosDAO.class
 com/mycompany/appsalonbelleza/JakartaRestConfiguration.class
+com/mycompany/appsalonbelleza/controllers/ReporteAnuncioServlet.class
 com/mycompany/appsalonbelleza/encriptacion/EncriptarMD5.class
 com/mycompany/appsalonbelleza/controllers/ObtenerUserMarketing.class
 com/mycompany/appsalonbelleza/persistence/AdminDAO.class

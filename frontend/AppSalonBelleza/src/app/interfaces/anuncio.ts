@@ -1,4 +1,5 @@
 export interface Anuncio {
+    id: number;
     tipoAnuncio: string;
     tiempoDuracion: number;
     descripcion: string;

@@ -6,7 +6,6 @@ package com.mycompany.appsalonbelleza.controllers;
 
 import com.google.gson.Gson;
 import com.mycompany.appsalonbelleza.models.CitaModel;
-import com.mycompany.appsalonbelleza.models.EmpleadoModel;
 import com.mycompany.appsalonbelleza.persistence.CitaDAO;
 import java.io.BufferedReader;
 import java.io.IOException;

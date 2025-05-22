@@ -26,6 +26,7 @@ import { RegisterDatosEmpleadoComponent } from './pages/empleado/register-datos-
 import { HomeMarketingComponent } from './pages/marketing/home-marketing/home-marketing.component';
 import { InfoHomeMarketingComponent } from './pages/marketing/info-home-marketing/info-home-marketing.component';
 import { IngresarAnuncioComponent } from './pages/marketing/ingresar-anuncio/ingresar-anuncio.component';
+import { ReportesMarketingComponent } from './pages/marketing/reportes-marketing/reportes-marketing.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -69,10 +70,12 @@ export const routes: Routes = [
             { path: 'info-home-empleado', component: InfoHomeEmpleadoComponent },
         ]
     },
-    { path: 'home-marketing', component: HomeMarketingComponent,
-        children:[
+    {
+        path: 'home-marketing', component: HomeMarketingComponent,
+        children: [
             { path: 'info-home-marketing', component: InfoHomeMarketingComponent },
             { path: 'ingresar-anuncio', component: IngresarAnuncioComponent },
+            { path: 'reportes-marketing', component: ReportesMarketingComponent }
         ]
     },
 

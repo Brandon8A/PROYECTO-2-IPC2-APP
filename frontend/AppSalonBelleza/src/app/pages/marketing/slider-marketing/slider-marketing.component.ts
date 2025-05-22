@@ -21,13 +21,13 @@ export class SliderMarketingComponent {
   }
 
   home(){
-    this.router.navigate(['/home-empleado'], {
+    this.router.navigate(['/home-marketing/info-home-marketing'], {
       queryParams: { emailLogueado: this.emailLogueado }
     });
   }
 
-  generarFactura(){
-    this.router.navigate(['/home-cliente/facturar'], {
+  reportes(){
+    this.router.navigate(['/home-marketing/reportes-marketing'], {
       queryParams: { emailLogueado: this.emailLogueado }
     });
   }

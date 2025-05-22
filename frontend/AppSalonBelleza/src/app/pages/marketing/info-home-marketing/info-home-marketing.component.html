@@ -14,6 +14,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>ID</th>
                             <th>Tipo Anuncio</th>
                             <th>Descripcion</th>
                             <th>Tiempo de Duración (en días)</th>
@@ -25,17 +26,18 @@
                         @for (anuncio of anuncios; track $index) {
                         <tr>
                             <td>{{$index+1}}</td>
+                            <td>{{anuncio.id}}</td>
                             <td>{{anuncio.tipoAnuncio}}</td>
                             <td>{{anuncio.descripcion}}</td>
                             <td>{{anuncio.tiempoDuracion}}</td>
                             <td>{{anuncio.vecesMostrado}}</td>
                             <td class="space-x-2">
-                                @if (!anuncio.activo) {
-                                <button class="btn btn-sm btn-danger">Quitar Anuncio</button>
+                                @if (anuncio.activo.toString() !== "0") {
+                                <button class="btn btn-sm btn-danger" (click)="quitarAnuncio(anuncio.id, anuncio)">Quitar Anuncio</button>
                                 } @else {
-                                <button class="btn btn-sm btn-primary">Publicar Anuncio</button>
+                                <button class="btn btn-sm btn-primary" (click)="mostrarAnuncio(anuncio.id, anuncio)">Publicar Anuncio</button>
                                 }
-                                <button class="btn btn-sm btn-info" [disabled]="anuncio.activo == false">Reactivar Anuncio</button>
+                                <button class="btn btn-sm btn-info" [disabled]="anuncio.activo == true">Reactivar Anuncio</button>
                             </td>
                         </tr>
                         }

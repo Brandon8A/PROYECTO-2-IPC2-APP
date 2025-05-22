@@ -9,15 +9,17 @@ package com.mycompany.appsalonbelleza.models;
  * @author brandon
  */
 public class AnuncioModel {
+    private int id;
     private String tipoAnuncio;
     private int tiempoDuracion;
     private String descripcion;
     private int vecesMostrado;
-    private boolean activo;
+    private String activo;
     private String path;
     private Double precioAdquirido;
 
-    public AnuncioModel(String tipoAnuncio, int tiempoDuracion, String descripcion, int vecesMostrado, boolean activo) {
+    public AnuncioModel(int id, String tipoAnuncio, int tiempoDuracion, String descripcion, int vecesMostrado, String activo) {
+        this.id = id;
         this.tipoAnuncio = tipoAnuncio;
         this.tiempoDuracion = tiempoDuracion;
         this.descripcion = descripcion;
@@ -25,12 +27,21 @@ public class AnuncioModel {
         this.activo = activo;
     }
 
-    public AnuncioModel(String tipoAnuncio, int tiempoDuracion, String descripcion, int vecesMostrado, boolean activo, String path, Double precioAdquirido) {
+    public AnuncioModel(String tipoAnuncio, int tiempoDuracion, String descripcion, int vecesMostrado, String activo, String path, Double precioAdquirido) {
         this.tipoAnuncio = tipoAnuncio;
         this.tiempoDuracion = tiempoDuracion;
         this.descripcion = descripcion;
         this.vecesMostrado = vecesMostrado;
         this.activo = activo;
+        this.path = path;
+        this.precioAdquirido = precioAdquirido;
+    }
+
+    public AnuncioModel(int id, String tipoAnuncio, int tiempoDuracion, String descripcion, String path, Double precioAdquirido) {
+        this.id = id;
+        this.tipoAnuncio = tipoAnuncio;
+        this.tiempoDuracion = tiempoDuracion;
+        this.descripcion = descripcion;
         this.path = path;
         this.precioAdquirido = precioAdquirido;
     }
@@ -42,7 +53,7 @@ public class AnuncioModel {
         this.path = path;
         this.precioAdquirido = precioAdquirido;
     }
-
+    
     public AnuncioModel() {
     }
 
@@ -78,11 +89,11 @@ public class AnuncioModel {
         this.vecesMostrado = vecesMostrado;
     }
 
-    public boolean isActivo() {
+    public String isActivo() {
         return activo;
     }
 
-    public void setActivo(boolean activo) {
+    public void setActivo(String activo) {
         this.activo = activo;
     }
 
@@ -100,6 +111,14 @@ public class AnuncioModel {
 
     public void setPrecioAdquirido(Double precioAdquirido) {
         this.precioAdquirido = precioAdquirido;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     
