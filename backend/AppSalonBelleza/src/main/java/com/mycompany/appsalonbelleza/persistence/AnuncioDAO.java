@@ -52,7 +52,8 @@ public class AnuncioDAO {
 
             statement.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Error en: CitaDAO en insert");
+            System.out.println("error: " +e);
+            System.out.println("Error en: AnuncioDAO en insert");
         }
         return entity;
     }

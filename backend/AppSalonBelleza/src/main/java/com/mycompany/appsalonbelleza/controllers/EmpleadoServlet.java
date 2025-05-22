@@ -129,7 +129,7 @@ public class EmpleadoServlet extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
             response.getWriter().write(json);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("error: " + e);
             System.out.println("Error en el servlet EmpleadoServlet, metodo doPut().");
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al actualizar los datos del cliente");
         }

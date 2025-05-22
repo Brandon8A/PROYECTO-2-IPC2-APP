@@ -32,7 +32,8 @@ public class EmpleadoDAO extends CrudDAO<EmpleadoModel>{
             statement.setString(2, encrypt.getMD5(entity.getPassword()));
             statement.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Error en: EmpleadoDAO");
+            System.out.println("Erro: " + e);
+            System.out.println("Error en: EmpleadoDAO metodo insert()");
         }
         return entity;
     }

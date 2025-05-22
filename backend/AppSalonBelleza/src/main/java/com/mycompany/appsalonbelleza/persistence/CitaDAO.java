@@ -31,6 +31,7 @@ public class CitaDAO {
             statement.setString(2, entity.getEmpleado());
             statement.executeUpdate();
         } catch (Exception e) {
+            System.out.println("Error: " + e);
             System.out.println("Error en: CitaDAO en insert");
         }
         return entity;

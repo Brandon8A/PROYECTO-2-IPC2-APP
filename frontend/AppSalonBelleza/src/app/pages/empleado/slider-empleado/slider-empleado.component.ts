@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-slider-empleado',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './slider-empleado.component.html',
   styleUrl: './slider-empleado.component.css'
 })
