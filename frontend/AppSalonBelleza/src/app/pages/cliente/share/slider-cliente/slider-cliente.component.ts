@@ -26,4 +26,10 @@ export class SliderClienteComponent{
       queryParams: { emailLogueado: this.emailLogueado }
     });
   }
+
+  home(){
+    this.router.navigate(['/home-cliente/info-home-cliente'], {
+      queryParams: { emailLogueado: this.emailLogueado }
+    });
+  }
 }

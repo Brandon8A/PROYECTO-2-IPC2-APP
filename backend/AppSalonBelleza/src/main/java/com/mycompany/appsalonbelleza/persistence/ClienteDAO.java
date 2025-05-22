@@ -57,7 +57,7 @@ public class ClienteDAO extends CrudDAO<ClienteModel> {
         return clientes;
     }
 
-    public ClienteModel actualizarDatosCliente(ClienteModel clienteModel, String cliente) {
+    public ClienteModel actualizarDatosCliente(ClienteModel clienteModel, String cliente)throws SQLException {
         String sqlInsert = "UPDATE Cliente SET dpi = ?, telefono = ?, direccion = ?, hobbies = ?, descripcion = ?, gustos = ?,"
                 + "path_foto = ? WHERE correo_cliente = '" + cliente + "';";
         clienteModel.setEmail(cliente);

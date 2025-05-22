@@ -15,48 +15,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class HomeClienteComponent implements OnInit{
 
-  mostrarHome: boolean = true;
-
   selectedFile!: File;
 
   emailLogueado: string = '';
   fotoPerfil: string | null = null;
 
-  registerForm: FormGroup;
-  hobbies: FormControl;
-  descripcion: FormControl;
-  dpi: FormControl;
-  phoneNumber: FormControl;
-  address: FormControl;
-  gustos: FormControl;
-  email: FormControl;
-  password: FormControl;
-  emailCliente: string = '';
+  
 
-
-  constructor(private route: ActivatedRoute, public clienteServicio: ClienteServiceService, private router: Router){
-    this.hobbies = new FormControl('', Validators.required);
-    this.descripcion = new FormControl('', Validators.required);
-    this.dpi = new FormControl('', Validators.required);
-    this.phoneNumber = new FormControl('', Validators.required);
-    this.address = new FormControl('', Validators.required);
-    this.gustos = new FormControl('', Validators.required);
-    this.email = new FormControl('');
-    this.password = new FormControl('');
-
-
-    this.registerForm = new FormGroup({
-      hobbies: this.hobbies,
-      descripcion: this.descripcion,
-      userDpi: this.dpi,
-      userPhoneNumber: this.phoneNumber,
-      userAddress: this.address,
-      gustos: this.gustos
-    });
-  }
-
-  toogleHomeCliente(){
-    this.mostrarHome = !this.mostrarHome;
+  constructor(private route: ActivatedRoute, public clienteServicio: ClienteServiceService, public router: Router){
+    
   }
 
   ngOnInit(): void {
@@ -65,7 +32,14 @@ export class HomeClienteComponent implements OnInit{
       this.fotoPerfil = params['pathFoto'];
       console.log('Email Logueado: '+this.emailLogueado);
       console.log('Path foto: '+this.fotoPerfil);
-    })
+    });
+    this.home();
+  }
+
+  home(){
+    this.router.navigate(['/home-cliente/info-home-cliente'], {
+      queryParams: { emailLogueado: this.emailLogueado }
+    });
   }
 
   onFileSelected(event: any) {
@@ -104,21 +78,6 @@ export class HomeClienteComponent implements OnInit{
       },
       error: error => {
 
-      }
-    })
-  }
-
-  actualizarDatosCliente(){
-    console.log('Actualizar datos del cliente...');
-    this.clienteServicio.actualizarDatosCliente(this.registerForm.value, this.emailLogueado).subscribe({
-      next: data => {
-        console.log('Datos del cliente actualizados');
-        Swal.fire('Exito', 'Datos actualizados correctamente', 'success');
-        this.router.navigate(['/home-cliente'], { queryParams: { emailLogueado: this.emailLogueado, pathFoto: this.fotoPerfil } });
-      },
-      error: error => {
-        console.error('Error al actualizar los datos del cliente', error);
-        Swal.fire('Error', 'No se pudieron actualizar los datos', 'error');
       }
     })
   }

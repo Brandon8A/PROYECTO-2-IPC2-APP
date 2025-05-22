@@ -27,6 +27,7 @@ import { HomeMarketingComponent } from './pages/marketing/home-marketing/home-ma
 import { InfoHomeMarketingComponent } from './pages/marketing/info-home-marketing/info-home-marketing.component';
 import { IngresarAnuncioComponent } from './pages/marketing/ingresar-anuncio/ingresar-anuncio.component';
 import { ReportesMarketingComponent } from './pages/marketing/reportes-marketing/reportes-marketing.component';
+import { InfoHomeClienteComponent } from './pages/cliente/info-home-cliente/info-home-cliente.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -52,7 +53,8 @@ export const routes: Routes = [
             { path: 'servicios', component: ServiciosComponent },
             { path: 'reservaciones', component: ReservacionesComponent },
             { path: 'historial', component: HistorialCitasComponent },
-            { path: 'reservar-cita', component: ReservarCitaComponent }
+            { path: 'reservar-cita', component: ReservarCitaComponent },
+            { path: 'info-home-cliente', component: InfoHomeClienteComponent }
         ]
     },
     {
