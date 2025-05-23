@@ -70,10 +70,11 @@ public class EmpleadoDisponibleServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         
         String horaDisponible = request.getParameter("hora");
+        String fechaDisponible = request.getParameter("fecha");
         System.out.println("hora: " + horaDisponible);
         
         try {
-            List<EmpleadoModel> empleadosDisponibles = empleadoDAO.findAllDisponibles(horaDisponible);
+            List<EmpleadoModel> empleadosDisponibles = empleadoDAO.findAllDisponibles(horaDisponible, fechaDisponible);
             String json = gson.toJson(empleadosDisponibles);
             response.getWriter().write(json);
         } catch (Exception e) {

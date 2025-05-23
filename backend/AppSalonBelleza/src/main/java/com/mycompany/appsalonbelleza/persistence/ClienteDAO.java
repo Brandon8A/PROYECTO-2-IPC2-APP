@@ -25,8 +25,7 @@ public class ClienteDAO extends CrudDAO<ClienteModel> {
     public ClienteModel insert(ClienteModel entity) throws SQLException {
         String sqlInsert = "INSERT INTO Cliente(correo_cliente, contraseña) VALUES(?, ?)";
         EncriptarMD5 encrypt = new EncriptarMD5();
-        try (Connection connection = DBConnection.getConnection(); 
-                PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, entity.getEmail());
             statement.setString(2, encrypt.getMD5(entity.getPassword()));
 
@@ -51,18 +50,18 @@ public class ClienteDAO extends CrudDAO<ClienteModel> {
                         rs.getString("contraseña"),
                         rs.getString("dpi"),
                         rs.getString("telefono"),
-                        rs.getString("direccion")));
+                        rs.getString("direccion"),
+                        "fotosPerfil/user.png"));
             }
         }
         return clientes;
     }
 
-    public ClienteModel actualizarDatosCliente(ClienteModel clienteModel, String cliente)throws SQLException {
+    public ClienteModel actualizarDatosCliente(ClienteModel clienteModel, String cliente) throws SQLException {
         String sqlInsert = "UPDATE Cliente SET dpi = ?, telefono = ?, direccion = ?, hobbies = ?, descripcion = ?, gustos = ?,"
                 + "path_foto = ? WHERE correo_cliente = '" + cliente + "';";
         clienteModel.setEmail(cliente);
-        try (Connection connection = DBConnection.getConnection(); 
-                PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, clienteModel.getUserDpi());
             statement.setString(2, clienteModel.getUserPhoneNumber());
             statement.setString(3, clienteModel.getUserAddress());
@@ -77,6 +76,35 @@ public class ClienteDAO extends CrudDAO<ClienteModel> {
             System.out.println("Error en: ClienteDAO en metodo actualizarDatosCliente()");
         }
         return clienteModel;
+    }
+
+    public ClienteModel obtenerCliente(String correo) throws SQLException {
+        String sql = "SELECT * FROM Cliente WHERE correo_cliente = ?";
+        ClienteModel cliente = null;
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, correo); // Evita inyección SQL
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    cliente = new ClienteModel(
+                            rs.getString("correo_cliente"),
+                            rs.getString("contraseña"),
+                            rs.getString("dpi"),
+                            rs.getString("telefono"),
+                            rs.getString("direccion"),
+                            rs.getString("path_foto"),
+                            rs.getString("hobbies"),
+                            rs.getString("descripcion"),
+                            rs.getString("gustos")
+                    );
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e);
+            System.out.println("Error en ClienteDAO, método: obtenerCliente()");
+        }
+        return cliente;
     }
 
 }

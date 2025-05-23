@@ -1,10 +1,11 @@
 <app-header title="Usuario Cliente"></app-header>
 <app-slider-cliente emailLogueado={{emailLogueado}}></app-slider-cliente>
+<app-barra-lateral-anuncio emailLogueado={{emailLogueado}}></app-barra-lateral-anuncio>
 <router-outlet></router-outlet>
 <div class="perfil-container">
     <div class="perfil">
         <!-- <img [src]="imagenURL" class="foto-perfil" /> -->
-        <img [src]="fotoPerfil" alt="Logo del servidor" width="200" class="foto-perfil">
+        <img *ngIf="previewUrl" [src]="previewUrl + fotoPerfil" alt="Logo del servidor" width="200" class="foto-perfil">
         <input type="file" (change)="onFileSelected($event)" id="fileInput" hidden />
         <button (click)="seleccionarArchivo()">Cambiar foto de perfil</button>
     </div>

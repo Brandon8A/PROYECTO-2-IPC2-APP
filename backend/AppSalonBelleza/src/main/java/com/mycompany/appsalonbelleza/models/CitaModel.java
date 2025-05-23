@@ -14,6 +14,8 @@ public class CitaModel {
     private String nombreCliente;
     private String nombreServicio;
     private String tiempo;
+    private String fecha;
+    private String servicio;
 
     public CitaModel(String hora, String empleado) {
         this.hora = hora;
@@ -67,6 +69,22 @@ public class CitaModel {
 
     public void setTiempo(String tiempo) {
         this.tiempo = tiempo;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(String servicio) {
+        this.servicio = servicio;
     }
     
     

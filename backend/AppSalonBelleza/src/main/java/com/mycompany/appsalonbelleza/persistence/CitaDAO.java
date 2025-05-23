@@ -23,13 +23,33 @@ import java.util.List;
  */
 public class CitaDAO {
 
-    public CitaModel insert(CitaModel entity) throws SQLException {
-        String sqlInsert = "INSERT INTO Horario(hora_inicio, correo_empleado_fk) VALUES(?, ?)";
+    ReservacionDAO reservacionDAO = new ReservacionDAO();
 
-        try (Connection connection = DBConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, entity.getHora());
-            statement.setString(2, entity.getEmpleado());
-            statement.executeUpdate();
+    public CitaModel insertarCita(CitaModel entity, String cliente) throws SQLException {
+        String sqlInsertHorario = "INSERT INTO Horario(hora_inicio, correo_empleado_fk, fecha_cita) VALUES(?, ?, ?)";
+        String sqlInsertCita = "INSERT INTO Cita(nombre_servicio_fk, correo_empleado_fk, fecha_cita, hora) VALUES(?, ?, ?, ?)";
+
+        try (Connection connection = DBConnection.getConnection(); PreparedStatement statementHorario = connection.prepareStatement(sqlInsertHorario, Statement.RETURN_GENERATED_KEYS); PreparedStatement statementCita = connection.prepareStatement(sqlInsertCita, Statement.RETURN_GENERATED_KEYS)) {
+
+            statementHorario.setString(1, entity.getHora());
+            statementHorario.setString(2, entity.getEmpleado());
+            statementHorario.setString(3, entity.getFecha());
+            statementHorario.executeUpdate();
+
+            statementCita.setString(1, entity.getServicio());
+            statementCita.setString(2, entity.getEmpleado());
+            statementCita.setString(3, entity.getFecha());
+            statementCita.setString(4, entity.getHora());
+            int filasInsertadas = statementCita.executeUpdate();
+
+            if (filasInsertadas > 0) {
+                ResultSet generatedKeys = statementCita.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    int idReservacionGenerada = generatedKeys.getInt(1); // o "id_reservacion"
+                    System.out.println("ID generado: " + idReservacionGenerada);
+                    reservacionDAO.insertReservacion(cliente, idReservacionGenerada);
+                }
+            }
         } catch (Exception e) {
             System.out.println("Error: " + e);
             System.out.println("Error en: CitaDAO en insert");
@@ -45,7 +65,9 @@ public class CitaDAO {
         try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                citas.add(new CitaModel());
+                citas.add(new CitaModel(rs.getString("correo_cliente_fk"),
+                        rs.getString("nombre_servico_fk"),
+                        rs.getString("tiempo_servicio")));
             }
         }
         return citas;

@@ -25,6 +25,7 @@ export class InfoHomeClienteComponent {
   emailCliente: string = '';
 
   emailLogueado: string = '';
+  pathFoto: string = '';
 
   constructor(public clienteServicio: ClienteServiceService, private router: Router, private route: ActivatedRoute){
     this.hobbies = new FormControl('', Validators.required);

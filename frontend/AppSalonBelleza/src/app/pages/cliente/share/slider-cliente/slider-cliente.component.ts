@@ -32,4 +32,16 @@ export class SliderClienteComponent{
       queryParams: { emailLogueado: this.emailLogueado }
     });
   }
+
+  reservaciones(email: string){
+    this.router.navigate(['/home-cliente/reservaciones'], {
+      queryParams: { emailLogueado: email }
+    });
+  }
+
+  historial(){
+    this.router.navigate(['/home-cliente/historial'], {
+      queryParams: { emailLogueado: this.emailLogueado }
+    });
+  }
 }

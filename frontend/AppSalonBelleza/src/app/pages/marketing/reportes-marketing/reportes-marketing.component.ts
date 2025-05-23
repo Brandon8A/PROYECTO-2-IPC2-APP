@@ -91,4 +91,20 @@ export class ReportesMarketingComponent {
       }
     })
   }
+
+  generarReporte(tipoReporte: string){
+    this.marketingServicio.generarReporteMarketing(tipoReporte).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'usuarios.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: err => {
+        console.error('Error al descargar el reporte:', err);
+      }
+    })
+  }
 }

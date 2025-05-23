@@ -20,12 +20,35 @@ public class ClienteModel {
     private String descripcion;
     private String gustos;
 
-    public ClienteModel(String correo, String contraseña, String userDpi, String userPhoneNumber, String userAddress) {
+    public ClienteModel(String correo, String contraseña, String userDpi, String userPhoneNumber, String userAddress, String pathFoto) {
         this.email = correo;
         this.password = contraseña;
         this.userDpi = userDpi;
         this.userPhoneNumber = userPhoneNumber;
         this.userAddress = userAddress;
+        this.pathFoto = pathFoto;
+    }
+    
+    public ClienteModel(String correo, String contraseña, String userDpi, String userPhoneNumber, String userAddress, String pathFoto, String gustos) {
+        this.email = correo;
+        this.password = contraseña;
+        this.userDpi = userDpi;
+        this.userPhoneNumber = userPhoneNumber;
+        this.userAddress = userAddress;
+        this.pathFoto = pathFoto;
+        this.gustos = gustos;
+    }
+
+    public ClienteModel(String email, String password, String userDpi, String userPhoneNumber, String userAddress, String pathFoto, String hobbies, String descripcion, String gustos) {
+        this.email = email;
+        this.password = password;
+        this.userDpi = userDpi;
+        this.userPhoneNumber = userPhoneNumber;
+        this.userAddress = userAddress;
+        this.pathFoto = pathFoto;
+        this.hobbies = hobbies;
+        this.descripcion = descripcion;
+        this.gustos = gustos;
     }
 
     public ClienteModel(String email, String password) {

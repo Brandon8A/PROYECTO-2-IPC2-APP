@@ -27,7 +27,6 @@ public class ClienteServlet extends HttpServlet {
 
     private final ClienteDAO clienteDAO = new ClienteDAO();
     private final Gson gson = new Gson();
-    private final String PATH_FOTOS_PERFIL = "http://localhost:8080/AppSalonBelleza/imagenes/";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -93,7 +92,7 @@ public class ClienteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Conectado con SERVLET: ClienteServlet");
+        System.out.println("Conectado con SERVLET: ClienteServlet metodo doPost()");
         Gson gson = new Gson();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -107,7 +106,7 @@ public class ClienteServlet extends HttpServlet {
             response.getWriter().write("{\"message\":\"Usuario Cliente creado correctamente\"}");
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Error en el servlet ClienteServlet, metodo post.");
+            System.out.println("Error en el servlet ClienteServlet, metodo doPost().");
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al crear Cliente");
         }
 //        processRequest(request, response);
@@ -123,22 +122,10 @@ public class ClienteServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        File carpeta = new File(PATH_FOTOS_PERFIL);
-        if (!carpeta.exists()) {
-            System.out.println("Las carpetas no existen.");
-            if (!carpeta.mkdirs()) {
-                System.out.println("No se pudieron crear las carpetas.");
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "No se pudieron crear las carpetas de los perfiles");
-                return;
-            }
-            System.out.println("Carpetas creadas");
-        }
-        System.out.println("path carpetas localhost: " + carpeta.getAbsolutePath());
-
         try {
             BufferedReader reader = request.getReader();
             ClienteModel datosClienteForm = gson.fromJson(reader, ClienteModel.class);
-            datosClienteForm.setPathFoto(PATH_FOTOS_PERFIL + "user.png");
+            datosClienteForm.setPathFoto("fotosPerfil/user.png");
             String json = gson.toJson(this.clienteDAO.actualizarDatosCliente(datosClienteForm, cliente));
             System.out.println(json);
             response.setStatus(HttpServletResponse.SC_ACCEPTED);

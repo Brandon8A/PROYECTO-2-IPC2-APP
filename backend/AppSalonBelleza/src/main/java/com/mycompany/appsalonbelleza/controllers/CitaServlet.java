@@ -73,8 +73,8 @@ public class CitaServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         
         try {
-            List<CitaModel> clientes = citaDAO.findAll(empleado);
-            String json = gson.toJson(clientes);
+            List<CitaModel> citas = citaDAO.findAll(empleado);
+            String json = gson.toJson(citas);
             response.getWriter().write(json);
         } catch (Exception e) {
             e.printStackTrace();
@@ -96,16 +96,18 @@ public class CitaServlet extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("Conectado con SERVLET: CitaServlet");
         Gson gson = new Gson();
+        
+        String cliente = request.getParameter("cliente");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         
         try {
             BufferedReader reader = request.getReader();
             CitaModel citaForm = gson.fromJson(reader, CitaModel.class);
-            this.citaDAO.insert(citaForm);
+            this.citaDAO.insertarCita(citaForm, cliente);
             
             response.setStatus(HttpServletResponse.SC_CREATED);
-            response.getWriter().write("{\"message\":\"Usuario creado correctamente\"}");
+            response.getWriter().write("{\"message\":\"Cita creado correctamente\"}");
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error en el servlet RegistrarUsuario, meotodo post.");

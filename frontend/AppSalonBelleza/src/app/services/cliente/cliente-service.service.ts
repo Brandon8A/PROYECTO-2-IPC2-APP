@@ -32,24 +32,27 @@ export class ClienteServiceService {
     return this.http.get<Servicios[]>(`${this.API_URL}/ServiciosServlet`);
   }
 
-  crearCita(cita: CitaCliente){
-    return this.http.post<CitaCliente>(`${this.API_URL}/CitaServlet`, cita);
+  crearCita(cita: CitaCliente, cliente: string){
+    return this.http.post<CitaCliente>(`${this.API_URL}/CitaServlet?cliente=${cliente}`, cita);
   }
 
-  obtenerEmpleadosDisponibles(hora: string): Observable<UserEmpleado[]>{
-    return this.http.get<UserEmpleado[]>(`${this.API_URL}/EmpleadoDisponibleServlet?hora=${hora}`);
+  obtenerEmpleadosDisponibles(hora: string, fecha:Date): Observable<UserEmpleado[]>{
+    return this.http.get<UserEmpleado[]>(`${this.API_URL}/EmpleadoDisponibleServlet?hora=${hora}&fecha=${fecha}`);
   }
 
   obtenerHistorialCliente(): Observable<HistorialCliente[]>{
     return this.http.get<HistorialCliente[]>(`${this.API_URL}/HistorialClienteServlet`);
   }
 
-  obtenerReservacionesCliente(): Observable<Reservacion[]>{
-    return this.http.get<Reservacion[]>(`${this.API_URL}/ReservacionServlet`);
+  obtenerReservacionesCliente(cliente: string): Observable<Reservacion[]>{
+    return this.http.get<Reservacion[]>(`${this.API_URL}/ReservacionServlet?cliente=${cliente}`);
   }
 
-  actualizarFotoPerfil(formData: FormData, file: File){
-    formData.append('file', file);
-    return this.http.post<string>(`${this.API_URL}/ImagenServlet`, formData)
+  actualizarFotoPerfil(formData: FormData, usuario: string){
+    return this.http.post<{ imagePath: string }>(`${this.API_URL}/ImagenServlet?usuario=${usuario}`, formData)
+  }
+
+  obtenerCliente(correo: string): Observable<UserCliente>{
+    return this.http.get<UserCliente>(`${this.API_URL}/ObtenerClienteServlet?correo=${correo}`);
   }
 }

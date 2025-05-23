@@ -48,7 +48,7 @@ export class RegisterDatosClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.emailCliente = params['email'];
+      this.emailCliente = params['emailLogueado'];
     });
     console.log(this.emailCliente);
   }
@@ -63,10 +63,11 @@ export class RegisterDatosClienteComponent implements OnInit {
         console.log('la data es: '+data)
         const emailLogueado = data.email;
         const pathFoto = data.pathFoto;
+        const gustos = data.gustos;
         console.log('path: ' + pathFoto);
         Swal.fire('Exito!', 'Datos guardados correctamente', 'success');
         this.router.navigate(['/home-cliente'], {
-          queryParams: { emailLogueado, pathFoto }
+          queryParams: { emailLogueado, pathFoto, gustos }
         });
         this.registerForm.reset();
       },

@@ -7,7 +7,7 @@
             <div class="card-header">
                 <h2>
                     <div class="contenedor">
-                        <button class="btn btn-sm btn-danger">Exportar PDF</button>
+                        <button class="btn btn-sm btn-danger" (click)="generarReporte('anunciosMasMostrados')">Exportar PDF</button>
                     </div>
                     <div class="contenedor">
                         <form [formGroup]="formularioAnunciosMasMostradosPorFecha"

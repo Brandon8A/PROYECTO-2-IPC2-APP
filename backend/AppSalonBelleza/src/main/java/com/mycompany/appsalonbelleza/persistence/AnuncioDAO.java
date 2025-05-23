@@ -52,7 +52,7 @@ public class AnuncioDAO {
 
             statement.executeUpdate();
         } catch (Exception e) {
-            System.out.println("error: " +e);
+            System.out.println("error: " + e);
             System.out.println("Error en: AnuncioDAO en insert");
         }
         return entity;
@@ -71,7 +71,7 @@ public class AnuncioDAO {
         servicios = findAll();
         return servicios;
     }
-    
+
     public List<AnuncioModel> activarAnuncio(String idAnuncio) {
         List<AnuncioModel> servicios = new ArrayList<>();
         String sqlInsert = "UPDATE Anuncio SET activo = TRUE WHERE id_anuncio = '" + idAnuncio + "';";
@@ -85,7 +85,7 @@ public class AnuncioDAO {
         servicios = findAll();
         return servicios;
     }
-    
+
     public List<AnuncioModel> obtenerAnunciosMasMostrados() {
         List<AnuncioModel> serviciosMasReservados = new ArrayList<>();
         String sqlInsert = "SELECT * FROM Anuncio ORDER BY veces_mostrado DESC LIMIT 5;";
@@ -95,7 +95,7 @@ public class AnuncioDAO {
                         resultSet.getString("tipo_anuncio_fk"),
                         resultSet.getInt("tiempo_duracion"),
                         resultSet.getString("descripcion"),
-                        resultSet.getInt("veces_mostrado"), 
+                        resultSet.getInt("veces_mostrado"),
                         resultSet.getString("activo")));
             }
 
@@ -107,7 +107,7 @@ public class AnuncioDAO {
         }
         return serviciosMasReservados;
     }
-    
+
     public List<AnuncioModel> obtenerAnunciosMenosMostrados() {
         List<AnuncioModel> serviciosMasReservados = new ArrayList<>();
         String sqlInsert = "SELECT * FROM Anuncio ORDER BY veces_mostrado ASC LIMIT 5;";
@@ -117,7 +117,7 @@ public class AnuncioDAO {
                         resultSet.getString("tipo_anuncio_fk"),
                         resultSet.getInt("tiempo_duracion"),
                         resultSet.getString("descripcion"),
-                        resultSet.getInt("veces_mostrado"), 
+                        resultSet.getInt("veces_mostrado"),
                         resultSet.getString("activo")));
             }
 
@@ -129,7 +129,7 @@ public class AnuncioDAO {
         }
         return serviciosMasReservados;
     }
-    
+
     public List<AnuncioModel> obtenerAnunciosMasComprados() {
         List<AnuncioModel> serviciosMasReservados = new ArrayList<>();
         String sqlInsert = "SELECT * FROM Anuncio;";
@@ -139,7 +139,7 @@ public class AnuncioDAO {
                         resultSet.getString("tipo_anuncio_fk"),
                         resultSet.getInt("tiempo_duracion"),
                         resultSet.getString("descripcion"),
-                        resultSet.getInt("veces_mostrado"), 
+                        resultSet.getInt("veces_mostrado"),
                         resultSet.getString("activo")));
             }
 
@@ -150,5 +150,36 @@ public class AnuncioDAO {
             System.out.println("Error en ServiciosDAO en metodo obtenerAnunciosMasComprados()");
         }
         return serviciosMasReservados;
+    }
+
+    public List<AnuncioModel> obtenerAnunciosAcitvos() throws SQLException {
+        List<AnuncioModel> servicios = new ArrayList<>();
+        String sql = "SELECT * FROM Anuncio WHERE activo = TRUE";
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                servicios.add(new AnuncioModel(rs.getInt("id_anuncio"),
+                        rs.getString("tipo_anuncio_fk"),
+                        Integer.parseInt(rs.getString("tiempo_duracion")),
+                        rs.getString("descripcion"),
+                        Integer.parseInt(rs.getString("veces_mostrado")),
+                        rs.getString("activo")));
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+            System.out.println("error: " + e);
+            System.out.println("Error en obtener los anuncios metodo obtenerAnunciosActivos(), Clase: AnuncioDAO");
+        }
+        return servicios;
+    }
+
+    public AnuncioModel anunicoAMostrar(List<AnuncioModel> anuncios, List<String> gustos) {
+        for (AnuncioModel anuncio : anuncios) {
+            for (String gusto : gustos) {
+                if (anuncio.getDescripcion().toLowerCase().contains(gusto.trim().toLowerCase())) {
+                    return anuncio;
+                }
+            }
+        }
+        return null;
     }
 }

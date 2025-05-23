@@ -11,10 +11,10 @@
             <li (click)="servicios()">Servicios</li>
         </ul>
         <ul>
-            <li><a routerLink="/home-cliente/reservaciones">Reservaciones</a></li>
+            <li><a (click)="reservaciones(this.emailLogueado)">Reservaciones</a></li>
         </ul>
         <ul>
-            <li><a routerLink="/home-cliente/historial">Historial de Citas</a></li>
+            <li><a (click)="historial()">Historial de Citas</a></li>
         </ul>
         <ul>
             <li><a routerLink="/login">Cerrar Sesion</a></li>

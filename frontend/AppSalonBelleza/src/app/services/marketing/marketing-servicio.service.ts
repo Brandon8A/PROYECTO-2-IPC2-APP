@@ -51,4 +51,10 @@ export class MarketingServicioService {
   obtenerAnunciosMenosMostradosPorFecha(tipoReporte: string, fechas: Fechas): Observable<Anuncio[]> {
     return this.http.post<Anuncio[]>(`${this.API_URL}/ReporteAnuncioServlet?tipoReporte=${tipoReporte}`, fechas);
   }
+
+  generarReporteMarketing(tipoReporte: string){
+    return this.http.get(`${this.API_URL}/ReporteMarketingServlet?tipoReporte=${tipoReporte}`, {
+      responseType: 'blob'
+    })
+  }
 }

@@ -40,7 +40,7 @@ export class LoginComponent {
           });
         } else if (datos.rol === 'Cliente') {
           this.router.navigate(['/home-cliente'], {
-            queryParams: { emailLogueado }
+            queryParams: { emailLogueado, tipoLogin: 'login' }
           });
         } else if (datos.rol === 'GestorServicios'){
           this.router.navigate(['/home-gestor-servicios'], {

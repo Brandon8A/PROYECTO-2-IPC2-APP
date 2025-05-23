@@ -24,12 +24,13 @@ export class ReservarCitaComponent implements OnInit {
   usersEmpleados: UserEmpleado[] = [];
 
   tipoServicio: string | null = null;
-  emailLogueado: string | null = null;
+  emailLogueado: string='' ;
 
   constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
     const horaInicio =
       this.horarioForm = this.fb.group({
-        horaEntrada: ['', Validators.required]
+        horaEntrada: ['', Validators.required],
+        fecha: ['', Validators.required]
       });
   }
 
@@ -43,8 +44,9 @@ export class ReservarCitaComponent implements OnInit {
 
   obtenerUsuariosEmpleados() {
     const { horaEntrada } = this.horarioForm.value;
+    const { fecha } = this.horarioForm.value;
     console.log(this.horarioForm.value)
-    this.fetchback.obtenerEmpleadosDisponibles(horaEntrada).subscribe({
+    this.fetchback.obtenerEmpleadosDisponibles(horaEntrada, fecha).subscribe({
       next: value => {
         this.usersEmpleados = value;
       },
@@ -55,14 +57,17 @@ export class ReservarCitaComponent implements OnInit {
   }
 
 
-  guardarCita(empleado: string) {
+  guardarCita(empleado: string, cliente:string) {
     const { horaEntrada } = this.horarioForm.value;
+    const { fecha } = this.horarioForm.value;
     const cita: CitaCliente = {
       hora: horaEntrada,
-      empleado: empleado
+      fecha: fecha,
+      empleado: empleado,
+      servicio: this.tipoServicio!
     }
     console.log(cita)
-    this.fetchback.crearCita(cita).subscribe({
+    this.fetchback.crearCita(cita, cliente).subscribe({
       next: data => {
         console.log(data);
         Swal.fire('Exito!', 'Cita agendada correctamente', 'success');
